@@ -1,0 +1,3 @@
+[submodule "hwplib"]
+	path = hwplib
+	url = https://github.com/neolord0/hwplib

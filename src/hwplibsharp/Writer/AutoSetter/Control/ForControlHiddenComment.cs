@@ -1,0 +1,29 @@
+using HwpLib.Object.BodyText.Control;
+
+namespace HwpLib.Writer.AutoSetter.Control;
+
+/// <summary>
+/// 숨은 설명 컨트롤을 쓰기 전에 자동 설정하기 위한 객체
+/// </summary>
+public static class ForControlHiddenComment
+{
+    /// <summary>
+    /// 숨은 설명 컨트롤을 자동 설정한다.
+    /// </summary>
+    /// <param name="hc">숨은 설명 컨트롤</param>
+    /// <param name="iid">인스턴스 id</param>
+    public static void AutoSet(ControlHiddenComment hc, InstanceID iid)
+    {
+        ListHeader(hc);
+        ForParagraphList.AutoSet(hc.ParagraphList, iid);
+    }
+
+    /// <summary>
+    /// 리스트 헤더 레코드를 자동 설정한다.
+    /// </summary>
+    /// <param name="hc">숨은 설명 컨트롤</param>
+    private static void ListHeader(ControlHiddenComment hc)
+    {
+        hc.ListHeader.ParaCount = hc.ParagraphList.ParagraphCount;
+    }
+}
