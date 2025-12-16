@@ -28,7 +28,7 @@ public class AddingParagraphBetweenClonedHwpFileTest
         
         // Act - 원본 타겟에 source.hwp에서 문단 추가
         AddHwpFile(targetHwpFile, sourceFilePath);
-        var writePath = TestHelper.GetResultPath("result-adding-paragraph.hwp");
+        var writePath = TestHelper.GetResultPath("result-adding-paragraph-original.hwp");
         HWPWriter.ToFile(targetHwpFile, writePath);
         
         // Act - 복제된 타겟에 merging-cell.hwp에서 문단 추가
