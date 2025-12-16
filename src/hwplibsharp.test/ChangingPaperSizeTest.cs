@@ -54,7 +54,7 @@ public class ChangingPaperSizeTest
         }
         
         // Assert
-        var writePath = TestHelper.GetResultPath("result-changing-papersize-a3.hwp");
+        var writePath = TestHelper.GetResultPath("result-changing-papersize-a3-single.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
         Assert.IsTrue(File.Exists(writePath));
     }
