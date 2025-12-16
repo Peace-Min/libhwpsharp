@@ -11,6 +11,8 @@
 
 ## 소개
 
+![HwpLibSharp Hero Image](./docs/hero_image.jpg)
+
 이 프로젝트는 [neolord0/hwplib](https://github.com/neolord0/hwplib)의 Java 코드를 .NET으로 포팅한 것입니다. AI 코딩 어시스턴트를 활용하여 [@rkttu](https://github.com/rkttu)가 .NET 개발자들을 위해 포팅 작업을 진행하였습니다.
 
 ## 기술적 특징
