@@ -47,7 +47,7 @@ public class InsertingSectionAndChangingPaperSizeTest
         }
         
         // Assert
-        Assert.AreEqual(2, hwpFile.BodyText.SectionList.Count, "섹션이 2개여야 합니다.");
+        Assert.HasCount(2, hwpFile.BodyText.SectionList, "섹션이 2개여야 합니다.");
         
         var writePath = TestHelper.GetResultPath("result-inserting-section.hwp");
         HWPWriter.ToFile(hwpFile, writePath);

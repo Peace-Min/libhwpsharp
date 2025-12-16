@@ -25,6 +25,6 @@ public class ExtractingTextWithParaHeadTest
         // Assert
         Assert.IsNotNull(text);
         Console.WriteLine(text);
-        Assert.IsTrue(text.Length > 0, "문단 헤드와 함께 텍스트 추출 성공");
+        Assert.IsGreaterThan(0, text.Length, "문단 헤드와 함께 텍스트 추출 성공");
     }
 }

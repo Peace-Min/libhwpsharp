@@ -20,6 +20,6 @@ public class ReadingDistributionHwpFileTest
         
         // Assert
         Assert.IsNotNull(hwpFile);
-        Assert.IsTrue(hwpFile.BodyText.SectionList.Count > 0, "배포용 파일 읽기 성공");
+        Assert.IsNotEmpty(hwpFile.BodyText.SectionList, "배포용 파일 읽기 성공");
     }
 }

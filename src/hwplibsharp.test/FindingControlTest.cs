@@ -22,7 +22,7 @@ public class FindingControlTest
                 var firstCell = firstRow.CellList[0];
                 
                 var normalString = firstCell.ParagraphList.GetNormalString();
-                if (normalString?.StartsWith("A") == true)
+                if (normalString?.StartsWith('A') == true)
                 {
                     return true;
                 }
@@ -46,7 +46,7 @@ public class FindingControlTest
         // Assert
         Assert.IsNotNull(result);
         Console.WriteLine($"found {result.Count} tables.");
-        Assert.IsTrue(result.Count > 0, "테이블을 찾았습니다.");
+        Assert.IsNotEmpty(result, "테이블을 찾았습니다.");
     }
 
     [TestMethod]

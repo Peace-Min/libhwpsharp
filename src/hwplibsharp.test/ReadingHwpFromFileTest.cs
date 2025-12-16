@@ -14,8 +14,7 @@ public class ReadingHwpFromFileTest
     [DataRow("etc.hwp")]
     [DataRow("ole.hwp")]
     [DataRow("각주미주.hwp")]
-    // 구버전 파일은 다른 구조로 인해 무한 루프 발생 가능 - 임시 제외
-    // [DataRow("구버전(5.0.2.2) Picture 컨트롤.hwp")]
+    [DataRow("구버전(5.0.2.2) Picture 컨트롤.hwp")]
     [DataRow("그림.hwp")]
     [DataRow("글상자.hwp")]
     [DataRow("글상자-압축.hwp")]
@@ -48,6 +47,6 @@ public class ReadingHwpFromFileTest
         
         // Assert
         Assert.IsNotNull(hwpFile);
-        Assert.IsTrue(hwpFile.BodyText.SectionList.Count > 0, $"{filename} 읽기 성공");
+        Assert.IsNotEmpty(hwpFile.BodyText.SectionList, $"{filename} 읽기 성공");
     }
 }

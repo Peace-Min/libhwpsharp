@@ -19,7 +19,7 @@ public class MakingBlankFileTest
         // Assert
         Assert.IsNotNull(hwpFile);
         Assert.IsNotNull(hwpFile.BodyText);
-        Assert.IsTrue(hwpFile.BodyText.SectionList.Count > 0);
+        Assert.IsNotEmpty(hwpFile.BodyText.SectionList);
     }
 
     [TestMethod]

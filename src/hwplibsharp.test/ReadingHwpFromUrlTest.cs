@@ -30,7 +30,7 @@ public class ReadingHwpFromUrlTest
         
         // Assert
         Assert.IsNotNull(hwpFile);
-        Assert.IsTrue(hwpFile.BodyText.SectionList.Count > 0, $"{url} 읽기 성공 !!");
+        Assert.IsNotEmpty(hwpFile.BodyText.SectionList, $"{url} 읽기 성공 !!");
         Console.WriteLine($"{url} 읽기 성공 !!");
     }
 
