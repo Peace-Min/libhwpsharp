@@ -16,7 +16,7 @@ public static class About
     /// <summary>
     /// 원본 라이브러리 저작자
     /// </summary>
-    public static string OriginalAuthor => "neolord";
+    public static string OriginalAuthor => "neolord0";
 
     /// <summary>
     /// .NET 포팅 작업자
@@ -30,11 +30,11 @@ public static class About
     {
         Console.WriteLine("=============================================");
         Console.WriteLine("HwpLibSharp");
-        Console.WriteLine("Copyright for neolord all rights reserved.");
+        Console.WriteLine("Copyright for neolord0 all rights reserved.");
         Console.WriteLine(".NET port by rkttu with AI-assisted translation.");
         Console.WriteLine("=============================================");
         Console.WriteLine($"\tversion = {Version}");
-        Console.WriteLine($"\ttarget framework = .NET 10.0");
+        Console.WriteLine($"\ttarget framework = .NET 8.0");
         Console.WriteLine($"\toriginal author = {OriginalAuthor}");
         Console.WriteLine($"\tported by = {PortedBy}");
     }

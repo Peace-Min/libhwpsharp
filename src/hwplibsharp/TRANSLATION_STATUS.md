@@ -1,6 +1,6 @@
 # hwplib Java → C# 번역 현황
 
-이 문서는 [neolord0/hwplib](https://github.com/neolord0/hwplib) Java 라이브러리를 C# (.NET 10.0)으로 변환하는 프로젝트의 현재 상태를 정리합니다.
+이 문서는 [neolord0/hwplib](https://github.com/neolord0/hwplib) Java 라이브러리를 C# (.NET 8.0)으로 변환하는 프로젝트의 현재 상태를 정리합니다.
 
 ## 🎉 빌드 상태
 
@@ -9,17 +9,17 @@
 | 빌드 | ✅ **성공** |
 | 오류 | 0개 |
 | 경고 | 0개 |
-| 출력 | `hwplibsharp.dll` (net10.0) |
+| 출력 | `hwplibsharp.dll` (net8.0) |
 
 ## 📋 프로젝트 개요
 
 | 항목 | 값 |
 |------|-----|
-| 대상 프레임워크 | .NET 10.0 (`net10.0`) |
+| 대상 프레임워크 | .NET 8.0 (`net8.0`) |
 | 프로젝트 이름 | hwplibsharp |
 | 버전 | 1.1.7 (원본 Java 라이브러리와 동일) |
 | 원본 라이브러리 | [neolord0/hwplib](https://github.com/neolord0/hwplib) (Java) |
-| 원 저작자 | neolord |
+| 원 저작자 | neolord0 |
 | .NET 포팅 | rkttu (AI 기반 번역) |
 | 주요 의존성 | OpenMcdf 3.1.0 |
 
