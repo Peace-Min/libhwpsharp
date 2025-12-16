@@ -53,7 +53,7 @@ public class AddingParagraphBetweenHwpFileTest
             paraAdder.Add(sourceHwpFile, sourceParagraph);
         }
         
-        var writePath = TestHelper.GetResultPath("result-adding-paragraph.hwp");
+        var writePath = TestHelper.GetResultPath("result-adding-paragraph-between-files.hwp");
         HWPWriter.ToFile(targetHwpFile, writePath);
         
         // Assert
