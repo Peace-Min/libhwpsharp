@@ -43,6 +43,26 @@ public static class Compressor
     /// <returns>해제된 데이터</returns>
     public static byte[] DecompressedBytes(byte[] compressedData)
     {
+        // HWP 형식: deflate 데이터 + 4바이트 0 + 4바이트 원본 길이 (little-endian)
+        // 마지막 4바이트에서 원본 길이를 읽어 0이면 빈 데이터
+        if (compressedData.Length >= 8)
+        {
+            int originalLength = BitConverter.ToInt32(compressedData, compressedData.Length - 4);
+            if (!BitConverter.IsLittleEndian)
+            {
+                // Big-endian 시스템에서 바이트 순서 변환
+                byte[] lengthBytes = new byte[4];
+                Array.Copy(compressedData, compressedData.Length - 4, lengthBytes, 0, 4);
+                Array.Reverse(lengthBytes);
+                originalLength = BitConverter.ToInt32(lengthBytes, 0);
+            }
+            
+            if (originalLength == 0)
+            {
+                return Array.Empty<byte>();
+            }
+        }
+        
         using var input = new MemoryStream(compressedData);
         return DecompressedBytes(input);
     }
