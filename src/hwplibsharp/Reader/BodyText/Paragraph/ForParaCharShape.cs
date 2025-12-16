@@ -23,9 +23,6 @@ public static class ForParaCharShape
             uint charShapeId = sr.ReadUInt4();
             pcs.AddParaCharShape(position, charShapeId);
         }
-
-        // 남은 바이트가 있으면 건너뛴다
-        sr.SkipToEndRecord();
     }
 }
 

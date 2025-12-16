@@ -28,9 +28,6 @@ public static class ForParaRangeTag
             item.SetData(data);
             item.Sort = sr.ReadSInt1();
         }
-
-        // 남은 바이트가 있으면 건너뛴다
-        sr.SkipToEndRecord();
     }
 }
 

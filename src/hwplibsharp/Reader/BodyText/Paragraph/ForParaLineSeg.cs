@@ -36,9 +36,6 @@ public static class ForParaLineSeg
                 item.Tag.Value = sr.ReadUInt4();
             }
         }
-
-        // 남은 바이트가 있으면 건너뛴다
-        sr.SkipToEndRecord();
     }
 }
 

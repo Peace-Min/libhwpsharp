@@ -271,10 +271,14 @@ namespace HwpLib.Tool.ObjectFinder.ForField
 
                     if (findPosition.FindEndPosition)
                     {
-                        if (!ChangeText(paraList, findPosition, textBuffer))
+                        int deletedCount;
+                        if (!ChangeText(paraList, findPosition, textBuffer, out deletedCount))
                         {
                             return SetFieldResult.NotEnoughText;
                         }
+                        // 삭제된 문단 수만큼 인덱스와 카운트를 조정
+                        paraIndex -= deletedCount;
+                        paraCount -= deletedCount;
                         findPosition = new FindPosition();
                     }
                 }
@@ -292,8 +296,10 @@ namespace HwpLib.Tool.ObjectFinder.ForField
         /// <summary>
         /// 텍스트를 변경한다.
         /// </summary>
-        private static bool ChangeText(IParagraphList paraList, FindPosition findPosition, TextBuffer textBuffer)
+        private static bool ChangeText(IParagraphList paraList, FindPosition findPosition, TextBuffer textBuffer, out int deletedCount)
         {
+            deletedCount = 0;
+
             string? text = textBuffer.NextText();
             if (text == null)
             {
@@ -313,11 +319,14 @@ namespace HwpLib.Tool.ObjectFinder.ForField
                 ParaTextSetter.MergeParagraph(startPara, endPara);
 
                 paraList.DeleteParagraph(findPosition.EndParaIndex);
+                deletedCount++;
+
                 if (findPosition.EndParaIndex - findPosition.StartParaIndex >= 2)
                 {
                     for (int deleteIndex = 0; deleteIndex < findPosition.EndParaIndex - findPosition.StartParaIndex - 1; deleteIndex++)
                     {
                         paraList.DeleteParagraph(findPosition.StartParaIndex + 1);
+                        deletedCount++;
                     }
                 }
             }
