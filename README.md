@@ -33,6 +33,151 @@
 - 원본 프로젝트와의 호환성 및 일관성을 유지하는 것을 목표로 합니다.
 - .NET 특화 기능이나 개선 사항은 원본 프로젝트의 철학을 존중하는 범위 내에서 추가됩니다.
 
+## 코드 사용법
+
+### 다양한 불러오기 방법
+
+다양한 소스로부터 HWP 파일을 불러올 수 있습니다.
+
+```csharp
+// 파일에서 읽기
+var hwpFile = HWPReader.FromFile("document.hwp");
+
+// URL에서 읽기
+var hwpFile = HWPReader.FromUrl("https://example.com/document.hwp");
+
+// URL에서 비동기로 읽기
+var hwpFile = await HWPReader.FromUrlAsync("https://example.com/document.hwp");
+
+// Stream에서 읽기
+using var stream = new FileStream("document.hwp", FileMode.Open);
+var hwpFile = HWPReader.FromStream(stream);
+
+// Base64 문자열에서 읽기
+var hwpFile = HWPReader.FromBase64String(base64EncodedHwp);
+```
+
+### 다양한 저장 방법
+
+다양한 대상으로 HWP 파일을 저장할 수 있습니다.
+
+```csharp
+// 파일로 저장
+HWPWriter.ToFile(hwpFile, "output.hwp");
+
+// Stream으로 저장
+using var outputStream = new MemoryStream();
+HWPWriter.ToStream(hwpFile, outputStream);
+```
+
+### 비어있는 HWP 파일 생성
+
+비어있는 HWP 파일을 생성할 수 있습니다.
+
+```csharp
+using HwpLib.Tool.BlankFileMaker;
+
+var hwpFile = BlankFileMaker.Make();
+HWPWriter.ToFile(hwpFile, "blank.hwp");
+```
+
+### RAG를 위한 텍스트 추출
+
+다음과 같이 HWP 파일에서 RAG를 위한 용도로 텍스트를 추출할 수 있습니다.
+
+```csharp
+var url = "https://raw.githubusercontent.com/rkttu/libhwpsharp/refs/heads/main/sample_hwp/source.hwp";
+var hwpFile = HWPReader.FromUrl(url);
+
+var option = new TextExtractOption();
+option.SetMethod(TextExtractMethod.InsertControlTextBetweenParagraphText);
+option.SetWithControlChar(false);
+option.SetAppendEndingLF(true);
+
+var extractedText = TextExtractor.Extract(hwpFile, option);
+Console.WriteLine(extractedText);
+```
+
+### 문단별 텍스트 추출
+
+다음과 같이 HWP 파일에서 문단별로 텍스트를 추출할 수 있습니다.
+
+```csharp
+foreach (var section in hwpFile.BodyText.SectionList)
+{
+    for (int i = 0; i < section.ParagraphCount; i++)
+    {
+        var paragraph = section.GetParagraph(i);
+        var text = paragraph.GetNormalString();
+        Console.WriteLine(text);
+    }
+}
+```
+
+### 표 찾기
+
+다음과 같이 HWP 파일에서 표를 찾을 수 있습니다.
+
+```csharp
+using HwpLib.Tool.ObjectFinder;
+using HwpLib.Object.BodyText.Control;
+
+// 커스텀 필터 정의
+class TableFilter : IControlFilter
+{
+    public bool IsMatched(Control control, Paragraph paragraph, Section section)
+    {
+        return control.Type == ControlType.Table;
+    }
+}
+
+var tables = ControlFinder.Find(hwpFile, new TableFilter());
+Console.WriteLine($"발견된 표 개수: {tables.Count}");
+```
+
+### 셀 내용 읽기
+
+다음과 같이 HWP 파일에서 표의 셀 내용을 읽을 수 있습니다.
+
+```csharp
+using HwpLib.Object.BodyText.Control.Table;
+
+// 표 컨트롤을 찾은 후
+var table = (ControlTable)control;
+
+foreach (var row in table.RowList)
+{
+    foreach (var cell in row.CellList)
+    {
+        var cellText = cell.ParagraphList.GetNormalString();
+        Console.Write($"[{cellText}] ");
+    }
+    Console.WriteLine();
+}
+```
+
+### 필드 및 누름틀 찾기
+
+다음과 같이 HWP 파일에서 필드 및 누름틀을 찾을 수 있습니다.
+
+```csharp
+using HwpLib.Tool.ObjectFinder;
+
+// 필드 텍스트 읽기
+var fieldTexts = FieldFinder.GetAllClickHereText(
+    hwpFile, 
+    "필드명", 
+    TextExtractMethod.OnlyMainParagraph);
+
+// 필드 텍스트 쓰기
+var textList = new List<string> { "값1", "값2", "값3" };
+var result = FieldFinder.SetFieldText(
+    hwpFile, 
+    ControlType.FIELD_CLICKHERE, 
+    "필드명", 
+    textList);
+```
+
 ## 기여자
 
 - **포팅 작업**: [@rkttu](https://github.com/rkttu)
