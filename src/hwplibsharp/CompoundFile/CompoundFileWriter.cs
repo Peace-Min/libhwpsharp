@@ -61,8 +61,10 @@ public class CompoundFileWriter : IDisposable
         if (_rootStorage == null)
             throw new InvalidOperationException("RootStorage is null.");
 
-        _rootStorage.BaseStream.Position = 0;
-        _rootStorage.BaseStream.CopyTo(outputStream);
+        // SwitchTo를 사용하여 compound file 구조를 올바르게 완료하고 출력 스트림에 저장
+        // SwitchTo는 내부적으로 현재 스토리지를 dispose하므로 이후 다시 dispose되지 않도록 null 처리
+        _rootStorage.SwitchTo(outputStream);
+        _rootStorage = null;
     }
 
     /// <summary>
