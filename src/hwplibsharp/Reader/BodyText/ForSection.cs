@@ -210,7 +210,7 @@ public class ForSection
             // ControlList의 마지막 항목을 _lastControl로 설정합니다.
             if (_currentParagraph.ControlList != null && _currentParagraph.ControlList.Count > 0)
             {
-                _lastControl = _currentParagraph.ControlList[^1];
+                _lastControl = _currentParagraph.ControlList[_currentParagraph.ControlList.Count - 1];
             }
             else
             {

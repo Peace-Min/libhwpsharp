@@ -174,14 +174,31 @@ public class CompoundStreamReader : IDisposable
     }
 
     /// <summary>
+    /// 스트림에서 정확히 지정된 바이트 수만큼 읽는다.
+    /// </summary>
+    /// <param name="stream">읽을 스트림</param>
+    /// <param name="buffer">읽은 데이터를 저장할 버퍼</param>
+    private static void ReadExactly(Stream stream, byte[] buffer)
+    {
+        int offset = 0;
+        while (offset < buffer.Length)
+        {
+            int read = stream.Read(buffer, offset, buffer.Length - offset);
+            if (read == 0)
+                throw new EndOfStreamException();
+            offset += read;
+        }
+    }
+
+    /// <summary>
     /// 2바이트 signed 정수를 읽는다. (Little Endian)
     /// </summary>
     /// <returns>signed 정수</returns>
     public short ReadSInt2()
     {
         ForwardPosition(2);
-        Span<byte> buffer = stackalloc byte[2];
-        _stream.ReadExactly(buffer);
+        byte[] buffer = new byte[2];
+        ReadExactly(_stream, buffer);
         return (short)(buffer[0] | (buffer[1] << 8));
     }
 
@@ -192,8 +209,8 @@ public class CompoundStreamReader : IDisposable
     public ushort ReadUInt2()
     {
         ForwardPosition(2);
-        Span<byte> buffer = stackalloc byte[2];
-        _stream.ReadExactly(buffer);
+        byte[] buffer = new byte[2];
+        ReadExactly(_stream, buffer);
         return (ushort)(buffer[0] | (buffer[1] << 8));
     }
 
@@ -204,8 +221,8 @@ public class CompoundStreamReader : IDisposable
     public int ReadSInt4()
     {
         ForwardPosition(4);
-        Span<byte> buffer = stackalloc byte[4];
-        _stream.ReadExactly(buffer);
+        byte[] buffer = new byte[4];
+        ReadExactly(_stream, buffer);
         return buffer[0] | (buffer[1] << 8) | (buffer[2] << 16) | (buffer[3] << 24);
     }
 
@@ -216,8 +233,8 @@ public class CompoundStreamReader : IDisposable
     public uint ReadUInt4()
     {
         ForwardPosition(4);
-        Span<byte> buffer = stackalloc byte[4];
-        _stream.ReadExactly(buffer);
+        byte[] buffer = new byte[4];
+        ReadExactly(_stream, buffer);
         return (uint)(buffer[0] | (buffer[1] << 8) | (buffer[2] << 16) | (buffer[3] << 24));
     }
 
@@ -228,9 +245,9 @@ public class CompoundStreamReader : IDisposable
     public long ReadSInt8()
     {
         ForwardPosition(8);
-        Span<byte> buffer = stackalloc byte[8];
-        _stream.ReadExactly(buffer);
-        return BitConverter.ToInt64(buffer);
+        byte[] buffer = new byte[8];
+        ReadExactly(_stream, buffer);
+        return BitConverter.ToInt64(buffer, 0);
     }
 
     /// <summary>
@@ -240,9 +257,9 @@ public class CompoundStreamReader : IDisposable
     public ulong ReadUInt8()
     {
         ForwardPosition(8);
-        Span<byte> buffer = stackalloc byte[8];
-        _stream.ReadExactly(buffer);
-        return BitConverter.ToUInt64(buffer);
+        byte[] buffer = new byte[8];
+        ReadExactly(_stream, buffer);
+        return BitConverter.ToUInt64(buffer, 0);
     }
 
     /// <summary>
@@ -252,9 +269,9 @@ public class CompoundStreamReader : IDisposable
     public double ReadDouble()
     {
         ForwardPosition(8);
-        Span<byte> buffer = stackalloc byte[8];
-        _stream.ReadExactly(buffer);
-        return BitConverter.ToDouble(buffer);
+        byte[] buffer = new byte[8];
+        ReadExactly(_stream, buffer);
+        return BitConverter.ToDouble(buffer, 0);
     }
 
     /// <summary>
@@ -264,9 +281,9 @@ public class CompoundStreamReader : IDisposable
     public float ReadFloat()
     {
         ForwardPosition(4);
-        Span<byte> buffer = stackalloc byte[4];
-        _stream.ReadExactly(buffer);
-        return BitConverter.ToSingle(buffer);
+        byte[] buffer = new byte[4];
+        ReadExactly(_stream, buffer);
+        return BitConverter.ToSingle(buffer, 0);
     }
 
     /// <summary>
@@ -288,7 +305,7 @@ public class CompoundStreamReader : IDisposable
     {
         ForwardPosition(size);
         var buffer = new byte[size];
-        _stream.ReadExactly(buffer);
+        ReadExactly(_stream, buffer);
         return buffer;
     }
 

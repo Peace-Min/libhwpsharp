@@ -131,7 +131,7 @@ public class Section : IParagraphList
     {
         if (_paragraphList.Count > 0)
         {
-            return _paragraphList[^1];
+            return _paragraphList[_paragraphList.Count - 1];
         }
         return null;
     }

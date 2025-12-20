@@ -126,7 +126,14 @@ public class StreamWrapper : IStreamEntry
     {
         _stream.Position = 0;
         var data = new byte[_stream.Length];
-        _stream.ReadExactly(data);
+        int offset = 0;
+        while (offset < data.Length)
+        {
+            int read = _stream.Read(data, offset, data.Length - offset);
+            if (read == 0)
+                throw new EndOfStreamException();
+            offset += read;
+        }
         return data;
     }
 

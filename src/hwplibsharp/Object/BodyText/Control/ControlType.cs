@@ -174,7 +174,7 @@ public static class ControlTypeExtensions
     /// <returns>컨트롤 타입</returns>
     public static ControlType CtrlIdOf(uint ctrlId)
     {
-        foreach (ControlType ct in Enum.GetValues<ControlType>())
+        foreach (ControlType ct in Enum.GetValues(typeof(ControlType)))
         {
             if ((uint)ct == ctrlId)
             {

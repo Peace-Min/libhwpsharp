@@ -153,10 +153,10 @@ public class CompoundStreamWriter
     /// <param name="value">부호있는 2 byte 정수값</param>
     public void WriteSInt2(short value)
     {
-        Span<byte> buffer = stackalloc byte[2];
+        byte[] buffer = new byte[2];
         buffer[0] = (byte)(value & 0xFF);
         buffer[1] = (byte)((value >> 8) & 0xFF);
-        _os.Write(buffer);
+        _os.Write(buffer, 0, buffer.Length);
     }
 
     /// <summary>
@@ -165,12 +165,12 @@ public class CompoundStreamWriter
     /// <param name="value">부호있는 4 byte 정수값</param>
     public void WriteSInt4(int value)
     {
-        Span<byte> buffer = stackalloc byte[4];
+        byte[] buffer = new byte[4];
         buffer[0] = (byte)(value & 0xFF);
         buffer[1] = (byte)((value >> 8) & 0xFF);
         buffer[2] = (byte)((value >> 16) & 0xFF);
         buffer[3] = (byte)((value >> 24) & 0xFF);
-        _os.Write(buffer);
+        _os.Write(buffer, 0, buffer.Length);
     }
 
     /// <summary>
@@ -197,10 +197,10 @@ public class CompoundStreamWriter
     /// <param name="value">부호없는 2 byte 정수값</param>
     public void WriteUInt2(ushort value)
     {
-        Span<byte> buffer = stackalloc byte[2];
+        byte[] buffer = new byte[2];
         buffer[0] = (byte)(value & 0xFF);
         buffer[1] = (byte)((value >> 8) & 0xFF);
-        _os.Write(buffer);
+        _os.Write(buffer, 0, buffer.Length);
     }
 
     /// <summary>
@@ -209,10 +209,10 @@ public class CompoundStreamWriter
     /// <param name="value">부호없는 2 byte 정수값 (int)</param>
     public void WriteUInt2(int value)
     {
-        Span<byte> buffer = stackalloc byte[2];
+        byte[] buffer = new byte[2];
         buffer[0] = (byte)(value & 0xFF);
         buffer[1] = (byte)((value >> 8) & 0xFF);
-        _os.Write(buffer);
+        _os.Write(buffer, 0, buffer.Length);
     }
 
     /// <summary>
@@ -221,12 +221,12 @@ public class CompoundStreamWriter
     /// <param name="value">부호없는 4 byte 정수값</param>
     public void WriteUInt4(uint value)
     {
-        Span<byte> buffer = stackalloc byte[4];
+        byte[] buffer = new byte[4];
         buffer[0] = (byte)(value & 0xFF);
         buffer[1] = (byte)((value >> 8) & 0xFF);
         buffer[2] = (byte)((value >> 16) & 0xFF);
         buffer[3] = (byte)((value >> 24) & 0xFF);
-        _os.Write(buffer);
+        _os.Write(buffer, 0, buffer.Length);
     }
 
     /// <summary>
@@ -235,12 +235,12 @@ public class CompoundStreamWriter
     /// <param name="value">부호없는 4 byte 정수값 (long)</param>
     public void WriteUInt4(long value)
     {
-        Span<byte> buffer = stackalloc byte[4];
+        byte[] buffer = new byte[4];
         buffer[0] = (byte)(value & 0xFF);
         buffer[1] = (byte)((value >> 8) & 0xFF);
         buffer[2] = (byte)((value >> 16) & 0xFF);
         buffer[3] = (byte)((value >> 24) & 0xFF);
-        _os.Write(buffer);
+        _os.Write(buffer, 0, buffer.Length);
     }
 
     /// <summary>

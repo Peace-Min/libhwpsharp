@@ -52,7 +52,7 @@ public class BodyText
         {
             return null;
         }
-        return _sectionList[^1];
+        return _sectionList[_sectionList.Count - 1];
     }
 
     /// <summary>

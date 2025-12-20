@@ -52,7 +52,7 @@ public static class FormObjectTypeExtensions
     /// <returns>FormObjectType 값 또는 null</returns>
     public static FormObjectType? FromUint4(uint id)
     {
-        foreach (FormObjectType fot in Enum.GetValues<FormObjectType>())
+        foreach (FormObjectType fot in Enum.GetValues(typeof(FormObjectType)))
         {
             if ((uint)fot == id)
             {

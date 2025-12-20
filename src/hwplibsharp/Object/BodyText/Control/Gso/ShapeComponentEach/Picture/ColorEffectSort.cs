@@ -51,7 +51,7 @@ public static class ColorEffectSortExtensions
     /// </summary>
     public static ColorEffectSort FromValue(int value)
     {
-        foreach (ColorEffectSort ces in Enum.GetValues<ColorEffectSort>())
+        foreach (ColorEffectSort ces in Enum.GetValues(typeof(ColorEffectSort)))
         {
             if ((int)ces == value || (int)ces + 500 == value)
             {

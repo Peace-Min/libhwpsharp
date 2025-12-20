@@ -104,7 +104,9 @@ public class HWPReader : IDisposable
     public static async Task<HWPFile> FromUrlAsync(string url, CancellationToken cancellationToken = default)
     {
         using var httpClient = new HttpClient();
-        var bytes = await httpClient.GetByteArrayAsync(url, cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+        var bytes = await httpClient.GetByteArrayAsync(url);
+        cancellationToken.ThrowIfCancellationRequested();
         using var stream = new MemoryStream(bytes);
         return FromStream(stream);
     }
