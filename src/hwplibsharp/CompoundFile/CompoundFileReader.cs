@@ -21,7 +21,7 @@ namespace HwpLib.CompoundFile
         /// <summary>
         /// 현재 스토리지(디렉토리) 경로 스택
         /// </summary>
-        private readonly Stack<StorageWrapper> _storageStack = new();
+        private readonly Stack<StorageWrapper> _storageStack = new Stack<StorageWrapper>();
 
         private bool _disposed;
 

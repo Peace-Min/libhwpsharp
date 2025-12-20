@@ -76,7 +76,7 @@ namespace HwpLib.Object.BodyText.Control.CtrlHeader
         /// <inheritdoc />
         public override void Copy(CtrlHeader from)
         {
-            if (from is not CtrlHeaderSectionDefine from2)
+            if (!(from is CtrlHeaderSectionDefine from2))
                 return;
 
             Property.Copy(from2.Property);

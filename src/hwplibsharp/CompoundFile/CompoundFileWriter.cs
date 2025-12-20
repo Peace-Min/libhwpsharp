@@ -21,7 +21,7 @@ namespace HwpLib.CompoundFile
         /// <summary>
         /// 현재 스토리지(디렉토리) 경로 스택
         /// </summary>
-        private readonly Stack<Storage> _storageStack = new();
+        private readonly Stack<Storage> _storageStack = new Stack<Storage>();
 
         /// <summary>
         /// 현재 스트림(파일)을 쓰기 위한 객체

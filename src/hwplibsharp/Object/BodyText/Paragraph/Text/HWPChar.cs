@@ -48,18 +48,51 @@
                 return HWPCharType.Normal;
             }
 
-            return code switch
+            switch (code)
             {
                 // 예약, 구역 정의/단 정의, 필드 시작, 그리기 개체/표/수식/양식 개체,
                 // 예약(12, 14), 숨은 설명, 머리말/꼬리말, 각주/미주, 자동번호,
                 // 페이지 컨트롤, 책갈피/찾아보기 표식, 덧말/글자 겹침
-                1 or 2 or 3 or 11 or 12 or 14 or 15 or 16 or 17 or 18 or 21 or 22 or 23 => HWPCharType.ControlExtend,
+                case 1:
+                case 2:
+                case 3:
+                case 11:
+                case 12:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 21:
+                case 22:
+                case 23:
+                    return HWPCharType.ControlExtend;
                 // 필드 끝, 예약(5,6,7), title mark, 탭, 예약(19,20)
-                4 or 5 or 6 or 7 or 8 or 9 or 19 or 20 => HWPCharType.ControlInline,
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 19:
+                case 20:
+                    return HWPCharType.ControlInline;
                 // unusable, 한 줄 끝, 문단 끝, 하이픈, 예약(25-29), 묶음 빈칸, 고정폭 빈칸
-                0 or 10 or 13 or 24 or 25 or 26 or 27 or 28 or 29 or 30 or 31 => HWPCharType.ControlChar,
-                _ => HWPCharType.Normal,
-            };
+                case 0:
+                case 10:
+                case 13:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                case 31:
+                    return HWPCharType.ControlChar;
+                default:
+                    return HWPCharType.Normal;
+            }
         }
 
         /// <summary>
