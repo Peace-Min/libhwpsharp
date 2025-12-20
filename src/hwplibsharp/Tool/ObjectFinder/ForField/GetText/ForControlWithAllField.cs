@@ -1,6 +1,5 @@
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Gso;
-using HwpLib.Object.BodyText.Control.Table;
 using System.Collections.Generic;
 
 namespace HwpLib.Tool.ObjectFinder.ForField.GetText

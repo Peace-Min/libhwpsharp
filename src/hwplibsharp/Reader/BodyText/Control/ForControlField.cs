@@ -1,76 +1,78 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.CtrlHeader;
-using HwpLib.Object.Etc;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ÇÊµå ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlField
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ÇÊµå ÄÁÆ®·Ñ Çì´õ¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="f">ÇÊµå ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadCtrlHeader(ControlField f, CompoundStreamReader sr)
-    {
-        var h = f.GetHeader();
-        if (h == null) return;
-
-        h.Property.Value = sr.ReadUInt4();
-        h.EtcProperty = (short)sr.ReadUInt1();
-        h.Command.Bytes = sr.ReadHWPString();
-        h.InstanceId = sr.ReadUInt4();
-
-        // Ãß°¡ 4¹ÙÀÌÆ® ÀÐ±â (¸Þ¸ð ÀÎµ¦½º ¶Ç´Â ¿¹¾à ¿µ¿ª)
-        if (!sr.IsEndOfRecord())
-        {
-            if (h.CtrlId == ControlType.FIELD_UNKNOWN.GetCtrlId())
-            {
-                h.MemoIndex = sr.ReadSInt4();
-            }
-            else
-            {
-                sr.Skip(4);
-            }
-        }
-
-        // ·¹ÄÚµå ³¡±îÁö ³²Àº ¹ÙÀÌÆ® °Ç³Ê¶Ù±â
-        sr.SkipToEndRecord();
-    }
 
     /// <summary>
-    /// ÄÁÆ®·Ñ ID°¡ ÀÌ¹Ì ÀÐÈù ÈÄ ÇÊµå ÄÁÆ®·Ñ Çì´õ¸¦ ÀÐ´Â´Ù.
+    /// ï¿½Êµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="f">ÇÊµå ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadAfterCtrlId(ControlField f, CompoundStreamReader sr)
+    public static class ForControlField
     {
-        var h = f.GetHeader();
-        if (h == null) return;
-
-        h.Property.Value = sr.ReadUInt4();
-        h.EtcProperty = (short)sr.ReadUInt1();
-        h.Command.Bytes = sr.ReadHWPString();
-        h.InstanceId = sr.ReadUInt4();
-
-        // Ãß°¡ 4¹ÙÀÌÆ® ÀÐ±â (¸Þ¸ð ÀÎµ¦½º ¶Ç´Â ¿¹¾à ¿µ¿ª)
-        if (!sr.IsEndOfRecord())
+        /// <summary>
+        /// ï¿½Êµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="f">ï¿½Êµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadCtrlHeader(ControlField f, CompoundStreamReader sr)
         {
-            if (h.CtrlId == ControlType.FIELD_UNKNOWN.GetCtrlId())
+            var h = f.GetHeader();
+            if (h == null) return;
+
+            h.Property.Value = sr.ReadUInt4();
+            h.EtcProperty = (short)sr.ReadUInt1();
+            h.Command.Bytes = sr.ReadHWPString();
+            h.InstanceId = sr.ReadUInt4();
+
+            // ï¿½ß°ï¿½ 4ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ð±ï¿½ (ï¿½Þ¸ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+            if (!sr.IsEndOfRecord())
             {
-                h.MemoIndex = sr.ReadSInt4();
+                if (h.CtrlId == ControlType.FIELD_UNKNOWN.GetCtrlId())
+                {
+                    h.MemoIndex = sr.ReadSInt4();
+                }
+                else
+                {
+                    sr.Skip(4);
+                }
             }
-            else
-            {
-                sr.Skip(4);
-            }
+
+            // ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ç³Ê¶Ù±ï¿½
+            sr.SkipToEndRecord();
         }
 
-        // ·¹ÄÚµå ³¡±îÁö ³²Àº ¹ÙÀÌÆ® °Ç³Ê¶Ù±â
-        sr.SkipToEndRecord();
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ IDï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Êµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="f">ï¿½Êµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadAfterCtrlId(ControlField f, CompoundStreamReader sr)
+        {
+            var h = f.GetHeader();
+            if (h == null) return;
+
+            h.Property.Value = sr.ReadUInt4();
+            h.EtcProperty = (short)sr.ReadUInt1();
+            h.Command.Bytes = sr.ReadHWPString();
+            h.InstanceId = sr.ReadUInt4();
+
+            // ï¿½ß°ï¿½ 4ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ð±ï¿½ (ï¿½Þ¸ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+            if (!sr.IsEndOfRecord())
+            {
+                if (h.CtrlId == ControlType.FIELD_UNKNOWN.GetCtrlId())
+                {
+                    h.MemoIndex = sr.ReadSInt4();
+                }
+                else
+                {
+                    sr.Skip(4);
+                }
+            }
+
+            // ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ç³Ê¶Ù±ï¿½
+            sr.SkipToEndRecord();
+        }
     }
+
 }

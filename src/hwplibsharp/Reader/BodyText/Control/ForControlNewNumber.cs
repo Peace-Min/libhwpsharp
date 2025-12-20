@@ -1,32 +1,36 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// »õ ¹øÈ£ ÁöÁ¤ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlNewNumber
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// »õ ¹øÈ£ ÁöÁ¤ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="nwno">»õ ¹øÈ£ ÁöÁ¤ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlNewNumber nwno, CompoundStreamReader sr)
-    {
-        CtrlHeader(nwno.GetHeader()!, sr);
-    }
 
     /// <summary>
-    /// »õ ¹øÈ£ ÁöÁ¤ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="header">»õ ¹øÈ£ ÁöÁ¤ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlHeader(CtrlHeaderNewNumber header, CompoundStreamReader sr)
+    public static class ForControlNewNumber
     {
-        header.Property.Value = sr.ReadUInt4();
-        header.Number = sr.ReadUInt2();
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="nwno">ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlNewNumber nwno, CompoundStreamReader sr)
+        {
+            CtrlHeader(nwno.GetHeader()!, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlHeader(CtrlHeaderNewNumber header, CompoundStreamReader sr)
+        {
+            header.Property.Value = sr.ReadUInt4();
+            header.Number = sr.ReadUInt2();
+        }
     }
+
 }

@@ -1,38 +1,42 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 
-namespace HwpLib.Reader.BodyText.Control.Secd;
 
-/// <summary>
-/// ±¸¿ª Á¤ÀÇ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForCtrlHeaderSecd
+namespace HwpLib.Reader.BodyText.Control.Secd
 {
+
     /// <summary>
-    /// ±¸¿ª Á¤ÀÇ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="header">±¸¿ª Á¤ÀÇ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(CtrlHeaderSectionDefine header, CompoundStreamReader sr)
+    public static class ForCtrlHeaderSecd
     {
-        header.Property.Value = sr.ReadUInt4();
-        header.ColumnGap = sr.ReadUInt2();
-        header.VerticalLineAlign = sr.ReadUInt2();
-        header.HorizontalLineAlign = sr.ReadUInt2();
-        header.DefaultTabGap = sr.ReadUInt4();
-        header.NumberParaShapeId = sr.CorrectParaShapeId(sr.ReadUInt2());
-        header.PageStartNumber = sr.ReadUInt2();
-        header.ImageStartNumber = sr.ReadUInt2();
-        header.TableStartNumber = sr.ReadUInt2();
-        header.EquationStartNumber = sr.ReadUInt2();
-
-        if (!sr.IsEndOfRecord() && sr.FileVersion.IsOver(5, 0, 1, 2))
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(CtrlHeaderSectionDefine header, CompoundStreamReader sr)
         {
-            header.DefaultLanguage = sr.ReadUInt2();
+            header.Property.Value = sr.ReadUInt4();
+            header.ColumnGap = sr.ReadUInt2();
+            header.VerticalLineAlign = sr.ReadUInt2();
+            header.HorizontalLineAlign = sr.ReadUInt2();
+            header.DefaultTabGap = sr.ReadUInt4();
+            header.NumberParaShapeId = sr.CorrectParaShapeId(sr.ReadUInt2());
+            header.PageStartNumber = sr.ReadUInt2();
+            header.ImageStartNumber = sr.ReadUInt2();
+            header.TableStartNumber = sr.ReadUInt2();
+            header.EquationStartNumber = sr.ReadUInt2();
+
+            if (!sr.IsEndOfRecord() && sr.FileVersion.IsOver(5, 0, 1, 2))
+            {
+                header.DefaultLanguage = sr.ReadUInt2();
+            }
+
+            if (sr.IsEndOfRecord()) return;
+
+            sr.SkipToEndRecord();
         }
-
-        if (sr.IsEndOfRecord()) return;
-
-        sr.SkipToEndRecord();
     }
+
 }

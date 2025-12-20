@@ -1,52 +1,56 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 
-namespace HwpLib.Reader.BodyText.Paragraph;
 
-/// <summary>
-/// ¹®´ÜÀÇ ·¹ÀÌ¾Æ¿ô ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForParaLineSeg
+namespace HwpLib.Reader.BodyText.Paragraph
 {
+
     /// <summary>
-    /// ¹®´ÜÀÇ ·¹ÀÌ¾Æ¿ô ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="p">¹®´Ü °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(HwpLib.Object.BodyText.Paragraph.Paragraph p, CompoundStreamReader sr)
+    public static class ForParaLineSeg
     {
-        p.CreateLineSeg();
-        int count = p.Header.LineAlignCount;
-        if (count != 0)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="p">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(HwpLib.Object.BodyText.Paragraph.Paragraph p, CompoundStreamReader sr)
         {
-            var pls = p.LineSeg!;
-            for (int i = 0; i < count; i++)
+            p.CreateLineSeg();
+            int count = p.Header.LineAlignCount;
+            if (count != 0)
             {
-                var item = pls.AddNewLineSegItem();
-                ParaLineSegItem(item, sr);
+                var pls = p.LineSeg!;
+                for (int i = 0; i < count; i++)
+                {
+                    var item = pls.AddNewLineSegItem();
+                    ParaLineSegItem(item, sr);
+                }
+            }
+            else
+            {
+                sr.SkipToEndRecord();
             }
         }
-        else
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="item">ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ParaLineSegItem(HwpLib.Object.BodyText.Paragraph.LineSeg.LineSegItem item, CompoundStreamReader sr)
         {
-            sr.SkipToEndRecord();
+            item.TextStartPosition = sr.ReadUInt4();
+            item.LineVerticalPosition = sr.ReadSInt4();
+            item.LineHeight = sr.ReadSInt4();
+            item.TextPartHeight = sr.ReadSInt4();
+            item.DistanceBaseLineToLineVerticalPosition = sr.ReadSInt4();
+            item.LineSpace = sr.ReadSInt4();
+            item.StartPositionFromColumn = sr.ReadSInt4();
+            item.SegmentWidth = sr.ReadSInt4();
+            item.Tag.Value = sr.ReadUInt4();
         }
     }
 
-    /// <summary>
-    /// ÇÑ ¶óÀÎÀÇ ·¹ÀÌ¾Æ¿ô Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="item">ÇÑ ¶óÀÎÀÇ ·¹ÀÌ¾Æ¿ô Á¤º¸</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ParaLineSegItem(HwpLib.Object.BodyText.Paragraph.LineSeg.LineSegItem item, CompoundStreamReader sr)
-    {
-        item.TextStartPosition = sr.ReadUInt4();
-        item.LineVerticalPosition = sr.ReadSInt4();
-        item.LineHeight = sr.ReadSInt4();
-        item.TextPartHeight = sr.ReadSInt4();
-        item.DistanceBaseLineToLineVerticalPosition = sr.ReadSInt4();
-        item.LineSpace = sr.ReadSInt4();
-        item.StartPositionFromColumn = sr.ReadSInt4();
-        item.SegmentWidth = sr.ReadSInt4();
-        item.Tag.Value = sr.ReadUInt4();
-    }
-}
 
+}

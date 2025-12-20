@@ -1,4 +1,4 @@
-namespace HwpLib.Tool.TextExtractor.ParaHead
+﻿namespace HwpLib.Tool.TextExtractor.ParaHead
 {
     /// <summary>
     /// 문단 번호 관리 클래스
@@ -6,7 +6,7 @@ namespace HwpLib.Tool.TextExtractor.ParaHead
     public class ParaNumber
     {
         private const int LevelCount = 10;
-        
+
         private int[] _levelNumbers;
         private int _currentHeadID;
 

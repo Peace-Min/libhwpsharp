@@ -1,217 +1,221 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.Etc;
 using HwpLib.Reader.BodyText.Control.Secd;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ±¸¿ª Á¤ÀÇ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public class ForControlSectionDefine
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ±¸¿ª Á¤ÀÇ ÄÁÆ®·Ñ
-    /// </summary>
-    private ControlSectionDefine? _secd;
 
     /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// ÄÁÆ®·ÑÇì´õÀÇ ·¹º§
-    /// </summary>
-    private short _ctrlHeaderLevel;
-
-    /// <summary>
-    /// ¹Ì/°¢ÁÖ¸ð¾ç ·¹ÄÚµå ÀÎµ¦½º
-    /// </summary>
-    private int _endFootnoteShapeIndex;
-
-    /// <summary>
-    /// ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå ÀÎµ¦½º
-    /// </summary>
-    private int _pageBorderFillIndex;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForControlSectionDefine()
+    public class ForControlSectionDefine
     {
-        _endFootnoteShapeIndex = 0;
-        _pageBorderFillIndex = 0;
-    }
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
+        /// </summary>
+        private ControlSectionDefine? _secd;
 
-    /// <summary>
-    /// ±¸¿ª Á¤ÀÇ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="secd">±¸¿ª Á¤ÀÇ ÄÁÆ®·Ñ °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(ControlSectionDefine secd, CompoundStreamReader sr)
-    {
-        _secd = secd;
-        _sr = sr;
-        _ctrlHeaderLevel = (short)sr.CurrentRecordHeader!.Level;
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-        CtrlHeader();
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private short _ctrlHeaderLevel;
 
-        while (!sr.IsEndOfStream())
+        /// <summary>
+        /// ï¿½ï¿½/ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Îµï¿½ï¿½ï¿½
+        /// </summary>
+        private int _endFootnoteShapeIndex;
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½Îµï¿½ï¿½ï¿½
+        /// </summary>
+        private int _pageBorderFillIndex;
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForControlSectionDefine()
         {
-            if (!sr.IsImmediatelyAfterReadingHeader)
+            _endFootnoteShapeIndex = 0;
+            _pageBorderFillIndex = 0;
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="secd">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(ControlSectionDefine secd, CompoundStreamReader sr)
+        {
+            _secd = secd;
+            _sr = sr;
+            _ctrlHeaderLevel = (short)sr.CurrentRecordHeader!.Level;
+
+            CtrlHeader();
+
+            while (!sr.IsEndOfStream())
             {
-                sr.ReadRecordHeader();
-            }
+                if (!sr.IsImmediatelyAfterReadingHeader)
+                {
+                    sr.ReadRecordHeader();
+                }
 
-            if (_ctrlHeaderLevel >= sr.CurrentRecordHeader!.Level)
+                if (_ctrlHeaderLevel >= sr.CurrentRecordHeader!.Level)
+                {
+                    break;
+                }
+                ReadBody();
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlHeader()
+        {
+            ForCtrlHeaderSecd.Read(_secd!.Header, _sr!);
+        }
+
+        /// <summary>
+        /// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ReadBody()
+        {
+            var tagId = _sr!.CurrentRecordHeader!.TagId;
+
+            if (tagId == HWPTag.PageDef)
             {
-                break;
+                PageDef();
             }
-            ReadBody();
+            else if (tagId == HWPTag.FootnoteShape)
+            {
+                EndFootnoteShapes();
+            }
+            else if (tagId == HWPTag.PageBorderFill)
+            {
+                PageBorderFills();
+            }
+            else if (tagId == HWPTag.ListHeader)
+            {
+                BatangPageInfo();
+            }
+            else if (tagId == HWPTag.CtrlData)
+            {
+                CtrlData();
+            }
+            else
+            {
+                _sr.SkipToEndRecord();
+            }
         }
-    }
 
-    /// <summary>
-    /// ±¸¿ª Á¤ÀÇ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlHeader()
-    {
-        ForCtrlHeaderSecd.Read(_secd!.Header, _sr!);
-    }
-
-    /// <summary>
-    /// ÀÌ¹Ì ÀÐÀº ·¹ÄÚµå Çì´õ¿¡ µû¸¥ ·¹ÄÚµå ³»¿ëÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    private void ReadBody()
-    {
-        var tagId = _sr!.CurrentRecordHeader!.TagId;
-
-        if (tagId == HWPTag.PageDef)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void PageDef()
         {
-            PageDef();
+            ForPageDef.Read(_secd!.PageDef, _sr!);
         }
-        else if (tagId == HWPTag.FootnoteShape)
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void EndFootnoteShapes()
         {
-            EndFootnoteShapes();
+            if (_endFootnoteShapeIndex == 0)
+            {
+                FootNoteShape();
+            }
+            else if (_endFootnoteShapeIndex == 1)
+            {
+                EndNoteShape();
+            }
+            _endFootnoteShapeIndex++;
         }
-        else if (tagId == HWPTag.PageBorderFill)
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void FootNoteShape()
         {
-            PageBorderFills();
+            ForFootEndNoteShape.Read(_secd!.FootNoteShape, _sr!);
         }
-        else if (tagId == HWPTag.ListHeader)
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void EndNoteShape()
         {
-            BatangPageInfo();
+            ForFootEndNoteShape.Read(_secd!.EndNoteShape, _sr!);
         }
-        else if (tagId == HWPTag.CtrlData)
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void PageBorderFills()
         {
-            CtrlData();
+            if (_pageBorderFillIndex == 0)
+            {
+                BothPageBorderFill();
+            }
+            else if (_pageBorderFillIndex == 1)
+            {
+                EvenPageBorderFill();
+            }
+            else if (_pageBorderFillIndex == 2)
+            {
+                OddPageBorderFill();
+            }
+            _pageBorderFillIndex++;
         }
-        else
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void BothPageBorderFill()
         {
-            _sr.SkipToEndRecord();
+            ForPageBorderFill.Read(_secd!.BothPageBorderFill, _sr!);
+        }
+
+        /// <summary>
+        /// Â¦ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void EvenPageBorderFill()
+        {
+            ForPageBorderFill.Read(_secd!.EvenPageBorderFill, _sr!);
+        }
+
+        /// <summary>
+        /// È¦ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void OddPageBorderFill()
+        {
+            ForPageBorderFill.Read(_secd!.OddPageBorderFill, _sr!);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void BatangPageInfo()
+        {
+            ForBatangPageInfo.Read(_secd!.AddNewBatangPageInfo(), _sr!);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlData()
+        {
+            _secd!.CreateCtrlData();
+            var ctrlData = ForCtrlData.Read(_sr!);
+            _secd.SetCtrlData(ctrlData);
         }
     }
 
-    /// <summary>
-    /// ¿ëÁö ¼³Á¤ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void PageDef()
-    {
-        ForPageDef.Read(_secd!.PageDef, _sr!);
-    }
-
-    /// <summary>
-    /// °¢ÁÖ/¹ÌÁÖ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void EndFootnoteShapes()
-    {
-        if (_endFootnoteShapeIndex == 0)
-        {
-            FootNoteShape();
-        }
-        else if (_endFootnoteShapeIndex == 1)
-        {
-            EndNoteShape();
-        }
-        _endFootnoteShapeIndex++;
-    }
-
-    /// <summary>
-    /// °¢ÁÖ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void FootNoteShape()
-    {
-        ForFootEndNoteShape.Read(_secd!.FootNoteShape, _sr!);
-    }
-
-    /// <summary>
-    /// ¹ÌÁÖ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void EndNoteShape()
-    {
-        ForFootEndNoteShape.Read(_secd!.EndNoteShape, _sr!);
-    }
-
-    /// <summary>
-    /// ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void PageBorderFills()
-    {
-        if (_pageBorderFillIndex == 0)
-        {
-            BothPageBorderFill();
-        }
-        else if (_pageBorderFillIndex == 1)
-        {
-            EvenPageBorderFill();
-        }
-        else if (_pageBorderFillIndex == 2)
-        {
-            OddPageBorderFill();
-        }
-        _pageBorderFillIndex++;
-    }
-
-    /// <summary>
-    /// ¾çÂÊ ÆäÀÌÁö¸¦ À§ÇÑ ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void BothPageBorderFill()
-    {
-        ForPageBorderFill.Read(_secd!.BothPageBorderFill, _sr!);
-    }
-
-    /// <summary>
-    /// Â¦¼öÂÊ ÆäÀÌÁö¸¦ À§ÇÑ ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void EvenPageBorderFill()
-    {
-        ForPageBorderFill.Read(_secd!.EvenPageBorderFill, _sr!);
-    }
-
-    /// <summary>
-    /// È¦¼öÂÊ ÆäÀÌÁö¸¦ À§ÇÑ ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void OddPageBorderFill()
-    {
-        ForPageBorderFill.Read(_secd!.OddPageBorderFill, _sr!);
-    }
-
-    /// <summary>
-    /// ¹ÙÅÁÂÊ Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void BatangPageInfo()
-    {
-        ForBatangPageInfo.Read(_secd!.AddNewBatangPageInfo(), _sr!);
-    }
-
-    /// <summary>
-    /// ÄÁÆ®·Ñ µ¥ÀÌÅÍ¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlData()
-    {
-        _secd!.CreateCtrlData();
-        var ctrlData = ForCtrlData.Read(_sr!);
-        _secd.SetCtrlData(ctrlData);
-    }
 }

@@ -1,130 +1,133 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Object.Etc;
-using HwpLib.Reader.BodyText.Control;
 using HwpLib.Reader.BodyText.Control.Gso.Part;
 using HwpLib.Reader.BodyText.Control.Tbl;
 
-namespace HwpLib.Reader.BodyText.Paragraph;
 
-/// <summary>
-/// Ç¥ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public class ForControlTable
+namespace HwpLib.Reader.BodyText.Paragraph
 {
-    /// <summary>
-    /// Ç¥ ÄÁÆ®·Ñ
-    /// </summary>
-    private ControlTable? _table;
 
     /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
+    /// Ç¥ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForControlTable()
+    public class ForControlTable
     {
-    }
+        /// <summary>
+        /// Ç¥ ï¿½ï¿½Æ®ï¿½ï¿½
+        /// </summary>
+        private ControlTable? _table;
 
-    /// <summary>
-    /// Ç¥ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="table">Ç¥ ÄÁÆ®·Ñ °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(ControlTable table, CompoundStreamReader sr)
-    {
-        _table = table;
-        _sr = sr;
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-        CtrlHeader();
-        CtrlData();
-        Caption();
-        Table();
-        Rows();
-    }
-
-    /// <summary>
-    /// Ç¥ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlHeader()
-    {
-        ForCtrlHeaderGso.Read(_table!.Header, _sr!);
-    }
-
-    /// <summary>
-    /// ÄÁÆ®·Ñ µ¥ÀÌÅÍ¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlData()
-    {
-        _sr!.ReadRecordHeader();
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForControlTable()
         {
-            _table!.CreateCtrlData();
-            var ctrlData = Control.ForCtrlData.Read(_sr);
-            _table.SetCtrlData(ctrlData);
+        }
+
+        /// <summary>
+        /// Ç¥ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="table">Ç¥ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(ControlTable table, CompoundStreamReader sr)
+        {
+            _table = table;
+            _sr = sr;
+
+            CtrlHeader();
+            CtrlData();
+            Caption();
+            Table();
+            Rows();
+        }
+
+        /// <summary>
+        /// Ç¥ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlHeader()
+        {
+            ForCtrlHeaderGso.Read(_table!.Header, _sr!);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlData()
+        {
+            _sr!.ReadRecordHeader();
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
+            {
+                _table!.CreateCtrlData();
+                var ctrlData = Control.ForCtrlData.Read(_sr);
+                _table.SetCtrlData(ctrlData);
+            }
+        }
+
+        /// <summary>
+        /// Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void Caption()
+        {
+            if (!_sr!.IsImmediatelyAfterReadingHeader)
+            {
+                _sr.ReadRecordHeader();
+            }
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
+            {
+                _table!.CreateCaption();
+                ForCaption.Read(_table.Caption!, _sr);
+            }
+        }
+
+        /// <summary>
+        /// Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void Table()
+        {
+            if (!_sr!.IsImmediatelyAfterReadingHeader)
+            {
+                _sr.ReadRecordHeader();
+            }
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.Table)
+            {
+                ForTable.Read(_table!.Table, _sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void Rows()
+        {
+            int rowCount = _table!.Table.RowCount;
+            var cellCountOfRowList = _table.Table.CellCountOfRowList;
+            for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
+            {
+                var r = _table.AddNewRow();
+                Row(r, cellCountOfRowList[rowIndex]);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="r">ï¿½ï¿½</param>
+        /// <param name="cellCount">ï¿½à¿¡ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private void Row(Row r, int cellCount)
+        {
+            for (int cellIndex = 0; cellIndex < cellCount; cellIndex++)
+            {
+                var c = r.AddNewCell();
+                ForCell.Read(c, _sr!);
+            }
         }
     }
 
-    /// <summary>
-    /// Ä¸¼Ç Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void Caption()
-    {
-        if (!_sr!.IsImmediatelyAfterReadingHeader)
-        {
-            _sr.ReadRecordHeader();
-        }
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
-        {
-            _table!.CreateCaption();
-            ForCaption.Read(_table.Caption!, _sr);
-        }
-    }
-
-    /// <summary>
-    /// Ç¥ Á¤º¸ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void Table()
-    {
-        if (!_sr!.IsImmediatelyAfterReadingHeader)
-        {
-            _sr.ReadRecordHeader();
-        }
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.Table)
-        {
-            ForTable.Read(_table!.Table, _sr);
-        }
-    }
-
-    /// <summary>
-    /// ÇàµéÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    private void Rows()
-    {
-        int rowCount = _table!.Table.RowCount;
-        var cellCountOfRowList = _table.Table.CellCountOfRowList;
-        for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
-        {
-            var r = _table.AddNewRow();
-            Row(r, cellCountOfRowList[rowIndex]);
-        }
-    }
-
-    /// <summary>
-    /// ÇÏ³ªÀÇ Çà ¾È¿¡ ¼¿µéÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="r">Çà</param>
-    /// <param name="cellCount">Çà¿¡ Æ÷ÇÔµÈ ¼¿ °³¼ö</param>
-    private void Row(Row r, int cellCount)
-    {
-        for (int cellIndex = 0; cellIndex < cellCount; cellIndex++)
-        {
-            var c = r.AddNewCell();
-            ForCell.Read(c, _sr!);
-        }
-    }
 }

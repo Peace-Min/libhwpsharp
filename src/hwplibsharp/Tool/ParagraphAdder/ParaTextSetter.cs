@@ -1,5 +1,4 @@
-using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Paragraph;
+﻿using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Object.BodyText.Paragraph.CharShape;
 using HwpLib.Object.BodyText.Paragraph.Text;
 using System.Collections.Generic;

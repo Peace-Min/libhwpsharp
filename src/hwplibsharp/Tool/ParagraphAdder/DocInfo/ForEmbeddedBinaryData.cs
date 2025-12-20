@@ -1,4 +1,6 @@
-using HwpLib.Object.BinData;
+﻿using HwpLib.Object.BinData;
+using System;
+using System.Collections.Generic;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo
 {

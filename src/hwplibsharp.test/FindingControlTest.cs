@@ -1,8 +1,6 @@
-using HwpLib.Object;
-using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.Table;
-using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Object.BodyText;
+using HwpLib.Object.BodyText.Control;
+using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Reader;
 using HwpLib.Tool.ObjectFinder;
 
@@ -20,7 +18,7 @@ public class FindingControlTest
                 var table = (ControlTable)control;
                 var firstRow = table.RowList[0];
                 var firstCell = firstRow.CellList[0];
-                
+
                 var normalString = firstCell.ParagraphList.GetNormalString();
                 if (normalString?.StartsWith('A') == true)
                 {
@@ -37,12 +35,12 @@ public class FindingControlTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("finding-control.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         // Act
         Assert.IsNotNull(hwpFile);
         var myFilter = new MyControlFilter();
         var result = ControlFinder.Find(hwpFile, myFilter);
-        
+
         // Assert
         Assert.IsNotNull(result);
         Console.WriteLine($"found {result.Count} tables.");
@@ -55,12 +53,12 @@ public class FindingControlTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath("표.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         // Act
         Assert.IsNotNull(hwpFile);
         var tableFilter = new TableControlFilter();
         var result = ControlFinder.Find(hwpFile, tableFilter);
-        
+
         // Assert
         Assert.IsNotNull(result);
         Console.WriteLine($"found {result.Count} tables.");

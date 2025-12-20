@@ -1,5 +1,4 @@
-using HwpLib.Object.BodyText;
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 using System.Text;
@@ -106,7 +105,7 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             var clonedMemo = sourceMemo.Clone();
             if (clonedMemo.MemoList != null)
                 clonedMemo.MemoList.MemoIndex = maxMemoIndex;
-            
+
             var targetMemo = docInfoAdder.GetTargetHWPFile()?.BodyText?.AddNewMemo();
             if (targetMemo != null)
             {

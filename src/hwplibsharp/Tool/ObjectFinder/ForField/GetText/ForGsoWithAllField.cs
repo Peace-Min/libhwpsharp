@@ -1,4 +1,4 @@
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 using System.Collections.Generic;

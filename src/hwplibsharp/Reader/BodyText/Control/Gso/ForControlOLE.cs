@@ -1,59 +1,63 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
 using HwpLib.Object.Etc;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// OLE ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlOLE
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
+
     /// <summary>
-    /// OLE ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
+    /// OLE ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="ole">OLE ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlOLE ole, CompoundStreamReader sr)
+    public static class ForControlOLE
     {
-        sr.ReadRecordHeader();
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentOle)
+        /// <summary>
+        /// OLE ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="ole">OLE ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlOLE ole, CompoundStreamReader sr)
         {
-            ShapeComponentOLE(ole.ShapeComponentOLE, sr);
+            sr.ReadRecordHeader();
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentOle)
+            {
+                ShapeComponentOLE(ole.ShapeComponentOLE, sr);
+            }
+        }
+
+        /// <summary>
+        /// OLE ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="sco">OLE ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentOLE(ShapeComponentOLE sco, CompoundStreamReader sr)
+        {
+            sco.Property.Value = sr.ReadUInt4();
+            sco.ExtentWidth = sr.ReadSInt4();
+            sco.ExtentHeight = sr.ReadSInt4();
+            sco.BinDataId = sr.ReadUInt2();
+            sco.BorderColor.Value = sr.ReadUInt4();
+            sco.BorderThickness = sr.ReadSInt4();
+            sco.BorderProperty.Value = sr.ReadUInt4();
+            UnknownData(sco, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="sco">OLE ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void UnknownData(ShapeComponentOLE sco, CompoundStreamReader sr)
+        {
+            int unknownSize = (int)(sr.CurrentRecordHeader!.Size - (sr.CurrentPosition - sr.CurrentPositionAfterHeader));
+            if (unknownSize > 0)
+            {
+                byte[] unknown = sr.ReadBytes(unknownSize);
+                sco.Unknown = unknown;
+            }
         }
     }
 
-    /// <summary>
-    /// OLE °³Ã¼ ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="sco">OLE °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentOLE(ShapeComponentOLE sco, CompoundStreamReader sr)
-    {
-        sco.Property.Value = sr.ReadUInt4();
-        sco.ExtentWidth = sr.ReadSInt4();
-        sco.ExtentHeight = sr.ReadSInt4();
-        sco.BinDataId = sr.ReadUInt2();
-        sco.BorderColor.Value = sr.ReadUInt4();
-        sco.BorderThickness = sr.ReadSInt4();
-        sco.BorderProperty.Value = sr.ReadUInt4();
-        UnknownData(sco, sr);
-    }
-
-    /// <summary>
-    /// ¾Ë ¼ö ¾ø´Â µ¥ÀÌÅÍ ºí·°À» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="sco">OLE °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void UnknownData(ShapeComponentOLE sco, CompoundStreamReader sr)
-    {
-        int unknownSize = (int)(sr.CurrentRecordHeader!.Size - (sr.CurrentPosition - sr.CurrentPositionAfterHeader));
-        if (unknownSize > 0)
-        {
-            byte[] unknown = sr.ReadBytes(unknownSize);
-            sco.Unknown = unknown;
-        }
-    }
 }

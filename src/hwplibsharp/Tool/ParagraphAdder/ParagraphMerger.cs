@@ -1,11 +1,9 @@
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.BodyText.Paragraph.CharShape;
 using HwpLib.Object.BodyText.Paragraph.Text;
 using HwpLib.Tool.ParagraphAdder.Control;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
-using System;
 
 namespace HwpLib.Tool.ParagraphAdder
 {
@@ -131,7 +129,7 @@ namespace HwpLib.Tool.ParagraphAdder
                 _target?.Text?.AddChar(hwpChar);
                 MoveCharSpace();
                 _targetCharPosition += hwpChar.CharSize;
-                
+
                 var controlList = _source?.ControlList;
                 if (controlList != null && _sourceControlIndex < controlList.Count)
                 {

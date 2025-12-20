@@ -1,11 +1,6 @@
-using HwpLib.Object;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.Caption;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.BodyText.Paragraph.CharShape;
-using HwpLib.Object.BodyText.Paragraph.Header;
-using HwpLib.Object.BodyText.Paragraph.LineSeg;
-using HwpLib.Object.BodyText.Paragraph.Text;
 using HwpLib.Reader;
 using HwpLib.Writer;
 
@@ -26,17 +21,17 @@ public class MakingCaptionTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("making_caption.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         var para = hwpFile.BodyText.SectionList[0].GetParagraph(0);
         Assert.IsNotNull(para);
         Assert.IsNotNull(para.ControlList);
-        
+
         var ctrlRect = para.ControlList[2] as ControlRectangle;
         Assert.IsNotNull(ctrlRect);
-        
+
         var caption = ctrlRect.Caption;
         if (caption == null)
         {
@@ -44,14 +39,14 @@ public class MakingCaptionTest
             caption = ctrlRect.Caption;
         }
         Assert.IsNotNull(caption);
-        
+
         SetListHeader(caption.ListHeader);
         var newPara = caption.ParagraphList.AddNewParagraph();
         SetPara(newPara, "이것은 caption 입니다");
-        
+
         var writePath = TestHelper.GetResultPath("result_making_caption.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "캡션 만들기 성공");
     }
@@ -65,7 +60,7 @@ public class MakingCaptionTest
     private static void SetPara(Paragraph? emptyPara, string text)
     {
         if (emptyPara == null) return;
-        
+
         SetParaHeader(emptyPara);
         SetParaText(emptyPara, text);
         SetParaCharShape(emptyPara);

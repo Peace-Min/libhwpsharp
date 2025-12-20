@@ -1,43 +1,48 @@
-using HwpLib.Object.DocInfo.TabDef;
+﻿using HwpLib.Object.DocInfo.TabDef;
+using System.Collections.Generic;
 
-namespace HwpLib.Object.DocInfo;
 
-/// <summary>
-/// 탭 정의에 대한 레코드
-/// </summary>
-public class TabDefInfo
+namespace HwpLib.Object.DocInfo
 {
-    private readonly TabDefProperty _property;
-    private readonly List<TabInfo> _tabInfoList;
 
-    public TabDefInfo()
+    /// <summary>
+    /// 탭 정의에 대한 레코드
+    /// </summary>
+    public class TabDefInfo
     {
-        _property = new TabDefProperty();
-        _tabInfoList = new List<TabInfo>();
-    }
+        private readonly TabDefProperty _property;
+        private readonly List<TabInfo> _tabInfoList;
 
-    public TabDefProperty Property => _property;
-
-    public TabInfo AddNewTabInfo()
-    {
-        var tabInfo = new TabInfo();
-        _tabInfoList.Add(tabInfo);
-        return tabInfo;
-    }
-
-    public IReadOnlyList<TabInfo> TabInfoList => _tabInfoList;
-
-    public TabDefInfo Clone()
-    {
-        var cloned = new TabDefInfo();
-        cloned._property.Copy(_property);
-
-        cloned._tabInfoList.Clear();
-        foreach (var tabInfo in _tabInfoList)
+        public TabDefInfo()
         {
-            cloned._tabInfoList.Add(tabInfo.Clone());
+            _property = new TabDefProperty();
+            _tabInfoList = new List<TabInfo>();
         }
 
-        return cloned;
+        public TabDefProperty Property => _property;
+
+        public TabInfo AddNewTabInfo()
+        {
+            var tabInfo = new TabInfo();
+            _tabInfoList.Add(tabInfo);
+            return tabInfo;
+        }
+
+        public IReadOnlyList<TabInfo> TabInfoList => _tabInfoList;
+
+        public TabDefInfo Clone()
+        {
+            var cloned = new TabDefInfo();
+            cloned._property.Copy(_property);
+
+            cloned._tabInfoList.Clear();
+            foreach (var tabInfo in _tabInfoList)
+            {
+                cloned._tabInfoList.Add(tabInfo.Clone());
+            }
+
+            return cloned;
+        }
     }
+
 }

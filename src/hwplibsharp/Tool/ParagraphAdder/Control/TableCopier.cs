@@ -1,5 +1,4 @@
-using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.CtrlHeader;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 

@@ -1,4 +1,4 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Picture;
@@ -6,97 +6,101 @@ using HwpLib.Object.Etc;
 using HwpLib.Reader.BodyText.Control.Gso.Part;
 using HwpLib.Reader.DocInfo.BorderFill;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// ±×¸² ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlPicture
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
-    /// <summary>
-    /// ±×¸² ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="picture">±×¸² ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlPicture picture, CompoundStreamReader sr)
-    {
-        sr.ReadRecordHeader();
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
-        {
-            picture.CreateCtrlData();
-            var ctrlData = ForCtrlData.Read(sr);
-            picture.SetCtrlData(ctrlData);
 
-            if (!sr.IsImmediatelyAfterReadingHeader)
+    /// <summary>
+    /// ï¿½×¸ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    /// </summary>
+    public static class ForControlPicture
+    {
+        /// <summary>
+        /// ï¿½×¸ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="picture">ï¿½×¸ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlPicture picture, CompoundStreamReader sr)
+        {
+            sr.ReadRecordHeader();
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
             {
-                sr.ReadRecordHeader();
+                picture.CreateCtrlData();
+                var ctrlData = ForCtrlData.Read(sr);
+                picture.SetCtrlData(ctrlData);
+
+                if (!sr.IsImmediatelyAfterReadingHeader)
+                {
+                    sr.ReadRecordHeader();
+                }
+            }
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentPicture)
+            {
+                ShapeComponentPicture(picture.ShapeComponentPicture, sr);
             }
         }
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentPicture)
+
+        /// <summary>
+        /// ï¿½×¸ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scp">ï¿½×¸ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentPicture(ShapeComponentPicture scp, CompoundStreamReader sr)
         {
-            ShapeComponentPicture(picture.ShapeComponentPicture, sr);
+            scp.BorderColor.Value = sr.ReadUInt4();
+            scp.BorderThickness = sr.ReadSInt4();
+            scp.BorderProperty.Value = sr.ReadUInt4();
+            scp.LeftTop.X = (uint)sr.ReadSInt4();
+            scp.LeftTop.Y = (uint)sr.ReadSInt4();
+            scp.RightTop.X = (uint)sr.ReadSInt4();
+            scp.RightTop.Y = (uint)sr.ReadSInt4();
+            scp.RightBottom.X = (uint)sr.ReadSInt4();
+            scp.RightBottom.Y = (uint)sr.ReadSInt4();
+            scp.LeftBottom.X = (uint)sr.ReadSInt4();
+            scp.LeftBottom.Y = (uint)sr.ReadSInt4();
+            scp.LeftAfterCutting = sr.ReadSInt4();
+            scp.TopAfterCutting = sr.ReadSInt4();
+            scp.RightAfterCutting = sr.ReadSInt4();
+            scp.BottomAfterCutting = sr.ReadSInt4();
+            InnerMargin(scp.InnerMargin, sr);
+            ForFillInfo.ReadPictureInfo(scp.PictureInfo, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            scp.BorderTransparency = sr.ReadUInt1();
+
+            if (sr.IsEndOfRecord()) return;
+
+            scp.InstanceId = sr.ReadUInt4();
+
+            if (sr.IsEndOfRecord()) return;
+
+            ForPictureEffect.Read(scp.PictureEffect, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            scp.ImageWidth = sr.ReadUInt4();
+            scp.ImageHeight = sr.ReadUInt4();
+
+            if (sr.IsEndOfRecord()) return;
+
+            sr.SkipToEndRecord();
+        }
+
+        /// <summary>
+        /// ï¿½×¸ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="im">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void InnerMargin(InnerMargin im, CompoundStreamReader sr)
+        {
+            im.Left = sr.ReadUInt2();
+            im.Right = sr.ReadUInt2();
+            im.Top = sr.ReadUInt2();
+            im.Bottom = sr.ReadUInt2();
         }
     }
 
-    /// <summary>
-    /// ±×¸² °³Ã¼ ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scp">±×¸² °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentPicture(ShapeComponentPicture scp, CompoundStreamReader sr)
-    {
-        scp.BorderColor.Value = sr.ReadUInt4();
-        scp.BorderThickness = sr.ReadSInt4();
-        scp.BorderProperty.Value = sr.ReadUInt4();
-        scp.LeftTop.X = (uint)sr.ReadSInt4();
-        scp.LeftTop.Y = (uint)sr.ReadSInt4();
-        scp.RightTop.X = (uint)sr.ReadSInt4();
-        scp.RightTop.Y = (uint)sr.ReadSInt4();
-        scp.RightBottom.X = (uint)sr.ReadSInt4();
-        scp.RightBottom.Y = (uint)sr.ReadSInt4();
-        scp.LeftBottom.X = (uint)sr.ReadSInt4();
-        scp.LeftBottom.Y = (uint)sr.ReadSInt4();
-        scp.LeftAfterCutting = sr.ReadSInt4();
-        scp.TopAfterCutting = sr.ReadSInt4();
-        scp.RightAfterCutting = sr.ReadSInt4();
-        scp.BottomAfterCutting = sr.ReadSInt4();
-        InnerMargin(scp.InnerMargin, sr);
-        ForFillInfo.ReadPictureInfo(scp.PictureInfo, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        scp.BorderTransparency = sr.ReadUInt1();
-
-        if (sr.IsEndOfRecord()) return;
-
-        scp.InstanceId = sr.ReadUInt4();
-
-        if (sr.IsEndOfRecord()) return;
-
-        ForPictureEffect.Read(scp.PictureEffect, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        scp.ImageWidth = sr.ReadUInt4();
-        scp.ImageHeight = sr.ReadUInt4();
-
-        if (sr.IsEndOfRecord()) return;
-
-        sr.SkipToEndRecord();
-    }
-
-    /// <summary>
-    /// ±×¸² °³Ã¼ ¼Ó¼º ·¹ÄÚµåÀÇ ³»ºÎ ¿©¹é ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="im">³»ºÎ ¿©¹éÀ» ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void InnerMargin(InnerMargin im, CompoundStreamReader sr)
-    {
-        im.Left = sr.ReadUInt2();
-        im.Right = sr.ReadUInt2();
-        im.Top = sr.ReadUInt2();
-        im.Bottom = sr.ReadUInt2();
-    }
 }

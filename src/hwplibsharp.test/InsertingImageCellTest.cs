@@ -1,15 +1,10 @@
 using HwpLib.Object;
-using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.CtrlHeader.Gso;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.LineInfo;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.ShadowInfo;
-using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
-using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.BinData;
 using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 using HwpLib.Reader;
@@ -45,15 +40,15 @@ public class InsertingImageCellTest
         var docFilePath = TestHelper.GetSamplePath("inserting_image_cell.hwp");
         var imgFilePath = TestHelper.GetImagePath("sample.jpg");
         var hwpFile = HWPReader.FromFile(docFilePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         InsertShapeWithImage(hwpFile, "필드3", imgFilePath);
-        
+
         var writePath = TestHelper.GetResultPath("result-inserting-image-cell.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "셀에 이미지 삽입 성공");
     }
@@ -118,7 +113,7 @@ public class InsertingImageCellTest
         {
             Paragraph? firstPara = c.ParagraphList.GetParagraph(0);
             if (firstPara == null) continue;
-            
+
             var paraText = firstPara.Text;
             if (paraText == null)
             {

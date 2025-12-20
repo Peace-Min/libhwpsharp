@@ -1,162 +1,165 @@
-using HwpLib.CompoundFile;
-using HwpLib.Object.BodyText.Paragraph.Text;
+ï»¿using HwpLib.CompoundFile;
 
-namespace HwpLib.Reader.BodyText.Paragraph;
 
-/// <summary>
-/// ¹®´Ü ÅØ½ºÆ® ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForParaText
+namespace HwpLib.Reader.BodyText.Paragraph
 {
+
     /// <summary>
-    /// ¹®´Ü ÅØ½ºÆ® ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="p">¹®´Ü</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(Object.BodyText.Paragraph.Paragraph p, CompoundStreamReader sr)
+    public static class ForParaText
     {
-        if (p.Text == null)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="p">ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(Object.BodyText.Paragraph.Paragraph p, CompoundStreamReader sr)
         {
-            p.CreateText();
-        }
-
-        var pt = p.Text!;
-
-        // ·¹ÄÚµå Å©±â / 2 = ¹®ÀÚ ¼ö (UTF-16LE)
-        long charCount = sr.CurrentRecordHeader!.Size / 2;
-
-        for (long i = 0; i < charCount; i++)
-        {
-            ushort code = sr.ReadUInt2();
-
-            if (code <= 0x0020)
+            if (p.Text == null)
             {
-                // Á¦¾î ¹®ÀÚ
-                switch (code)
-                {
-                    case 0x0000: // »ç¿ë ¾È ÇÔ
-                        break;
-                    case 0x0001: // ¿¹¾à (¹®ÀÚ ÄÁÆ®·Ñ)
-                    case 0x0002: // ±¸¿ª/´Ü Á¤ÀÇ (È®Àå ÄÁÆ®·Ñ)
-                    case 0x0003: // ÇÊµå ½ÃÀÛ (È®Àå ÄÁÆ®·Ñ)
-                        {
-                            var extendChar = pt.AddNewExtendControlChar();
-                            extendChar.Code = (short)code;
-                            byte[] addition = sr.ReadBytes(12);
-                            extendChar.SetAddition(addition);
-                            sr.ReadUInt2(); // Á¾·á ÄÚµå ÀÐ±â
-                            i += 7; // Ãß°¡ 12¹ÙÀÌÆ® = 6 ¹®ÀÚ + 1 ¹®ÀÚ (ÄÚµå ÀÚÃ¼) - ÀÌ¹Ì 1 ´õÇØÁü
-                        }
-                        break;
-                    case 0x0004: // ÇÊµå ³¡ (ÀÎ¶óÀÎ ÄÁÆ®·Ñ)
-                        {
-                            var inlineChar = pt.AddNewInlineControlChar();
-                            inlineChar.Code = (short)code;
-                            byte[] addition = sr.ReadBytes(12);
-                            inlineChar.SetAddition(addition);
-                            sr.ReadUInt2(); // Á¾·á ÄÚµå ÀÐ±â
-                            i += 7;
-                        }
-                        break;
-                    case 0x0005: // ¿¹¾à
-                    case 0x0006: // ¿¹¾à
-                    case 0x0007: // ¿¹¾à
-                    case 0x0008: // Á¦¸ñ Â÷·Ê (¹®ÀÚ ÄÁÆ®·Ñ)
-                    case 0x0009: // ÅÇ (¹®ÀÚ ÄÁÆ®·Ñ)
-                    case 0x000A: // ÁÙ ¹Ù²Þ (¹®ÀÚ ÄÁÆ®·Ñ)
-                        {
-                            var controlChar = pt.AddNewCharControlChar();
-                            controlChar.Code = (short)code;
-                        }
-                        break;
-                    case 0x000B: // ±×¸®±â °³Ã¼/Ç¥ (È®Àå ÄÁÆ®·Ñ)
-                        {
-                            var extendChar = pt.AddNewExtendControlChar();
-                            extendChar.Code = (short)code;
-                            byte[] addition = sr.ReadBytes(12);
-                            extendChar.SetAddition(addition);
-                            sr.ReadUInt2(); // Á¾·á ÄÚµå ÀÐ±â
-                            i += 7;
-                        }
-                        break;
-                    case 0x000C: // ¿¹¾à
-                        break;
-                    case 0x000D: // ¹®´Ü ³¡ (¹®ÀÚ ÄÁÆ®·Ñ)
-                        {
-                            var normalChar = pt.AddNewNormalChar();
-                            normalChar.Code = (short)code;
-                        }
-                        break;
-                    case 0x000E: // ¿¹¾à
-                    case 0x000F: // ÇÏÀÌÇÂ (¹®ÀÚ ÄÁÆ®·Ñ)
-                        {
-                            var controlChar = pt.AddNewCharControlChar();
-                            controlChar.Code = (short)code;
-                        }
-                        break;
-                    case 0x0010: // ¸Ó¸®¸»/²¿¸®¸»/°¢ÁÖ/¹ÌÁÖ µî (È®Àå ÄÁÆ®·Ñ)
-                    case 0x0011: // ÀÚµ¿ ¹øÈ£ (È®Àå ÄÁÆ®·Ñ)
-                        {
-                            var extendChar = pt.AddNewExtendControlChar();
-                            extendChar.Code = (short)code;
-                            byte[] addition = sr.ReadBytes(12);
-                            extendChar.SetAddition(addition);
-                            sr.ReadUInt2(); // Á¾·á ÄÚµå ÀÐ±â
-                            i += 7;
-                        }
-                        break;
-                    case 0x0012: // ¿¹¾à
-                    case 0x0013: // ¿¹¾à
-                    case 0x0014: // ¿¹¾à
-                    case 0x0015: // ¼ûÀº ¼³¸í (È®Àå ÄÁÆ®·Ñ)
-                        {
-                            var extendChar = pt.AddNewExtendControlChar();
-                            extendChar.Code = (short)code;
-                            byte[] addition = sr.ReadBytes(12);
-                            extendChar.SetAddition(addition);
-                            sr.ReadUInt2(); // Á¾·á ÄÚµå ÀÐ±â
-                            i += 7;
-                        }
-                        break;
-                    case 0x0016: // ¿¹¾à
-                    case 0x0017: // ¿¹¾à
-                    case 0x0018: // ±ÛÀÚ °ãÄ§ (ÀÎ¶óÀÎ ÄÁÆ®·Ñ)
-                        {
-                            var inlineChar = pt.AddNewInlineControlChar();
-                            inlineChar.Code = (short)code;
-                            byte[] addition = sr.ReadBytes(12);
-                            inlineChar.SetAddition(addition);
-                            sr.ReadUInt2(); // Á¾·á ÄÚµå ÀÐ±â
-                            i += 7;
-                        }
-                        break;
-                    case 0x0019: // ¿¹¾à
-                    case 0x001A: // ¿¹¾à
-                    case 0x001B: // ¿¹¾à
-                    case 0x001C: // ¿¹¾à
-                    case 0x001D: // ¿¹¾à
-                    case 0x001E: // ¿¬°á/º¸Á¶ ¹®ÀÚ À§Ä¡ (¹®ÀÚ ÄÁÆ®·Ñ)
-                    case 0x001F: // ÇÏÀÌÇÂ (¹®ÀÚ ÄÁÆ®·Ñ)
-                    case 0x0020: // °ø¹é (ÀÏ¹Ý ¹®ÀÚ)
-                        {
-                            var normalChar = pt.AddNewNormalChar();
-                            normalChar.Code = (short)code;
-                        }
-                        break;
-                    default:
-                        {
-                            var normalChar = pt.AddNewNormalChar();
-                            normalChar.Code = (short)code;
-                        }
-                        break;
-                }
+                p.CreateText();
             }
-            else
+
+            var pt = p.Text!;
+
+            // ï¿½ï¿½ï¿½Úµï¿½ Å©ï¿½ï¿½ / 2 = ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (UTF-16LE)
+            long charCount = sr.CurrentRecordHeader!.Size / 2;
+
+            for (long i = 0; i < charCount; i++)
             {
-                // ÀÏ¹Ý ¹®ÀÚ
-                var normalChar = pt.AddNewNormalChar();
-                normalChar.Code = (short)code;
+                ushort code = sr.ReadUInt2();
+
+                if (code <= 0x0020)
+                {
+                    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                    switch (code)
+                    {
+                        case 0x0000: // ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
+                            break;
+                        case 0x0001: // ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                        case 0x0002: // ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (È®ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                        case 0x0003: // ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ (È®ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var extendChar = pt.AddNewExtendControlChar();
+                                extendChar.Code = (short)code;
+                                byte[] addition = sr.ReadBytes(12);
+                                extendChar.SetAddition(addition);
+                                sr.ReadUInt2(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ð±ï¿½
+                                i += 7; // ï¿½ß°ï¿½ 12ï¿½ï¿½ï¿½ï¿½Æ® = 6 ï¿½ï¿½ï¿½ï¿½ + 1 ï¿½ï¿½ï¿½ï¿½ (ï¿½Úµï¿½ ï¿½ï¿½Ã¼) - ï¿½Ì¹ï¿½ 1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                            }
+                            break;
+                        case 0x0004: // ï¿½Êµï¿½ ï¿½ï¿½ (ï¿½Î¶ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var inlineChar = pt.AddNewInlineControlChar();
+                                inlineChar.Code = (short)code;
+                                byte[] addition = sr.ReadBytes(12);
+                                inlineChar.SetAddition(addition);
+                                sr.ReadUInt2(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ð±ï¿½
+                                i += 7;
+                            }
+                            break;
+                        case 0x0005: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0006: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0007: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0008: // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                        case 0x0009: // ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                        case 0x000A: // ï¿½ï¿½ ï¿½Ù²ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var controlChar = pt.AddNewCharControlChar();
+                                controlChar.Code = (short)code;
+                            }
+                            break;
+                        case 0x000B: // ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼/Ç¥ (È®ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var extendChar = pt.AddNewExtendControlChar();
+                                extendChar.Code = (short)code;
+                                byte[] addition = sr.ReadBytes(12);
+                                extendChar.SetAddition(addition);
+                                sr.ReadUInt2(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ð±ï¿½
+                                i += 7;
+                            }
+                            break;
+                        case 0x000C: // ï¿½ï¿½ï¿½ï¿½
+                            break;
+                        case 0x000D: // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var normalChar = pt.AddNewNormalChar();
+                                normalChar.Code = (short)code;
+                            }
+                            break;
+                        case 0x000E: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x000F: // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var controlChar = pt.AddNewCharControlChar();
+                                controlChar.Code = (short)code;
+                            }
+                            break;
+                        case 0x0010: // ï¿½Ó¸ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (È®ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                        case 0x0011: // ï¿½Úµï¿½ ï¿½ï¿½È£ (È®ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var extendChar = pt.AddNewExtendControlChar();
+                                extendChar.Code = (short)code;
+                                byte[] addition = sr.ReadBytes(12);
+                                extendChar.SetAddition(addition);
+                                sr.ReadUInt2(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ð±ï¿½
+                                i += 7;
+                            }
+                            break;
+                        case 0x0012: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0013: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0014: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0015: // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (È®ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var extendChar = pt.AddNewExtendControlChar();
+                                extendChar.Code = (short)code;
+                                byte[] addition = sr.ReadBytes(12);
+                                extendChar.SetAddition(addition);
+                                sr.ReadUInt2(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ð±ï¿½
+                                i += 7;
+                            }
+                            break;
+                        case 0x0016: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0017: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x0018: // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ (ï¿½Î¶ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                            {
+                                var inlineChar = pt.AddNewInlineControlChar();
+                                inlineChar.Code = (short)code;
+                                byte[] addition = sr.ReadBytes(12);
+                                inlineChar.SetAddition(addition);
+                                sr.ReadUInt2(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ð±ï¿½
+                                i += 7;
+                            }
+                            break;
+                        case 0x0019: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x001A: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x001B: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x001C: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x001D: // ï¿½ï¿½ï¿½ï¿½
+                        case 0x001E: // ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                        case 0x001F: // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½)
+                        case 0x0020: // ï¿½ï¿½ï¿½ï¿½ (ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½)
+                            {
+                                var normalChar = pt.AddNewNormalChar();
+                                normalChar.Code = (short)code;
+                            }
+                            break;
+                        default:
+                            {
+                                var normalChar = pt.AddNewNormalChar();
+                                normalChar.Code = (short)code;
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    // ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+                    var normalChar = pt.AddNewNormalChar();
+                    normalChar.Code = (short)code;
+                }
             }
         }
     }
+
 }

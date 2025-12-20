@@ -1,39 +1,43 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Equation;
 
-namespace HwpLib.Reader.BodyText.Control.Eqed;
 
-/// <summary>
-/// ¼ö½Ä Á¤º¸ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForEQEdit
+namespace HwpLib.Reader.BodyText.Control.Eqed
 {
+
     /// <summary>
-    /// ¼ö½Ä Á¤º¸ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="eqEdit">¼ö½Ä Á¤º¸ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(EQEdit eqEdit, CompoundStreamReader sr)
+    public static class ForEQEdit
     {
-        eqEdit.Property = sr.ReadUInt4();
-        eqEdit.Script.Bytes = sr.ReadHWPString();
-        eqEdit.LetterSize = sr.ReadUInt4();
-        eqEdit.LetterColor.Value = sr.ReadUInt4();
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="eqEdit">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(EQEdit eqEdit, CompoundStreamReader sr)
+        {
+            eqEdit.Property = sr.ReadUInt4();
+            eqEdit.Script.Bytes = sr.ReadHWPString();
+            eqEdit.LetterSize = sr.ReadUInt4();
+            eqEdit.LetterColor.Value = sr.ReadUInt4();
 
-        if (sr.IsEndOfRecord()) return;
+            if (sr.IsEndOfRecord()) return;
 
-        eqEdit.BaseLine = sr.ReadSInt2();
+            eqEdit.BaseLine = sr.ReadSInt2();
 
-        if (sr.IsEndOfRecord()) return;
+            if (sr.IsEndOfRecord()) return;
 
-        eqEdit.Unknown = sr.ReadUInt2();
+            eqEdit.Unknown = sr.ReadUInt2();
 
-        if (sr.IsEndOfRecord()) return;
+            if (sr.IsEndOfRecord()) return;
 
-        eqEdit.VersionInfo.Bytes = sr.ReadHWPString();
+            eqEdit.VersionInfo.Bytes = sr.ReadHWPString();
 
-        if (sr.IsEndOfRecord()) return;
+            if (sr.IsEndOfRecord()) return;
 
-        eqEdit.FontName.Bytes = sr.ReadHWPString();
+            eqEdit.FontName.Bytes = sr.ReadHWPString();
+        }
     }
+
 }

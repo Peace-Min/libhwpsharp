@@ -1,87 +1,90 @@
-using HwpLib.Object.BodyText.Control.CtrlHeader;
+﻿using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
-using HwpLib.Object.BodyText.Control.Gso.TextBox;
 
-namespace HwpLib.Object.BodyText.Control.Gso;
 
-/// <summary>
-/// 호 개체 컨트롤
-/// </summary>
-public class ControlArc : GsoControl
+namespace HwpLib.Object.BodyText.Control.Gso
 {
-    /// <summary>
-    /// 글상자
-    /// </summary>
-    private TextBox.TextBox? _textBox;
 
     /// <summary>
-    /// 호 개체 속성
+    /// 호 개체 컨트롤
     /// </summary>
-    private readonly ShapeComponentArc _shapeComponentArc;
-
-    /// <summary>
-    /// 생성자
-    /// </summary>
-    public ControlArc()
-        : this(new CtrlHeaderGso())
+    public class ControlArc : GsoControl
     {
-    }
+        /// <summary>
+        /// 글상자
+        /// </summary>
+        private TextBox.TextBox? _textBox;
 
-    /// <summary>
-    /// 생성자
-    /// </summary>
-    /// <param name="header">그리기 개체를 위한 컨트롤 헤더</param>
-    public ControlArc(CtrlHeaderGso header)
-        : base(header)
-    {
-        SetGsoId((uint)GsoControlType.Arc.GetId());
+        /// <summary>
+        /// 호 개체 속성
+        /// </summary>
+        private readonly ShapeComponentArc _shapeComponentArc;
 
-        _textBox = null;
-        _shapeComponentArc = new ShapeComponentArc();
-    }
-
-    /// <summary>
-    /// 글상자 객체를 생성한다.
-    /// </summary>
-    public void CreateTextBox()
-    {
-        _textBox = new TextBox.TextBox();
-    }
-
-    /// <summary>
-    /// 글상자 객체를 삭제한다.
-    /// </summary>
-    public void DeleteTextBox()
-    {
-        _textBox = null;
-    }
-
-    /// <summary>
-    /// 글상자 객체를 반환한다.
-    /// </summary>
-    public TextBox.TextBox? TextBox => _textBox;
-
-    /// <summary>
-    /// 호 개체의 속성 객체를 반환한다.
-    /// </summary>
-    public ShapeComponentArc ShapeComponentArc => _shapeComponentArc;
-
-    /// <summary>
-    /// 객체를 복제한다.
-    /// </summary>
-    /// <returns>복제된 객체</returns>
-    public override Control Clone()
-    {
-        ControlArc cloned = new ControlArc();
-        cloned.CopyGsoControlPart(this);
-
-        if (_textBox != null)
+        /// <summary>
+        /// 생성자
+        /// </summary>
+        public ControlArc()
+            : this(new CtrlHeaderGso())
         {
-            cloned.CreateTextBox();
-            cloned._textBox!.Copy(_textBox);
         }
 
-        cloned._shapeComponentArc.Copy(_shapeComponentArc);
-        return cloned;
+        /// <summary>
+        /// 생성자
+        /// </summary>
+        /// <param name="header">그리기 개체를 위한 컨트롤 헤더</param>
+        public ControlArc(CtrlHeaderGso header)
+            : base(header)
+        {
+            SetGsoId((uint)GsoControlType.Arc.GetId());
+
+            _textBox = null;
+            _shapeComponentArc = new ShapeComponentArc();
+        }
+
+        /// <summary>
+        /// 글상자 객체를 생성한다.
+        /// </summary>
+        public void CreateTextBox()
+        {
+            _textBox = new TextBox.TextBox();
+        }
+
+        /// <summary>
+        /// 글상자 객체를 삭제한다.
+        /// </summary>
+        public void DeleteTextBox()
+        {
+            _textBox = null;
+        }
+
+        /// <summary>
+        /// 글상자 객체를 반환한다.
+        /// </summary>
+        public TextBox.TextBox? TextBox => _textBox;
+
+        /// <summary>
+        /// 호 개체의 속성 객체를 반환한다.
+        /// </summary>
+        public ShapeComponentArc ShapeComponentArc => _shapeComponentArc;
+
+        /// <summary>
+        /// 객체를 복제한다.
+        /// </summary>
+        /// <returns>복제된 객체</returns>
+        public override Control Clone()
+        {
+            ControlArc cloned = new ControlArc();
+            cloned.CopyGsoControlPart(this);
+
+            if (_textBox != null)
+            {
+                cloned.CreateTextBox();
+                cloned._textBox!.Copy(_textBox);
+            }
+
+            cloned._shapeComponentArc.Copy(_shapeComponentArc);
+            return cloned;
+        }
     }
+
 }

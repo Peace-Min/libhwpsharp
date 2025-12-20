@@ -1,23 +1,27 @@
-using HwpLib.CompoundFile;
+﻿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText;
 
-namespace HwpLib.Writer.BodyText.Paragraph;
 
-/// <summary>
-/// 문단 리스트를 쓰기 위한 객체
-/// </summary>
-public static class ForParagraphList
+namespace HwpLib.Writer.BodyText.Paragraph
 {
+
     /// <summary>
-    /// 문단 리스트를 쓴다.
+    /// 문단 리스트를 쓰기 위한 객체
     /// </summary>
-    /// <param name="pl">문단 리스트</param>
-    /// <param name="sw">스트림 라이터</param>
-    public static void Write(IParagraphList pl, CompoundStreamWriter sw)
+    public static class ForParagraphList
     {
-        foreach (var p in pl)
+        /// <summary>
+        /// 문단 리스트를 쓴다.
+        /// </summary>
+        /// <param name="pl">문단 리스트</param>
+        /// <param name="sw">스트림 라이터</param>
+        public static void Write(IParagraphList pl, CompoundStreamWriter sw)
         {
-            ForParagraph.Write(p, sw);
+            foreach (var p in pl)
+            {
+                ForParagraph.Write(p, sw);
+            }
         }
     }
+
 }

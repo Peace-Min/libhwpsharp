@@ -1,6 +1,5 @@
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Gso;
-using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Tool.TextExtractor.ParaHead;
 using System.Text;
 

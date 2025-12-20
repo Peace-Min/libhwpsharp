@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Reader;
 using HwpLib.Writer;
 
@@ -43,15 +42,15 @@ public class RewritingHwpFileTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath(filename);
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         // Act
         Assert.IsNotNull(hwpFile);
         var writePath = TestHelper.GetResultPath($"result-rewrite-{filename}");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), $"{filename} 다시 쓰기 성공");
-        
+
         // 다시 읽어서 검증
         var reloadedFile = HWPReader.FromFile(writePath);
         Assert.IsNotNull(reloadedFile);

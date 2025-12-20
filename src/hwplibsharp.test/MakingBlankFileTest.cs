@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Tool.BlankFileMaker;
 using HwpLib.Writer;
 
@@ -15,7 +14,7 @@ public class MakingBlankFileTest
     {
         // Act
         var hwpFile = BlankFileMaker.Make();
-        
+
         // Assert
         Assert.IsNotNull(hwpFile);
         Assert.IsNotNull(hwpFile.BodyText);
@@ -28,11 +27,11 @@ public class MakingBlankFileTest
         // Arrange
         var hwpFile = BlankFileMaker.Make();
         var writePath = TestHelper.GetResultPath("result-making-blankfile.hwp");
-        
+
         // Act
         Assert.IsNotNull(hwpFile);
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath));
     }

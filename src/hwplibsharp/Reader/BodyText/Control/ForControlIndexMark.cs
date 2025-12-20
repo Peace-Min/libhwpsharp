@@ -1,36 +1,40 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// Ã£¾Æº¸±â Ç¥½Ä ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlIndexMark
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// Ã£¾Æº¸±â Ç¥½Ä ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="idxm">Ã£¾Æº¸±â Ç¥½Ä ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlIndexMark idxm, CompoundStreamReader sr)
-    {
-        CtrlHeader(idxm.GetHeader()!, sr);
-    }
 
     /// <summary>
-    /// Ã£¾Æº¸±â Ç¥½Ã ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// Ã£ï¿½Æºï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="header">Ã£¾Æº¸±â Ç¥½Ã ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlHeader(CtrlHeaderIndexMark header, CompoundStreamReader sr)
+    public static class ForControlIndexMark
     {
-        header.Keyword1.Bytes = sr.ReadHWPString();
-        header.Keyword2.Bytes = sr.ReadHWPString();
-        if (!sr.IsEndOfRecord())
+        /// <summary>
+        /// Ã£ï¿½Æºï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="idxm">Ã£ï¿½Æºï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlIndexMark idxm, CompoundStreamReader sr)
         {
-            sr.SkipToEndRecord();
+            CtrlHeader(idxm.GetHeader()!, sr);
+        }
+
+        /// <summary>
+        /// Ã£ï¿½Æºï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">Ã£ï¿½Æºï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlHeader(CtrlHeaderIndexMark header, CompoundStreamReader sr)
+        {
+            header.Keyword1.Bytes = sr.ReadHWPString();
+            header.Keyword2.Bytes = sr.ReadHWPString();
+            if (!sr.IsEndOfRecord())
+            {
+                sr.SkipToEndRecord();
+            }
         }
     }
+
 }

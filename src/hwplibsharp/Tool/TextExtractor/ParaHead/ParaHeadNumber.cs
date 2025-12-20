@@ -1,4 +1,4 @@
-using HwpLib.Object.DocInfo.Numbering;
+﻿using HwpLib.Object.DocInfo.Numbering;
 
 namespace HwpLib.Tool.TextExtractor.ParaHead
 {

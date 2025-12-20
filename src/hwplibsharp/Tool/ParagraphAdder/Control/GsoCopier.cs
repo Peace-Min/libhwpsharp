@@ -1,7 +1,4 @@
-using HwpLib.Object.BodyText.Control.Gso;
-using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
-using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Picture;
-using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Polygon;
+﻿using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 

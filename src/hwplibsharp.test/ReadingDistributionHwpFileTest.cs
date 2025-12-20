@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Reader;
 
 namespace HwpLibSharp.Test;
@@ -14,10 +13,10 @@ public class ReadingDistributionHwpFileTest
     {
         // Arrange
         var filePath = TestHelper.GetSamplePath("distribution.hwp");
-        
+
         // Act
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         // Assert
         Assert.IsNotNull(hwpFile);
         Assert.IsNotEmpty(hwpFile.BodyText.SectionList, "배포용 파일 읽기 성공");

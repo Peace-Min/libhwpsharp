@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Reader;
 using HwpLib.Tool.ObjectFinder;
@@ -18,9 +17,9 @@ public class SettingFieldTextTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("setting-fields.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act & Assert - 필드1 설정
         {
             var textList = new List<string>
@@ -33,7 +32,7 @@ public class SettingFieldTextTest
             var sfr = FieldFinder.SetFieldText(hwpFile, ControlType.FIELD_CLICKHERE, "필드1", textList);
             Console.WriteLine($"필드1 설정결과 = {sfr}");
         }
-        
+
         // Act & Assert - 필드2 설정
         {
             var textList = new List<string>
@@ -45,7 +44,7 @@ public class SettingFieldTextTest
             var sfr = FieldFinder.SetFieldText(hwpFile, ControlType.FIELD_CLICKHERE, "필드2", textList);
             Console.WriteLine($"필드2 설정결과 = {sfr}");
         }
-        
+
         // 저장
         var writePath = TestHelper.GetResultPath("result-setting-field.hwp");
         HWPWriter.ToFile(hwpFile, writePath);

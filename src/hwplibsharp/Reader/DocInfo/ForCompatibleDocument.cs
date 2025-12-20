@@ -1,21 +1,25 @@
+﻿using HwpLib.CompoundFile;
 using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.CompatibleDocument;
-using HwpLib.CompoundFile;
 
-namespace HwpLib.Reader.DocInfo;
 
-/// <summary>
-/// 호환 문서 레코드를 읽기 위한 객체
-/// </summary>
-public static class ForCompatibleDocument
+namespace HwpLib.Reader.DocInfo
 {
+
     /// <summary>
-    /// 호환 문서 정보를 읽는다.
+    /// 호환 문서 레코드를 읽기 위한 객체
     /// </summary>
-    /// <param name="cd">호환 문서 레코드</param>
-    /// <param name="sr">스트림 리더</param>
-    public static void Read(CompatibleDocumentInfo cd, CompoundStreamReader sr)
+    public static class ForCompatibleDocument
     {
-        cd.TargetProgram = CompatibleDocumentSortExtensions.FromValue((byte)sr.ReadUInt4());
+        /// <summary>
+        /// 호환 문서 정보를 읽는다.
+        /// </summary>
+        /// <param name="cd">호환 문서 레코드</param>
+        /// <param name="sr">스트림 리더</param>
+        public static void Read(CompatibleDocumentInfo cd, CompoundStreamReader sr)
+        {
+            cd.TargetProgram = CompatibleDocumentSortExtensions.FromValue((byte)sr.ReadUInt4());
+        }
     }
+
 }

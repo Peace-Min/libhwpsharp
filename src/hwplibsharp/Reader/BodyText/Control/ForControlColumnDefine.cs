@@ -1,69 +1,73 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.CtrlHeader.ColumnDefine;
 using HwpLib.Object.DocInfo.BorderFill;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ´Ü Á¤ÀÇ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlColumnDefine
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ´Ü Á¤ÀÇ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="cd">´Ü Á¤ÀÇ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlColumnDefine cd, CompoundStreamReader sr)
-    {
-        CtrlHeader(cd.GetHeader()!, sr);
-    }
 
     /// <summary>
-    /// ´Ü Á¤ÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="h">´Ü Á¤ÀÇ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlHeader(CtrlHeaderColumnDefine h, CompoundStreamReader sr)
+    public static class ForControlColumnDefine
     {
-        h.Property.Value = sr.ReadUInt2();
-
-        int count = h.Property.GetColumnCount();
-        bool sameWidth = h.Property.IsSameWidth();
-
-        if (count < 2 || sameWidth)
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="cd">ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlColumnDefine cd, CompoundStreamReader sr)
         {
-            h.GapBetweenColumn = sr.ReadUInt2();
-            h.Property2 = sr.ReadUInt2();
-        }
-        else
-        {
-            h.Property2 = sr.ReadUInt2();
-            ColumnInfos(h, sr);
+            CtrlHeader(cd.GetHeader()!, sr);
         }
 
-        h.DivideLine.Type = BorderTypeExtensions.FromValue(sr.ReadUInt1());
-        h.DivideLine.Thickness = BorderThicknessExtensions.FromValue(sr.ReadUInt1());
-        h.DivideLine.Color.Value = sr.ReadUInt4();
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="h">ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlHeader(CtrlHeaderColumnDefine h, CompoundStreamReader sr)
+        {
+            h.Property.Value = sr.ReadUInt2();
 
-        sr.SkipToEndRecord();
+            int count = h.Property.GetColumnCount();
+            bool sameWidth = h.Property.IsSameWidth();
+
+            if (count < 2 || sameWidth)
+            {
+                h.GapBetweenColumn = sr.ReadUInt2();
+                h.Property2 = sr.ReadUInt2();
+            }
+            else
+            {
+                h.Property2 = sr.ReadUInt2();
+                ColumnInfos(h, sr);
+            }
+
+            h.DivideLine.Type = BorderTypeExtensions.FromValue(sr.ReadUInt1());
+            h.DivideLine.Thickness = BorderThicknessExtensions.FromValue(sr.ReadUInt1());
+            h.DivideLine.Color.Value = sr.ReadUInt4();
+
+            sr.SkipToEndRecord();
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="h">ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ColumnInfos(CtrlHeaderColumnDefine h, CompoundStreamReader sr)
+        {
+            int count = h.Property.GetColumnCount();
+            for (int index = 0; index < count; index++)
+            {
+                ColumnInfo ci = h.AddNewColumnInfo();
+                ci.Width = sr.ReadUInt2();
+                ci.Gap = sr.ReadUInt2();
+            }
+        }
     }
 
-    /// <summary>
-    /// ´Ü Á¤ÀÇ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµåÀÇ ´Ü Á¤º¸ ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="h">´Ü Á¤ÀÇ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ColumnInfos(CtrlHeaderColumnDefine h, CompoundStreamReader sr)
-    {
-        int count = h.Property.GetColumnCount();
-        for (int index = 0; index < count; index++)
-        {
-            ColumnInfo ci = h.AddNewColumnInfo();
-            ci.Width = sr.ReadUInt2();
-            ci.Gap = sr.ReadUInt2();
-        }
-    }
 }

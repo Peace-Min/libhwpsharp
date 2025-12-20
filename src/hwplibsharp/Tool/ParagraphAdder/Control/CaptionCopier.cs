@@ -1,4 +1,4 @@
-using HwpLib.Object.BodyText.Control.Gso.Caption;
+﻿using HwpLib.Object.BodyText.Control.Gso.Caption;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 
 namespace HwpLib.Tool.ParagraphAdder.Control

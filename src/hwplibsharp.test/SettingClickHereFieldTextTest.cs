@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Reader;
 using HwpLib.Tool.ObjectFinder;
 using HwpLib.Writer;
@@ -17,9 +16,9 @@ public class SettingClickHereFieldTextTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath("필드-누름틀.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         {
             var textList = new List<string> { "필드1 값1" };
@@ -31,10 +30,10 @@ public class SettingClickHereFieldTextTest
             var sfr = FieldFinder.SetClickHereText(hwpFile, "필드2", textList);
             Console.WriteLine($"필드2 설정결과 = {sfr}");
         }
-        
+
         var writePath = TestHelper.GetBasicSamplePath("result-setting-필드-누름틀.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "누름틀 필드 텍스트 설정 성공");
     }

@@ -1,5 +1,7 @@
-using HwpLib.Object.DocInfo;
+﻿using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.FaceName;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo
 {

@@ -1,39 +1,43 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.CtrlHeader.AdditionalText;
 using HwpLib.Object.DocInfo.ParaShape;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// µ¡¸» ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlAdditionalText
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// µ¡¸» ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="at">µ¡¸» ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlAdditionalText at, CompoundStreamReader sr)
-    {
-        CtrlHeader(at.GetHeader()!, sr);
-    }
 
     /// <summary>
-    /// µ¡¸» ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="h">µ¡¸» ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlHeader(CtrlHeaderAdditionalText h, CompoundStreamReader sr)
+    public static class ForControlAdditionalText
     {
-        h.MainText.Bytes = sr.ReadHWPString();
-        h.SubText.Bytes = sr.ReadHWPString();
-        h.Position = AdditionalTextPositionExtensions.FromValue((byte)sr.ReadUInt4());
-        h.Fsizeratio = sr.ReadUInt4();
-        h.Option = sr.ReadUInt4();
-        h.StyleId = sr.ReadUInt4();
-        h.Alignment = AlignmentExtensions.FromValue((byte)sr.ReadUInt4());
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="at">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlAdditionalText at, CompoundStreamReader sr)
+        {
+            CtrlHeader(at.GetHeader()!, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="h">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlHeader(CtrlHeaderAdditionalText h, CompoundStreamReader sr)
+        {
+            h.MainText.Bytes = sr.ReadHWPString();
+            h.SubText.Bytes = sr.ReadHWPString();
+            h.Position = AdditionalTextPositionExtensions.FromValue((byte)sr.ReadUInt4());
+            h.Fsizeratio = sr.ReadUInt4();
+            h.Option = sr.ReadUInt4();
+            h.StyleId = sr.ReadUInt4();
+            h.Alignment = AlignmentExtensions.FromValue((byte)sr.ReadUInt4());
+        }
     }
+
 }

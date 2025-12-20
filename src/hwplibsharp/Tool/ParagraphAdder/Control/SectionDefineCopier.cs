@@ -1,5 +1,4 @@
-using HwpLib.Object.BodyText;
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.SectionDefine;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 
@@ -28,8 +27,8 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             }
         }
 
-        private static void CopyHeader(HwpLib.Object.BodyText.Control.CtrlHeader.CtrlHeaderSectionDefine? source, 
-                                       HwpLib.Object.BodyText.Control.CtrlHeader.CtrlHeaderSectionDefine? target, 
+        private static void CopyHeader(HwpLib.Object.BodyText.Control.CtrlHeader.CtrlHeaderSectionDefine? source,
+                                       HwpLib.Object.BodyText.Control.CtrlHeader.CtrlHeaderSectionDefine? target,
                                        DocInfoAdder? docInfoAdder)
         {
             if (source == null || target == null) return;

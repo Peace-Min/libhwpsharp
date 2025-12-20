@@ -1,36 +1,40 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.SectionDefine;
 using HwpLib.Object.DocInfo.BorderFill;
 
-namespace HwpLib.Reader.BodyText.Control.Secd;
 
-/// <summary>
-/// °¢ÁÖ/¹ÌÁÖ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForFootEndNoteShape
+namespace HwpLib.Reader.BodyText.Control.Secd
 {
+
     /// <summary>
-    /// °¢ÁÖ/¹ÌÁÖ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="fens">°¢ÁÖ/¹ÌÁÖ ¸ð¾ç ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(FootEndNoteShape fens, CompoundStreamReader sr)
+    public static class ForFootEndNoteShape
     {
-        fens.Property.Value = sr.ReadUInt4();
-        fens.UserSymbol.Bytes = sr.ReadWChar();
-        fens.BeforeDecorativeLetter.Bytes = sr.ReadWChar();
-        fens.AfterDecorativeLetter.Bytes = sr.ReadWChar();
-        fens.StartNumber = sr.ReadUInt2();
-        fens.DivideLineLength = sr.ReadUInt4();
-        fens.DivideLineTopMargin = sr.ReadUInt2();
-        fens.DivideLineBottomMargin = sr.ReadUInt2();
-        fens.BetweenNotesMargin = sr.ReadUInt2();
-        fens.DivideLine.Type = BorderTypeExtensions.FromValue(sr.ReadUInt1());
-        fens.DivideLine.Thickness = BorderThicknessExtensions.FromValue(sr.ReadUInt1());
-        fens.DivideLine.Color.Value = sr.ReadUInt4();
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="fens">ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(FootEndNoteShape fens, CompoundStreamReader sr)
+        {
+            fens.Property.Value = sr.ReadUInt4();
+            fens.UserSymbol.Bytes = sr.ReadWChar();
+            fens.BeforeDecorativeLetter.Bytes = sr.ReadWChar();
+            fens.AfterDecorativeLetter.Bytes = sr.ReadWChar();
+            fens.StartNumber = sr.ReadUInt2();
+            fens.DivideLineLength = sr.ReadUInt4();
+            fens.DivideLineTopMargin = sr.ReadUInt2();
+            fens.DivideLineBottomMargin = sr.ReadUInt2();
+            fens.BetweenNotesMargin = sr.ReadUInt2();
+            fens.DivideLine.Type = BorderTypeExtensions.FromValue(sr.ReadUInt1());
+            fens.DivideLine.Thickness = BorderThicknessExtensions.FromValue(sr.ReadUInt1());
+            fens.DivideLine.Color.Value = sr.ReadUInt4();
 
-        if (sr.IsEndOfRecord()) return;
+            if (sr.IsEndOfRecord()) return;
 
-        fens.Unknown = sr.ReadUInt4();
+            fens.Unknown = sr.ReadUInt4();
+        }
     }
+
 }

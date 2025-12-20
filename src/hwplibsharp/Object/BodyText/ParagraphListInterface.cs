@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using HwpLib.Object.BodyText.Paragraph;
+﻿using System.Collections.Generic;
 
 namespace HwpLib.Object.BodyText
 {

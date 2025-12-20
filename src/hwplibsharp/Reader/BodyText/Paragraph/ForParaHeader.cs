@@ -1,40 +1,44 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 
-namespace HwpLib.Reader.BodyText.Paragraph;
 
-/// <summary>
-/// ¹®´Ü Çì´õ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForParaHeader
+namespace HwpLib.Reader.BodyText.Paragraph
 {
+
     /// <summary>
-    /// ¹®´Ü Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="ph">¹®´Ü Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(HwpLib.Object.BodyText.Paragraph.Header.ParaHeader ph, CompoundStreamReader sr)
+    public static class ForParaHeader
     {
-        // ¹®´Ü ¸®½ºÆ®¿¡¼­ ¸¶Áö¸· ¹®´Ü¿©ºÎ¿Í ¹®ÀÚ¼ö¸¦ ÀÐ´Â´Ù.
-        uint value = sr.ReadUInt4();
-        ph.LastInList = (value & 0x80000000) != 0;
-        ph.CharacterCount = value & 0x7fffffff;
-
-        ph.ControlMask.Value = sr.ReadUInt4();
-        ph.ParaShapeId = sr.ReadUInt2();
-        ph.StyleId = sr.ReadUInt1();
-        ph.DivideSort.Value = sr.ReadUInt1();
-        ph.CharShapeCount = sr.ReadUInt2();
-        ph.RangeTagCount = sr.ReadUInt2();
-        ph.LineAlignCount = sr.ReadUInt2();
-        ph.InstanceID = sr.ReadUInt4();
-
-        if (!sr.IsEndOfRecord() && sr.FileVersion.IsOver(5, 0, 3, 2))
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="ph">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(HwpLib.Object.BodyText.Paragraph.Header.ParaHeader ph, CompoundStreamReader sr)
         {
-            ph.IsMergedByTrack = sr.ReadUInt2();
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ü¿ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+            uint value = sr.ReadUInt4();
+            ph.LastInList = (value & 0x80000000) != 0;
+            ph.CharacterCount = value & 0x7fffffff;
+
+            ph.ControlMask.Value = sr.ReadUInt4();
+            ph.ParaShapeId = sr.ReadUInt2();
+            ph.StyleId = sr.ReadUInt1();
+            ph.DivideSort.Value = sr.ReadUInt1();
+            ph.CharShapeCount = sr.ReadUInt2();
+            ph.RangeTagCount = sr.ReadUInt2();
+            ph.LineAlignCount = sr.ReadUInt2();
+            ph.InstanceID = sr.ReadUInt4();
+
+            if (!sr.IsEndOfRecord() && sr.FileVersion.IsOver(5, 0, 3, 2))
+            {
+                ph.IsMergedByTrack = sr.ReadUInt2();
+            }
+
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶Ú´ï¿½
+            sr.SkipToEndRecord();
         }
-
-        // ³²Àº ¹ÙÀÌÆ®°¡ ÀÖÀ¸¸é °Ç³Ê¶Ú´Ù
-        sr.SkipToEndRecord();
     }
-}
 
+
+}

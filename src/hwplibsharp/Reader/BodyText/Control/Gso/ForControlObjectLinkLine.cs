@@ -1,60 +1,64 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.ObjectLinkLine;
 using HwpLib.Object.Etc;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// °´Ã¼ ¿¬°á¼± ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlObjectLinkLine
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
+
     /// <summary>
-    /// °´Ã¼ ¿¬°á¼± ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
+    /// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½á¼± ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="objectLinkLine">°´Ã¼ ¿¬°á¼± ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlObjectLinkLine objectLinkLine, CompoundStreamReader sr)
+    public static class ForControlObjectLinkLine
     {
-        sr.ReadRecordHeader();
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentLine)
+        /// <summary>
+        /// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½á¼± ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="objectLinkLine">ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½á¼± ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlObjectLinkLine objectLinkLine, CompoundStreamReader sr)
         {
-            ShapeComponentLine(objectLinkLine.ShapeComponentLine, sr);
+            sr.ReadRecordHeader();
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentLine)
+            {
+                ShapeComponentLine(objectLinkLine.ShapeComponentLine, sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scl">ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentLine(ShapeComponentLineForObjectLinkLine scl, CompoundStreamReader sr)
+        {
+            scl.StartX = sr.ReadSInt4();
+            scl.StartY = sr.ReadSInt4();
+            scl.EndX = sr.ReadSInt4();
+            scl.EndY = sr.ReadSInt4();
+
+            scl.Type = LinkLineTypeExtensions.FromValue((byte)sr.ReadUInt4());
+            scl.StartSubjectID = sr.ReadUInt4();
+            scl.StartSubjectIndex = sr.ReadUInt4();
+            scl.EndSubjectID = sr.ReadUInt4();
+            scl.EndSubjectIndex = sr.ReadUInt4();
+
+            int countOfCP = (int)sr.ReadUInt4();
+            for (int index = 0; index < countOfCP; index++)
+            {
+                var cp = scl.AddNewControlPoint();
+                cp.X = sr.ReadUInt4();
+                cp.Y = sr.ReadUInt4();
+                cp.Type = sr.ReadUInt2();
+            }
+
+            if (sr.IsEndOfRecord()) return;
+
+            sr.SkipToEndRecord();
         }
     }
 
-    /// <summary>
-    /// ¼± °³Ã¼ ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scl">¼± °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentLine(ShapeComponentLineForObjectLinkLine scl, CompoundStreamReader sr)
-    {
-        scl.StartX = sr.ReadSInt4();
-        scl.StartY = sr.ReadSInt4();
-        scl.EndX = sr.ReadSInt4();
-        scl.EndY = sr.ReadSInt4();
-
-        scl.Type = LinkLineTypeExtensions.FromValue((byte)sr.ReadUInt4());
-        scl.StartSubjectID = sr.ReadUInt4();
-        scl.StartSubjectIndex = sr.ReadUInt4();
-        scl.EndSubjectID = sr.ReadUInt4();
-        scl.EndSubjectIndex = sr.ReadUInt4();
-
-        int countOfCP = (int)sr.ReadUInt4();
-        for (int index = 0; index < countOfCP; index++)
-        {
-            var cp = scl.AddNewControlPoint();
-            cp.X = sr.ReadUInt4();
-            cp.Y = sr.ReadUInt4();
-            cp.Type = sr.ReadUInt2();
-        }
-
-        if (sr.IsEndOfRecord()) return;
-
-        sr.SkipToEndRecord();
-    }
 }

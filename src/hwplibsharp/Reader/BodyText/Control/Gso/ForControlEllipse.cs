@@ -1,63 +1,67 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
 using HwpLib.Object.Etc;
 using HwpLib.Reader.BodyText.Control.Gso.Part;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// Å¸¿ø ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlEllipse
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
-    /// <summary>
-    /// Å¸¿ø ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="ellipse">Å¸¿ø ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlEllipse ellipse, CompoundStreamReader sr)
-    {
-        sr.ReadRecordHeader();
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
-        {
-            ellipse.CreateTextBox();
-            ForTextBox.Read(ellipse.TextBox!, sr);
 
-            if (!sr.IsImmediatelyAfterReadingHeader)
+    /// <summary>
+    /// Å¸ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    /// </summary>
+    public static class ForControlEllipse
+    {
+        /// <summary>
+        /// Å¸ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="ellipse">Å¸ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlEllipse ellipse, CompoundStreamReader sr)
+        {
+            sr.ReadRecordHeader();
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
             {
-                sr.ReadRecordHeader();
+                ellipse.CreateTextBox();
+                ForTextBox.Read(ellipse.TextBox!, sr);
+
+                if (!sr.IsImmediatelyAfterReadingHeader)
+                {
+                    sr.ReadRecordHeader();
+                }
+            }
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentEllipse)
+            {
+                ShapeComponentEllipse(ellipse.ShapeComponentEllipse, sr);
             }
         }
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentEllipse)
+
+        /// <summary>
+        /// Å¸ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="sce">Å¸ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentEllipse(ShapeComponentEllipse sce, CompoundStreamReader sr)
         {
-            ShapeComponentEllipse(ellipse.ShapeComponentEllipse, sr);
+            sce.Property.Value = sr.ReadUInt4();
+            sce.CenterX = sr.ReadSInt4();
+            sce.CenterY = sr.ReadSInt4();
+            sce.Axis1X = sr.ReadSInt4();
+            sce.Axis1Y = sr.ReadSInt4();
+            sce.Axis2X = sr.ReadSInt4();
+            sce.Axis2Y = sr.ReadSInt4();
+            sce.StartX = sr.ReadSInt4();
+            sce.StartY = sr.ReadSInt4();
+            sce.EndX = sr.ReadSInt4();
+            sce.EndY = sr.ReadSInt4();
+            sce.StartX2 = sr.ReadSInt4();
+            sce.StartY2 = sr.ReadSInt4();
+            sce.EndX2 = sr.ReadSInt4();
+            sce.EndY2 = sr.ReadSInt4();
         }
     }
 
-    /// <summary>
-    /// Å¸¿ø °³Ã¼ ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="sce">Å¸¿ø °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentEllipse(ShapeComponentEllipse sce, CompoundStreamReader sr)
-    {
-        sce.Property.Value = sr.ReadUInt4();
-        sce.CenterX = sr.ReadSInt4();
-        sce.CenterY = sr.ReadSInt4();
-        sce.Axis1X = sr.ReadSInt4();
-        sce.Axis1Y = sr.ReadSInt4();
-        sce.Axis2X = sr.ReadSInt4();
-        sce.Axis2Y = sr.ReadSInt4();
-        sce.StartX = sr.ReadSInt4();
-        sce.StartY = sr.ReadSInt4();
-        sce.EndX = sr.ReadSInt4();
-        sce.EndY = sr.ReadSInt4();
-        sce.StartX2 = sr.ReadSInt4();
-        sce.StartY2 = sr.ReadSInt4();
-        sce.EndX2 = sr.ReadSInt4();
-        sce.EndY2 = sr.ReadSInt4();
-    }
 }

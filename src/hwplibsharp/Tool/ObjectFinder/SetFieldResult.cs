@@ -1,37 +1,40 @@
-namespace HwpLib.Tool.ObjectFinder;
-
-/// <summary>
-/// SetField 처리 결과상태
-/// </summary>
-public enum SetFieldResult
+﻿namespace HwpLib.Tool.ObjectFinder
 {
-    /// <summary>
-    /// 처리중
-    /// </summary>
-    InProcess,
 
     /// <summary>
-    /// 파일 끝까지 찾지 못함
+    /// SetField 처리 결과상태
     /// </summary>
-    NotFound,
+    public enum SetFieldResult
+    {
+        /// <summary>
+        /// 처리중
+        /// </summary>
+        InProcess,
 
-    /// <summary>
-    /// Text가 남음
-    /// </summary>
-    TextRemains,
+        /// <summary>
+        /// 파일 끝까지 찾지 못함
+        /// </summary>
+        NotFound,
 
-    /// <summary>
-    /// 모든 text를 설정함
-    /// </summary>
-    SetAllText,
+        /// <summary>
+        /// Text가 남음
+        /// </summary>
+        TextRemains,
 
-    /// <summary>
-    /// text가 부족함
-    /// </summary>
-    NotEnoughText,
+        /// <summary>
+        /// 모든 text를 설정함
+        /// </summary>
+        SetAllText,
 
-    /// <summary>
-    /// 기타 에러
-    /// </summary>
-    ETCError
+        /// <summary>
+        /// text가 부족함
+        /// </summary>
+        NotEnoughText,
+
+        /// <summary>
+        /// 기타 에러
+        /// </summary>
+        ETCError
+    }
+
 }

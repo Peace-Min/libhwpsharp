@@ -1,35 +1,39 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.SectionDefine;
 
-namespace HwpLib.Reader.BodyText.Control.Secd;
 
-/// <summary>
-/// ¹ÙÅÁÂÊ Á¤º¸¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForBatangPageInfo
+namespace HwpLib.Reader.BodyText.Control.Secd
 {
-    /// <summary>
-    /// ¹ÙÅÁÂÊ Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="bpi">¹ÙÅÁÂÊ Á¤º¸</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(BatangPageInfo bpi, CompoundStreamReader sr)
-    {
-        ListHeader(bpi.ListHeader, sr);
-        ForParagraphList.Read(bpi.ParagraphList, sr);
-    }
 
     /// <summary>
-    /// ¹ÙÅÁÂÊÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="lh">¹ÙÅÁÂÊÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ListHeader(ListHeaderForBatangPage lh, CompoundStreamReader sr)
+    public static class ForBatangPageInfo
     {
-        lh.ParaCount = sr.ReadSInt4();
-        lh.Property.Value = sr.ReadUInt4();
-        lh.TextWidth = sr.ReadUInt4();
-        lh.TextHeight = sr.ReadUInt4();
-        sr.SkipToEndRecord();
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="bpi">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(BatangPageInfo bpi, CompoundStreamReader sr)
+        {
+            ListHeader(bpi.ListHeader, sr);
+            ForParagraphList.Read(bpi.ParagraphList, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="lh">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ListHeader(ListHeaderForBatangPage lh, CompoundStreamReader sr)
+        {
+            lh.ParaCount = sr.ReadSInt4();
+            lh.Property.Value = sr.ReadUInt4();
+            lh.TextWidth = sr.ReadUInt4();
+            lh.TextHeight = sr.ReadUInt4();
+            sr.SkipToEndRecord();
+        }
     }
+
 }

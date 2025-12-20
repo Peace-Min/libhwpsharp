@@ -1,17 +1,11 @@
 using HwpLib.Object;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.CtrlHeader.Gso;
 using HwpLib.Object.BodyText.Control.CtrlHeader.SectionDefine;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.BodyText.Paragraph.CharShape;
-using HwpLib.Object.BodyText.Paragraph.Header;
-using HwpLib.Object.BodyText.Paragraph.LineSeg;
-using HwpLib.Object.BodyText.Paragraph.Text;
-using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.BorderFill;
 using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 using HwpLib.Reader;
@@ -38,15 +32,15 @@ public class InsertingTableTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("blank.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         MakeTable(hwpFile);
-        
+
         var writePath = TestHelper.GetResultPath("result-inserting-table.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "테이블 삽입 성공");
     }
@@ -76,7 +70,7 @@ public class InsertingTableTest
     private void SetCtrlHeaderRecord()
     {
         if (_table == null) return;
-        
+
         var ctrlHeader = _table.Header;
         ctrlHeader.Property.SetLikeWord(false);
         ctrlHeader.Property.SetApplyLineSpace(false);
@@ -106,7 +100,7 @@ public class InsertingTableTest
     private void SetTableRecordFor2By2Cells()
     {
         if (_table == null) return;
-        
+
         var tableRecord = _table.Table;
         tableRecord.Property.DivideAtPageBoundary = DivideAtPageBoundary.DivideByCell;
         tableRecord.Property.AutoRepeatTitleRow = false;
@@ -213,7 +207,7 @@ public class InsertingTableTest
     private void SetListHeaderForCell(int colIndex, int rowIndex)
     {
         if (_cell == null) return;
-        
+
         var lh = _cell.ListHeader;
         lh.ParaCount = 1;
         lh.Property.TextDirection = TextDirection.Horizontal;
@@ -239,7 +233,7 @@ public class InsertingTableTest
     private void SetParagraphForCell(string text)
     {
         if (_cell == null) return;
-        
+
         var p = _cell.ParagraphList.AddNewParagraph();
         SetParaHeader(p);
         SetParaText(p, text);

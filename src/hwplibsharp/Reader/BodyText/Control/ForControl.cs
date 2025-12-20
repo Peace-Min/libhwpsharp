@@ -1,190 +1,194 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Reader.BodyText.Paragraph;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControl
+namespace HwpLib.Reader.BodyText.Control
 {
+
     /// <summary>
-    /// ÄÁÆ®·ÑÀÇ Á¾·ù¿¡ µû¶ó ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
+    /// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="c">ÄÁÆ®·Ñ °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+    public static class ForControl
     {
-        if (ControlTypeExtensions.IsField(c.Type.GetCtrlId()))
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="c">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(Object.BodyText.Control.Control c, CompoundStreamReader sr)
         {
-            Field(c, sr);
-            return;
+            if (ControlTypeExtensions.IsField(c.Type.GetCtrlId()))
+            {
+                Field(c, sr);
+                return;
+            }
+
+            switch (c.Type)
+            {
+                case ControlType.Table:
+                    Table(c, sr);
+                    break;
+                case ControlType.Equation:
+                    Equation(c, sr);
+                    break;
+                case ControlType.SectionDefine:
+                    SectionDefine(c, sr);
+                    break;
+                case ControlType.ColumnDefine:
+                    ColumnDefine(c, sr);
+                    break;
+                case ControlType.Header:
+                    Header(c, sr);
+                    break;
+                case ControlType.Footer:
+                    Footer(c, sr);
+                    break;
+                case ControlType.Footnote:
+                    Footnote(c, sr);
+                    break;
+                case ControlType.Endnote:
+                    Endnote(c, sr);
+                    break;
+                case ControlType.AutoNumber:
+                    AutoNumber(c, sr);
+                    break;
+                case ControlType.NewNumber:
+                    NewNumber(c, sr);
+                    break;
+                case ControlType.PageHide:
+                    PageHide(c, sr);
+                    break;
+                case ControlType.PageOddEvenAdjust:
+                    PageOddEvenAdjust(c, sr);
+                    break;
+                case ControlType.PageNumberPosition:
+                    PageNumberPosition(c, sr);
+                    break;
+                case ControlType.IndexMark:
+                    IndexMark(c, sr);
+                    break;
+                case ControlType.Bookmark:
+                    Bookmark(c, sr);
+                    break;
+                case ControlType.OverlappingLetter:
+                    OverlappingLetter(c, sr);
+                    break;
+                case ControlType.AdditionalText:
+                    AdditionalText(c, sr);
+                    break;
+                case ControlType.HiddenComment:
+                    HiddenComment(c, sr);
+                    break;
+                default:
+                    // ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶Ú´ï¿½
+                    sr.SkipToEndRecord();
+                    break;
+            }
         }
 
-        switch (c.Type)
+        private static void Field(Object.BodyText.Control.Control c, CompoundStreamReader sr)
         {
-            case ControlType.Table:
-                Table(c, sr);
-                break;
-            case ControlType.Equation:
-                Equation(c, sr);
-                break;
-            case ControlType.SectionDefine:
-                SectionDefine(c, sr);
-                break;
-            case ControlType.ColumnDefine:
-                ColumnDefine(c, sr);
-                break;
-            case ControlType.Header:
-                Header(c, sr);
-                break;
-            case ControlType.Footer:
-                Footer(c, sr);
-                break;
-            case ControlType.Footnote:
-                Footnote(c, sr);
-                break;
-            case ControlType.Endnote:
-                Endnote(c, sr);
-                break;
-            case ControlType.AutoNumber:
-                AutoNumber(c, sr);
-                break;
-            case ControlType.NewNumber:
-                NewNumber(c, sr);
-                break;
-            case ControlType.PageHide:
-                PageHide(c, sr);
-                break;
-            case ControlType.PageOddEvenAdjust:
-                PageOddEvenAdjust(c, sr);
-                break;
-            case ControlType.PageNumberPosition:
-                PageNumberPosition(c, sr);
-                break;
-            case ControlType.IndexMark:
-                IndexMark(c, sr);
-                break;
-            case ControlType.Bookmark:
-                Bookmark(c, sr);
-                break;
-            case ControlType.OverlappingLetter:
-                OverlappingLetter(c, sr);
-                break;
-            case ControlType.AdditionalText:
-                AdditionalText(c, sr);
-                break;
-            case ControlType.HiddenComment:
-                HiddenComment(c, sr);
-                break;
-            default:
-                // ¾Ë ¼ö ¾ø´Â ÄÁÆ®·ÑÀº °Ç³Ê¶Ú´Ù
-                sr.SkipToEndRecord();
-                break;
+            ForControlField.ReadCtrlHeader((ControlField)c, sr);
+        }
+
+        private static void Table(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fct = new ForControlTable();
+            fct.Read((ControlTable)c, sr);
+        }
+
+        private static void Equation(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fce = new ForControlEquation();
+            fce.Read((ControlEquation)c, sr);
+        }
+
+        private static void SectionDefine(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fcsd = new ForControlSectionDefine();
+            fcsd.Read((ControlSectionDefine)c, sr);
+        }
+
+        private static void ColumnDefine(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlColumnDefine.Read((ControlColumnDefine)c, sr);
+        }
+
+        private static void Header(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fch = new ForControlHeader();
+            fch.Read((ControlHeader)c, sr);
+        }
+
+        private static void Footer(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fcf = new ForControlFooter();
+            fcf.Read((ControlFooter)c, sr);
+        }
+
+        private static void Footnote(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fcfn = new ForControlFootnote();
+            fcfn.Read((ControlFootnote)c, sr);
+        }
+
+        private static void Endnote(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fcen = new ForControlEndnote();
+            fcen.Read((ControlEndnote)c, sr);
+        }
+
+        private static void AutoNumber(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlAutoNumber.Read((ControlAutoNumber)c, sr);
+        }
+
+        private static void NewNumber(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlNewNumber.Read((ControlNewNumber)c, sr);
+        }
+
+        private static void PageHide(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlPageHide.Read((ControlPageHide)c, sr);
+        }
+
+        private static void PageOddEvenAdjust(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlPageOddEvenAdjust.Read((ControlPageOddEvenAdjust)c, sr);
+        }
+
+        private static void PageNumberPosition(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlPageNumberPosition.Read((ControlPageNumberPosition)c, sr);
+        }
+
+        private static void IndexMark(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlIndexMark.Read((ControlIndexMark)c, sr);
+        }
+
+        private static void Bookmark(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlBookmark.Read((ControlBookmark)c, sr);
+        }
+
+        private static void OverlappingLetter(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlOverlappingLetter.Read((ControlOverlappingLetter)c, sr);
+        }
+
+        private static void AdditionalText(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            ForControlAdditionalText.Read((ControlAdditionalText)c, sr);
+        }
+
+        private static void HiddenComment(Object.BodyText.Control.Control c, CompoundStreamReader sr)
+        {
+            var fchc = new ForControlHiddenComment();
+            fchc.Read((ControlHiddenComment)c, sr);
         }
     }
 
-    private static void Field(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlField.ReadCtrlHeader((ControlField)c, sr);
-    }
-
-    private static void Table(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fct = new ForControlTable();
-        fct.Read((ControlTable)c, sr);
-    }
-
-    private static void Equation(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fce = new ForControlEquation();
-        fce.Read((ControlEquation)c, sr);
-    }
-
-    private static void SectionDefine(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fcsd = new ForControlSectionDefine();
-        fcsd.Read((ControlSectionDefine)c, sr);
-    }
-
-    private static void ColumnDefine(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlColumnDefine.Read((ControlColumnDefine)c, sr);
-    }
-
-    private static void Header(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fch = new ForControlHeader();
-        fch.Read((ControlHeader)c, sr);
-    }
-
-    private static void Footer(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fcf = new ForControlFooter();
-        fcf.Read((ControlFooter)c, sr);
-    }
-
-    private static void Footnote(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fcfn = new ForControlFootnote();
-        fcfn.Read((ControlFootnote)c, sr);
-    }
-
-    private static void Endnote(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fcen = new ForControlEndnote();
-        fcen.Read((ControlEndnote)c, sr);
-    }
-
-    private static void AutoNumber(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlAutoNumber.Read((ControlAutoNumber)c, sr);
-    }
-
-    private static void NewNumber(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlNewNumber.Read((ControlNewNumber)c, sr);
-    }
-
-    private static void PageHide(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlPageHide.Read((ControlPageHide)c, sr);
-    }
-
-    private static void PageOddEvenAdjust(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlPageOddEvenAdjust.Read((ControlPageOddEvenAdjust)c, sr);
-    }
-
-    private static void PageNumberPosition(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlPageNumberPosition.Read((ControlPageNumberPosition)c, sr);
-    }
-
-    private static void IndexMark(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlIndexMark.Read((ControlIndexMark)c, sr);
-    }
-
-    private static void Bookmark(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlBookmark.Read((ControlBookmark)c, sr);
-    }
-
-    private static void OverlappingLetter(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlOverlappingLetter.Read((ControlOverlappingLetter)c, sr);
-    }
-
-    private static void AdditionalText(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        ForControlAdditionalText.Read((ControlAdditionalText)c, sr);
-    }
-
-    private static void HiddenComment(Object.BodyText.Control.Control c, CompoundStreamReader sr)
-    {
-        var fchc = new ForControlHiddenComment();
-        fchc.Read((ControlHiddenComment)c, sr);
-    }
 }

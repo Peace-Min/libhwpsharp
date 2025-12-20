@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Object.BodyText.Paragraph.CharShape;
@@ -25,9 +24,9 @@ public class ChangingParagraphTextTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("changing-paragraph-text.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         Section s = hwpFile.BodyText.SectionList[0];
         int count = s.ParagraphCount;
@@ -35,10 +34,10 @@ public class ChangingParagraphTextTest
         {
             ChangeParagraphText(hwpFile.BodyText.SectionList[0].GetParagraph(index));
         }
-        
+
         var writePath = TestHelper.GetResultPath("result-changing-paragraph-text.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "문단 텍스트 변경 성공");
     }
@@ -46,7 +45,7 @@ public class ChangingParagraphTextTest
     private static void ChangeParagraphText(Paragraph? paragraph)
     {
         if (paragraph?.Text == null) return;
-        
+
         var newCharList = GetNewCharList(paragraph.Text.CharList.ToList());
         ChangeNewCharList(paragraph, newCharList);
         RemoveLineSeg(paragraph);
@@ -57,7 +56,7 @@ public class ChangingParagraphTextTest
     {
         var newList = new List<HWPChar>();
         var listForText = new List<HWPChar>();
-        
+
         foreach (var ch in oldList)
         {
             if (ch.Type == HWPCharType.Normal)
@@ -71,7 +70,7 @@ public class ChangingParagraphTextTest
                     var text = ToString(listForText);
                     listForText.Clear();
                     var newText = ChangeText(text);
-                    
+
                     if (newText != null)
                     {
                         newList.AddRange(ToHwpCharList(newText));
@@ -86,13 +85,13 @@ public class ChangingParagraphTextTest
             var text = ToString(listForText);
             listForText.Clear();
             var newText = ChangeText(text);
-            
+
             if (newText != null)
             {
                 newList.AddRange(ToHwpCharList(newText));
             }
         }
-        
+
         return newList;
     }
 
@@ -140,9 +139,9 @@ public class ChangingParagraphTextTest
         // 임시 우회: 텍스트 삭제 후 AddString으로 다시 추가
         paragraph.DeleteText();
         paragraph.CreateText();
-        
+
         if (paragraph.Text == null) return;
-        
+
         // 새 문자 리스트의 내용을 문자열로 변환하여 추가
         var sb = new System.Text.StringBuilder();
         foreach (var ch in newCharList)
@@ -156,7 +155,7 @@ public class ChangingParagraphTextTest
         {
             paragraph.Text.AddString(sb.ToString());
         }
-        
+
         paragraph.Header.CharacterCount = paragraph.Text.CharList.Count;
     }
 
@@ -168,7 +167,7 @@ public class ChangingParagraphTextTest
     private static void RemoveCharShapeExceptFirstOne(Paragraph paragraph)
     {
         if (paragraph.CharShape == null) return;
-        
+
         int size = paragraph.CharShape.PositionShapeIdPairList.Count;
         if (size > 1)
         {

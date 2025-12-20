@@ -1,89 +1,94 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.FootnoteEndnote;
 using HwpLib.Object.BodyText.Control.SectionDefine;
 using HwpLib.Object.Etc;
+using System;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// °¢ÁÖ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public class ForControlFootnote
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// °¢ÁÖ ÄÁÆ®·Ñ
-    /// </summary>
-    private ControlFootnote? _fn;
 
     /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForControlFootnote()
+    public class ForControlFootnote
     {
-    }
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
+        /// </summary>
+        private ControlFootnote? _fn;
 
-    /// <summary>
-    /// °¢ÁÖ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="fn">°¢ÁÖ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(ControlFootnote fn, CompoundStreamReader sr)
-    {
-        _fn = fn;
-        _sr = sr;
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-        CtrlHeader();
-        ListHeader();
-        ParagraphList();
-    }
-
-    /// <summary>
-    /// °¢ÁÖ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlHeader()
-    {
-        CtrlHeaderFootnote h = _fn!.Header;
-        h.Number = _sr!.ReadUInt4();
-        h.BeforeDecorationLetter.Bytes = _sr.ReadWChar();
-        h.AfterDecorationLetter.Bytes = _sr.ReadWChar();
-        h.NumberShape = NumberShapeExtensions.FromValue((short)_sr.ReadUInt4());
-
-        if (_sr.IsEndOfRecord()) return;
-
-        h.InstanceId = _sr.ReadUInt4();
-    }
-
-    /// <summary>
-    /// °¢ÁÖ ÄÁÆ®·ÑÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ListHeader()
-    {
-        _sr!.ReadRecordHeader();
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForControlFootnote()
         {
-            ListHeaderForFootnoteEndnote lh = _fn!.ListHeader;
-            lh.ParaCount = _sr.ReadSInt4();
-            lh.Property.Value = _sr.ReadUInt4();
-            _sr.SkipToEndRecord();
         }
-        else
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="fn">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(ControlFootnote fn, CompoundStreamReader sr)
         {
-            throw new InvalidOperationException("List header must be located.");
+            _fn = fn;
+            _sr = sr;
+
+            CtrlHeader();
+            ListHeader();
+            ParagraphList();
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlHeader()
+        {
+            CtrlHeaderFootnote h = _fn!.Header;
+            h.Number = _sr!.ReadUInt4();
+            h.BeforeDecorationLetter.Bytes = _sr.ReadWChar();
+            h.AfterDecorationLetter.Bytes = _sr.ReadWChar();
+            h.NumberShape = NumberShapeExtensions.FromValue((short)_sr.ReadUInt4());
+
+            if (_sr.IsEndOfRecord()) return;
+
+            h.InstanceId = _sr.ReadUInt4();
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ListHeader()
+        {
+            _sr!.ReadRecordHeader();
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
+            {
+                ListHeaderForFootnoteEndnote lh = _fn!.ListHeader;
+                lh.ParaCount = _sr.ReadSInt4();
+                lh.Property.Value = _sr.ReadUInt4();
+                _sr.SkipToEndRecord();
+            }
+            else
+            {
+                throw new InvalidOperationException("List header must be located.");
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParagraphList()
+        {
+            ForParagraphList.Read(_fn!.ParagraphList, _sr!);
         }
     }
 
-    /// <summary>
-    /// ¹®´Ü ¸®½ºÆ®¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ParagraphList()
-    {
-        ForParagraphList.Read(_fn!.ParagraphList, _sr!);
-    }
 }

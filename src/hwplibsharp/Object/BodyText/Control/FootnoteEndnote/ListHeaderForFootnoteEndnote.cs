@@ -1,4 +1,4 @@
-using HwpLib.Object.BodyText.Control.Gso.TextBox;
+﻿using HwpLib.Object.BodyText.Control.Gso.TextBox;
 
 namespace HwpLib.Object.BodyText.Control.FootnoteEndnote
 {

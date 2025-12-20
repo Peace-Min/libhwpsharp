@@ -1,8 +1,7 @@
+﻿using HwpLib.Object;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
-using System;
 using System.Collections.Generic;
 
 namespace HwpLib.Tool.ParagraphAdder

@@ -1,44 +1,47 @@
-namespace HwpLib.Object.DocInfo.Style;
-
-/// <summary>
-/// 스타일 종류
-/// </summary>
-public enum StyleSort : byte
+﻿namespace HwpLib.Object.DocInfo.Style
 {
-    /// <summary>
-    /// 문단 스타일
-    /// </summary>
-    ParaStyle = 0,
 
     /// <summary>
-    /// 글자 스타일
+    /// 스타일 종류
     /// </summary>
-    CharStyle = 1
-}
-
-/// <summary>
-/// StyleSort 확장 메서드
-/// </summary>
-public static class StyleSortExtensions
-{
-    /// <summary>
-    /// 파일에 저장되는 정수값을 반환한다.
-    /// </summary>
-    public static byte GetValue(this StyleSort sort)
+    public enum StyleSort : byte
     {
-        return (byte)sort;
+        /// <summary>
+        /// 문단 스타일
+        /// </summary>
+        ParaStyle = 0,
+
+        /// <summary>
+        /// 글자 스타일
+        /// </summary>
+        CharStyle = 1
     }
 
     /// <summary>
-    /// 파일에 저장되는 정수값에 해당되는 enum 값을 반환한다.
+    /// StyleSort 확장 메서드
     /// </summary>
-    public static StyleSort FromValue(byte value)
+    public static class StyleSortExtensions
     {
-        return value switch
+        /// <summary>
+        /// 파일에 저장되는 정수값을 반환한다.
+        /// </summary>
+        public static byte GetValue(this StyleSort sort)
         {
-            0 => StyleSort.ParaStyle,
-            1 => StyleSort.CharStyle,
-            _ => StyleSort.ParaStyle
-        };
+            return (byte)sort;
+        }
+
+        /// <summary>
+        /// 파일에 저장되는 정수값에 해당되는 enum 값을 반환한다.
+        /// </summary>
+        public static StyleSort FromValue(byte value)
+        {
+            return value switch
+            {
+                0 => StyleSort.ParaStyle,
+                1 => StyleSort.CharStyle,
+                _ => StyleSort.ParaStyle
+            };
+        }
     }
+
 }

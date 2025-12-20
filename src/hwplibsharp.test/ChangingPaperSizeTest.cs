@@ -1,7 +1,4 @@
-using HwpLib.Object;
-using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.CtrlHeader.SectionDefine;
 using HwpLib.Reader;
 using HwpLib.Writer;
 
@@ -33,13 +30,13 @@ public class ChangingPaperSizeTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath("blank.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         var section = hwpFile.BodyText.SectionList[0];
         var firstParagraph = section.GetParagraph(0);
-        
+
         // 섹션 정의 컨트롤 찾기
         if (firstParagraph.ControlList != null)
         {
@@ -52,7 +49,7 @@ public class ChangingPaperSizeTest
                 }
             }
         }
-        
+
         // Assert
         var writePath = TestHelper.GetResultPath("result-changing-papersize-a3-single.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
@@ -71,13 +68,13 @@ public class ChangingPaperSizeTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath("blank.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         var section = hwpFile.BodyText.SectionList[0];
         var firstParagraph = section.GetParagraph(0);
-        
+
         if (firstParagraph.ControlList != null)
         {
             foreach (var control in firstParagraph.ControlList)
@@ -89,7 +86,7 @@ public class ChangingPaperSizeTest
                 }
             }
         }
-        
+
         // Assert
         var writePath = TestHelper.GetResultPath($"result-changing-papersize-{sizeName}.hwp");
         HWPWriter.ToFile(hwpFile, writePath);

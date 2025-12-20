@@ -1,7 +1,6 @@
 using HwpLib.Object;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Reader;
 using HwpLib.Writer;
@@ -20,21 +19,21 @@ public class RemovingTableRowTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("removing-row.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         var table = FindTable(hwpFile);
         Assert.IsNotNull(table);
-        
+
         RemoveSecondRowObject(table);
         AdjustTableRowCount(table);
         RemoveCellCountOfRow(table);
         AdjustCellRowIndex(table);
-        
+
         var writePath = TestHelper.GetResultPath("result-removing-row.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "테이블 행 삭제 성공");
     }
@@ -74,10 +73,10 @@ public class RemovingTableRowTest
     {
         Section s = hwpFile.BodyText.SectionList[0];
         Paragraph firstParagraph = s.GetParagraph(0);
-        
+
         if (firstParagraph.ControlList == null)
             return null;
-            
+
         foreach (var control in firstParagraph.ControlList)
         {
             if (control.Type == ControlType.Table)

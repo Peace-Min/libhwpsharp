@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Paragraph;
@@ -19,7 +18,7 @@ public class InsertingHyperLinkTest
         // Arrange
         var hwpFile = BlankFileMaker.Make();
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         Section s = hwpFile.BodyText.SectionList[0];
         int count = s.ParagraphCount;
@@ -27,10 +26,10 @@ public class InsertingHyperLinkTest
         {
             InsertHyperLink(hwpFile.BodyText.SectionList[0].GetParagraph(index));
         }
-        
+
         var writePath = TestHelper.GetResultPath("result-inserting-hyperlink.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "하이퍼링크 삽입 성공");
     }
@@ -38,7 +37,7 @@ public class InsertingHyperLinkTest
     private static void InsertHyperLink(Paragraph? paragraph)
     {
         if (paragraph?.Text == null) return;
-        
+
         paragraph.Text.AddString("이것은 ");
         paragraph.Text.AddExtendCharForHyperlinkStart();
         paragraph.Text.AddString("다음 사이트");

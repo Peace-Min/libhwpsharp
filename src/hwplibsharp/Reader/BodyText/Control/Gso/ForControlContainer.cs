@@ -1,28 +1,32 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// ¹­À½ ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlContainer
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
+
     /// <summary>
-    /// ¹­À½ ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="container">¹­À½ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlContainer container, CompoundStreamReader sr)
+    public static class ForControlContainer
     {
-        var scc = (ShapeComponentContainer)container.ShapeComponent;
-        int childCount = scc.ChildControlIdList.Count;
-        for (int index = 0; index < childCount; index++)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="container">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlContainer container, CompoundStreamReader sr)
         {
-            var fgc = new ForGsoControl();
-            var gc = fgc.ReadInContainer(sr);
-            container.AddChildControl(gc);
+            var scc = (ShapeComponentContainer)container.ShapeComponent;
+            int childCount = scc.ChildControlIdList.Count;
+            for (int index = 0; index < childCount; index++)
+            {
+                var fgc = new ForGsoControl();
+                var gc = fgc.ReadInContainer(sr);
+                container.AddChildControl(gc);
+            }
         }
     }
+
 }

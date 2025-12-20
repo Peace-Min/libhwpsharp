@@ -1,29 +1,33 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.SectionDefine;
 
-namespace HwpLib.Reader.BodyText.Control.Secd;
 
-/// <summary>
-/// ¿ëÁö ¼³Á¤ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForPageDef
+namespace HwpLib.Reader.BodyText.Control.Secd
 {
+
     /// <summary>
-    /// ¿ëÁö ¼³Á¤ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="pd">¿ëÁö ¼³Á¤ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(PageDef pd, CompoundStreamReader sr)
+    public static class ForPageDef
     {
-        pd.PaperWidth = sr.ReadUInt4();
-        pd.PaperHeight = sr.ReadUInt4();
-        pd.LeftMargin = sr.ReadUInt4();
-        pd.RightMargin = sr.ReadUInt4();
-        pd.TopMargin = sr.ReadUInt4();
-        pd.BottomMargin = sr.ReadUInt4();
-        pd.HeaderMargin = sr.ReadUInt4();
-        pd.FooterMargin = sr.ReadUInt4();
-        pd.GutterMargin = sr.ReadUInt4();
-        pd.Property.Value = sr.ReadUInt4();
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pd">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(PageDef pd, CompoundStreamReader sr)
+        {
+            pd.PaperWidth = sr.ReadUInt4();
+            pd.PaperHeight = sr.ReadUInt4();
+            pd.LeftMargin = sr.ReadUInt4();
+            pd.RightMargin = sr.ReadUInt4();
+            pd.TopMargin = sr.ReadUInt4();
+            pd.BottomMargin = sr.ReadUInt4();
+            pd.HeaderMargin = sr.ReadUInt4();
+            pd.FooterMargin = sr.ReadUInt4();
+            pd.GutterMargin = sr.ReadUInt4();
+            pd.Property.Value = sr.ReadUInt4();
+        }
     }
+
 }

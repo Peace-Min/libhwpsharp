@@ -1,28 +1,32 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 
-namespace HwpLib.Reader.BodyText.Paragraph;
 
-/// <summary>
-/// ¹®´Ü ±ÛÀÚ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForParaCharShape
+namespace HwpLib.Reader.BodyText.Paragraph
 {
-    /// <summary>
-    /// ¹®´Ü ±ÛÀÚ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="pcs">¹®´Ü ±ÛÀÚ ¸ð¾ç</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(HwpLib.Object.BodyText.Paragraph.CharShape.ParaCharShape pcs, CompoundStreamReader sr)
-    {
-        // ·¹ÄÚµå Å©±â / 8 = Ç×¸ñ ¼ö (position 4¹ÙÀÌÆ® + charShapeId 4¹ÙÀÌÆ®)
-        int count = (int)(sr.CurrentRecordHeader!.Size / 8);
 
-        for (int i = 0; i < count; i++)
+    /// <summary>
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    /// </summary>
+    public static class ForParaCharShape
+    {
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pcs">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(HwpLib.Object.BodyText.Paragraph.CharShape.ParaCharShape pcs, CompoundStreamReader sr)
         {
-            uint position = sr.ReadUInt4();
-            uint charShapeId = sr.ReadUInt4();
-            pcs.AddParaCharShape(position, charShapeId);
+            // ï¿½ï¿½ï¿½Úµï¿½ Å©ï¿½ï¿½ / 8 = ï¿½×¸ï¿½ ï¿½ï¿½ (position 4ï¿½ï¿½ï¿½ï¿½Æ® + charShapeId 4ï¿½ï¿½ï¿½ï¿½Æ®)
+            int count = (int)(sr.CurrentRecordHeader!.Size / 8);
+
+            for (int i = 0; i < count; i++)
+            {
+                uint position = sr.ReadUInt4();
+                uint charShapeId = sr.ReadUInt4();
+                pcs.AddParaCharShape(position, charShapeId);
+            }
         }
     }
-}
 
+
+}

@@ -1,4 +1,4 @@
-using HwpLib.Object.DocInfo;
+﻿using HwpLib.Object.DocInfo;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo
 {

@@ -1,7 +1,5 @@
 using HwpLib.Object;
-using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.BodyText.Paragraph.Text;
 using HwpLib.Reader;
 using HwpLib.Tool.ObjectFinder;
 using HwpLib.Writer;
@@ -20,17 +18,17 @@ public class SettingCellTextByFieldTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("setting-celltext-by-field.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         SetCellTextByField(hwpFile, "필드명1", "ABCD");
         SetCellTextByField(hwpFile, "필드명2", "가나다라");
         SetCellTextByField(hwpFile, "필드명3", "1234");
-        
+
         var writePath = TestHelper.GetResultPath("result-setting-celltext-by-field.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "필드로 셀 텍스트 설정 성공");
     }
@@ -42,7 +40,7 @@ public class SettingCellTextByFieldTest
         {
             Paragraph? firstPara = c.ParagraphList.GetParagraph(0);
             if (firstPara == null) continue;
-            
+
             var paraText = firstPara.Text;
             if (paraText == null)
             {

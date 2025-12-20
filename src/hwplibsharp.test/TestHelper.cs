@@ -13,13 +13,13 @@ public static class TestHelper
         // 테스트 실행 디렉토리에서 프로젝트 루트로 이동
         var currentDir = Directory.GetCurrentDirectory();
         var dir = new DirectoryInfo(currentDir);
-        
+
         // sample_hwp 폴더를 찾을 때까지 상위로 이동
         while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, "sample_hwp")))
         {
             dir = dir.Parent;
         }
-        
+
         return dir?.FullName ?? throw new DirectoryNotFoundException("프로젝트 루트를 찾을 수 없습니다.");
     }
 

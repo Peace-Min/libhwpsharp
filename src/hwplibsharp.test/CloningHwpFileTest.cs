@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Reader;
 using HwpLib.Writer;
 
@@ -43,15 +42,15 @@ public class CloningHwpFileTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath(filename);
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         // Act
         Assert.IsNotNull(hwpFile);
         var clonedHwpFile = hwpFile.Clone(false);
-        
+
         // Assert
         Assert.IsNotNull(clonedHwpFile);
         Assert.AreNotSame(hwpFile, clonedHwpFile);
-        
+
         // 복제 파일 저장
         var writePath = TestHelper.GetResultPath($"result-clone-{filename}");
         HWPWriter.ToFile(clonedHwpFile, writePath);
@@ -64,11 +63,11 @@ public class CloningHwpFileTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath("표.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         // Act
         Assert.IsNotNull(hwpFile);
         var clonedHwpFile = hwpFile.Clone(true); // 깊은 복사
-        
+
         // Assert
         Assert.IsNotNull(clonedHwpFile);
         Assert.AreNotSame(hwpFile, clonedHwpFile);

@@ -1,4 +1,4 @@
-using HwpLib.Object.BodyText.Control.CtrlHeader;
+﻿using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.FootnoteEndnote;
 using HwpLib.Object.BodyText.Paragraph;
 

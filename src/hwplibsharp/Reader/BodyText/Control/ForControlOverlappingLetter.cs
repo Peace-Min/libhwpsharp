@@ -1,71 +1,75 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.Etc;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ±ÛÀÚ °ãÄ§ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlOverlappingLetter
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ±ÛÀÚ °ãÄ§ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="tcps">±ÛÀÚ °ãÄ§ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlOverlappingLetter tcps, CompoundStreamReader sr)
-    {
-        CtrlHeader(tcps.GetHeader()!, sr);
-    }
 
     /// <summary>
-    /// ±ÛÀÚ °ãÄ§ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµåÀ» ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="header">±ÛÀÚ °ãÄ§ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlHeader(CtrlHeaderOverlappingLetter header, CompoundStreamReader sr)
+    public static class ForControlOverlappingLetter
     {
-        OverlappingLetters(header, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        header.BorderType = sr.ReadUInt1();
-        header.InternalFontSize = (byte)sr.ReadSInt1();
-        header.ExpendInsideLetter = sr.ReadUInt1();
-
-        CharShapeIds(header, sr);
-    }
-
-    /// <summary>
-    /// °ãÄ§ ±ÛÀÚ ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="header">±ÛÀÚ °ãÄ§ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void OverlappingLetters(CtrlHeaderOverlappingLetter header, CompoundStreamReader sr)
-    {
-        int count = sr.ReadUInt2();
-        for (int index = 0; index < count; index++)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="tcps">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlOverlappingLetter tcps, CompoundStreamReader sr)
         {
-            var letter = new HWPString();
-            letter.Bytes = sr.ReadWChar();
-            header.AddOverlappingLetter(letter);
+            CtrlHeader(tcps.GetHeader()!, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlHeader(CtrlHeaderOverlappingLetter header, CompoundStreamReader sr)
+        {
+            OverlappingLetters(header, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            header.BorderType = sr.ReadUInt1();
+            header.InternalFontSize = (byte)sr.ReadSInt1();
+            header.ExpendInsideLetter = sr.ReadUInt1();
+
+            CharShapeIds(header, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Ä§ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void OverlappingLetters(CtrlHeaderOverlappingLetter header, CompoundStreamReader sr)
+        {
+            int count = sr.ReadUInt2();
+            for (int index = 0; index < count; index++)
+            {
+                var letter = new HWPString();
+                letter.Bytes = sr.ReadWChar();
+                header.AddOverlappingLetter(letter);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CharShapeIds(CtrlHeaderOverlappingLetter header, CompoundStreamReader sr)
+        {
+            short count = sr.ReadUInt1();
+            for (short i = 0; i < count; i++)
+            {
+                uint charShapeId = sr.ReadUInt4();
+                header.AddCharShapeId(charShapeId);
+            }
         }
     }
 
-    /// <summary>
-    /// ±ÛÀÚ ¸ð¾ç ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="header">±ÛÀÚ °ãÄ§ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CharShapeIds(CtrlHeaderOverlappingLetter header, CompoundStreamReader sr)
-    {
-        short count = sr.ReadUInt1();
-        for (short i = 0; i < count; i++)
-        {
-            uint charShapeId = sr.ReadUInt4();
-            header.AddCharShapeId(charShapeId);
-        }
-    }
 }

@@ -1,5 +1,4 @@
-using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.Bookmark;
+﻿using HwpLib.Object.BodyText.Control.Bookmark;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 
 namespace HwpLib.Tool.ParagraphAdder.Control

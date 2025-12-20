@@ -1,4 +1,4 @@
-using HwpLib.Object.BodyText.Paragraph.Text;
+﻿using HwpLib.Object.BodyText.Paragraph.Text;
 
 namespace HwpLib.Tool.ParagraphAdder
 {

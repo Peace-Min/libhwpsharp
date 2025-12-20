@@ -1,4 +1,4 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.LineInfo;
@@ -6,186 +6,190 @@ using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.RenderingInfo;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.ShadowInfo;
 using HwpLib.Reader.DocInfo.BorderFill;
 
-namespace HwpLib.Reader.BodyText.Control.Gso.Part;
 
-/// <summary>
-/// ±×¸®±â °³Ã¼ÀÇ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForShapeComponent
+namespace HwpLib.Reader.BodyText.Control.Gso.Part
 {
-    /// <summary>
-    /// ±×¸®±â °³Ã¼ÀÇ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="gsoControl">±×¸®±â °³Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(GsoControl gsoControl, CompoundStreamReader sr)
-    {
-        if (gsoControl.GsoType == GsoControlType.Container)
-        {
-            ShapeComponentForContainer((ShapeComponentContainer)gsoControl.ShapeComponent, sr);
-        }
-        else
-        {
-            ShapeComponentForNormal((ShapeComponentNormal)gsoControl.ShapeComponent, sr);
-        }
-    }
 
     /// <summary>
-    /// ÀÏ¹Ý ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="scn">°´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentForNormal(ShapeComponentNormal scn, CompoundStreamReader sr)
+    public static class ForShapeComponent
     {
-        CommonPart(scn, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        LineInfo(scn, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        FillInfo(scn, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        ShadowInfo(scn, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        scn.Instid = sr.ReadUInt4();
-        sr.Skip(1);
-        if (scn.ShadowInfo != null)
+        /// <summary>
+        /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="gsoControl">ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(GsoControl gsoControl, CompoundStreamReader sr)
         {
-            scn.ShadowInfo.Transparent = sr.ReadUInt1();
+            if (gsoControl.GsoType == GsoControlType.Container)
+            {
+                ShapeComponentForContainer((ShapeComponentContainer)gsoControl.ShapeComponent, sr);
+            }
+            else
+            {
+                ShapeComponentForNormal((ShapeComponentNormal)gsoControl.ShapeComponent, sr);
+            }
         }
-        else
+
+        /// <summary>
+        /// ï¿½Ï¹ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scn">ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentForNormal(ShapeComponentNormal scn, CompoundStreamReader sr)
         {
+            CommonPart(scn, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            LineInfo(scn, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            FillInfo(scn, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            ShadowInfo(scn, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            scn.Instid = sr.ReadUInt4();
             sr.Skip(1);
+            if (scn.ShadowInfo != null)
+            {
+                scn.ShadowInfo.Transparent = sr.ReadUInt1();
+            }
+            else
+            {
+                sr.Skip(1);
+            }
         }
-    }
 
-    /// <summary>
-    /// °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµåÀÇ °øÅë ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="sc">°´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CommonPart(ShapeComponent sc, CompoundStreamReader sr)
-    {
-        sc.OffsetX = sr.ReadSInt4();
-        sc.OffsetY = sr.ReadSInt4();
-        sc.GroupingCount = sr.ReadUInt2();
-        sc.LocalFileVersion = sr.ReadUInt2();
-        sc.WidthAtCreate = sr.ReadSInt4();
-        sc.HeightAtCreate = sr.ReadSInt4();
-        sc.WidthAtCurrent = sr.ReadSInt4();
-        sc.HeightAtCurrent = sr.ReadSInt4();
-        sc.Property.Value = sr.ReadUInt4();
-        sc.RotateAngle = sr.ReadUInt2();
-        sc.RotateXCenter = sr.ReadSInt4();
-        sc.RotateYCenter = sr.ReadSInt4();
-
-        RenderingInfo(sc.RenderingInfo, sr);
-    }
-
-    /// <summary>
-    /// °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµåÀÇ rendering Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="ri">rendering Á¤º¸¸¦ ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void RenderingInfo(RenderingInfo ri, CompoundStreamReader sr)
-    {
-        int scaleRotateMatrixCount = sr.ReadUInt2();
-        Matrix(ri.TranslationMatrix, sr);
-        for (int index = 0; index < scaleRotateMatrixCount; index++)
+        /// <summary>
+        /// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="sc">ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CommonPart(ShapeComponent sc, CompoundStreamReader sr)
         {
-            var srmp = ri.AddNewScaleRotateMatrixPair();
-            Matrix(srmp.ScaleMatrix, sr);
-            Matrix(srmp.RotateMatrix, sr);
-        }
-    }
+            sc.OffsetX = sr.ReadSInt4();
+            sc.OffsetY = sr.ReadSInt4();
+            sc.GroupingCount = sr.ReadUInt2();
+            sc.LocalFileVersion = sr.ReadUInt2();
+            sc.WidthAtCreate = sr.ReadSInt4();
+            sc.HeightAtCreate = sr.ReadSInt4();
+            sc.WidthAtCurrent = sr.ReadSInt4();
+            sc.HeightAtCurrent = sr.ReadSInt4();
+            sc.Property.Value = sr.ReadUInt4();
+            sc.RotateAngle = sr.ReadUInt2();
+            sc.RotateXCenter = sr.ReadSInt4();
+            sc.RotateYCenter = sr.ReadSInt4();
 
-    /// <summary>
-    /// º¯È¯ Çà·ÄÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="m">º¯È¯ Çà·Ä °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void Matrix(Matrix m, CompoundStreamReader sr)
-    {
-        for (int index = 0; index < 6; index++)
+            RenderingInfo(sc.RenderingInfo, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ rendering ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="ri">rendering ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void RenderingInfo(RenderingInfo ri, CompoundStreamReader sr)
         {
-            m.SetValue(index, sr.ReadDouble());
+            int scaleRotateMatrixCount = sr.ReadUInt2();
+            Matrix(ri.TranslationMatrix, sr);
+            for (int index = 0; index < scaleRotateMatrixCount; index++)
+            {
+                var srmp = ri.AddNewScaleRotateMatrixPair();
+                Matrix(srmp.ScaleMatrix, sr);
+                Matrix(srmp.RotateMatrix, sr);
+            }
         }
-    }
 
-    /// <summary>
-    /// ÀÏ¹Ý ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµåÀÇ line Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scn">ÀÏ¹Ý ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void LineInfo(ShapeComponentNormal scn, CompoundStreamReader sr)
-    {
-        scn.CreateLineInfo();
-        var li = scn.LineInfo!;
-        li.Color.Value = sr.ReadUInt4();
-        li.Thickness = sr.ReadSInt4();
-        li.Property.Value = sr.ReadUInt4();
-        li.OutlineStyle = OutlineStyleExtensions.FromValue((byte)sr.ReadUInt1());
-    }
-
-    /// <summary>
-    /// ÀÏ¹Ý ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµåÀÇ ¹è°æ Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scn">ÀÏ¹Ý ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void FillInfo(ShapeComponentNormal scn, CompoundStreamReader sr)
-    {
-        scn.CreateFillInfo();
-        ForFillInfo.Read(scn.FillInfo!, sr);
-    }
-
-    /// <summary>
-    /// ÀÏ¹Ý ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµåÀÇ ±×¸²ÀÚ Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scn">ÀÏ¹Ý ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShadowInfo(ShapeComponentNormal scn, CompoundStreamReader sr)
-    {
-        scn.CreateShadowInfo();
-        var si = scn.ShadowInfo!;
-        si.Type = ShadowTypeExtensions.FromValue((byte)sr.ReadUInt4());
-        si.Color.Value = sr.ReadUInt4();
-        si.OffsetX = sr.ReadSInt4();
-        si.OffsetY = sr.ReadSInt4();
-    }
-
-    /// <summary>
-    /// ¹­À½ ÄÁÆ®·ÑÀ» À§ÇÑ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scc">°´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentForContainer(ShapeComponentContainer scc, CompoundStreamReader sr)
-    {
-        CommonPart(scc, sr);
-        ChildInfo(scc, sr);
-
-        if (sr.IsEndOfRecord()) return;
-
-        scc.Instid = sr.ReadUInt4();
-    }
-
-    /// <summary>
-    /// Æ÷ÇÔÇÏ°í ÀÖ´Â ÄÁÆ®·Ñ¿¡ ´ëÇÑ Á¤º¸ ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scc">¹­À½ ÄÁÆ®·ÑÀÇ °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ChildInfo(ShapeComponentContainer scc, CompoundStreamReader sr)
-    {
-        int count = sr.ReadUInt2();
-        for (int index = 0; index < count; index++)
+        /// <summary>
+        /// ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="m">ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void Matrix(Matrix m, CompoundStreamReader sr)
         {
-            uint childId = sr.ReadUInt4();
-            scc.AddChildControlId(childId);
+            for (int index = 0; index < 6; index++)
+            {
+                m.SetValue(index, sr.ReadDouble());
+            }
+        }
+
+        /// <summary>
+        /// ï¿½Ï¹ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ line ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scn">ï¿½Ï¹ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void LineInfo(ShapeComponentNormal scn, CompoundStreamReader sr)
+        {
+            scn.CreateLineInfo();
+            var li = scn.LineInfo!;
+            li.Color.Value = sr.ReadUInt4();
+            li.Thickness = sr.ReadSInt4();
+            li.Property.Value = sr.ReadUInt4();
+            li.OutlineStyle = OutlineStyleExtensions.FromValue((byte)sr.ReadUInt1());
+        }
+
+        /// <summary>
+        /// ï¿½Ï¹ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scn">ï¿½Ï¹ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void FillInfo(ShapeComponentNormal scn, CompoundStreamReader sr)
+        {
+            scn.CreateFillInfo();
+            ForFillInfo.Read(scn.FillInfo!, sr);
+        }
+
+        /// <summary>
+        /// ï¿½Ï¹ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scn">ï¿½Ï¹ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShadowInfo(ShapeComponentNormal scn, CompoundStreamReader sr)
+        {
+            scn.CreateShadowInfo();
+            var si = scn.ShadowInfo!;
+            si.Type = ShadowTypeExtensions.FromValue((byte)sr.ReadUInt4());
+            si.Color.Value = sr.ReadUInt4();
+            si.OffsetX = sr.ReadSInt4();
+            si.OffsetY = sr.ReadSInt4();
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scc">ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentForContainer(ShapeComponentContainer scc, CompoundStreamReader sr)
+        {
+            CommonPart(scc, sr);
+            ChildInfo(scc, sr);
+
+            if (sr.IsEndOfRecord()) return;
+
+            scc.Instid = sr.ReadUInt4();
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Æ®ï¿½Ñ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scc">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ChildInfo(ShapeComponentContainer scc, CompoundStreamReader sr)
+        {
+            int count = sr.ReadUInt2();
+            for (int index = 0; index < count; index++)
+            {
+                uint childId = sr.ReadUInt4();
+                scc.AddChildControlId(childId);
+            }
         }
     }
+
 }

@@ -1,59 +1,63 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Table;
 
-namespace HwpLib.Reader.BodyText.Control.Tbl;
 
-/// <summary>
-/// Ç¥ Á¤º¸ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForTable
+namespace HwpLib.Reader.BodyText.Control.Tbl
 {
+
     /// <summary>
-    /// Ç¥ Á¤º¸ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="table">Ç¥ Á¤º¸ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(Table table, CompoundStreamReader sr)
+    public static class ForTable
     {
-        table.Property.Value = sr.ReadUInt4();
-
-        table.RowCount = sr.ReadUInt2();
-        table.ColumnCount = sr.ReadUInt2();
-        table.CellSpacing = sr.ReadUInt2();
-        table.LeftInnerMargin = sr.ReadUInt2();
-        table.RightInnerMargin = sr.ReadUInt2();
-        table.TopInnerMargin = sr.ReadUInt2();
-        table.BottomInnerMargin = sr.ReadUInt2();
-
-        for (int index = 0; index < table.RowCount; index++)
+        /// <summary>
+        /// Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="table">Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(Table table, CompoundStreamReader sr)
         {
-            table.AddCellCountOfRow(sr.ReadUInt2());
+            table.Property.Value = sr.ReadUInt4();
+
+            table.RowCount = sr.ReadUInt2();
+            table.ColumnCount = sr.ReadUInt2();
+            table.CellSpacing = sr.ReadUInt2();
+            table.LeftInnerMargin = sr.ReadUInt2();
+            table.RightInnerMargin = sr.ReadUInt2();
+            table.TopInnerMargin = sr.ReadUInt2();
+            table.BottomInnerMargin = sr.ReadUInt2();
+
+            for (int index = 0; index < table.RowCount; index++)
+            {
+                table.AddCellCountOfRow(sr.ReadUInt2());
+            }
+
+            table.BorderFillId = sr.ReadUInt2();
+
+            if (sr.FileVersion.IsOver(5, 0, 1, 0))
+            {
+                ZoneInfo(table, sr);
+            }
         }
 
-        table.BorderFillId = sr.ReadUInt2();
-
-        if (sr.FileVersion.IsOver(5, 0, 1, 0))
+        /// <summary>
+        /// zone infoï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="table">Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ZoneInfo(Table table, CompoundStreamReader sr)
         {
-            ZoneInfo(table, sr);
+            int count = sr.ReadUInt2();
+            for (int index = 0; index < count; index++)
+            {
+                var zi = table.AddNewZoneInfo();
+                zi.StartColumn = sr.ReadUInt2();
+                zi.StartRow = sr.ReadUInt2();
+                zi.EndColumn = sr.ReadUInt2();
+                zi.EndRow = sr.ReadUInt2();
+                zi.BorderFillId = sr.ReadUInt2();
+            }
         }
     }
 
-    /// <summary>
-    /// zone info¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="table">Ç¥ Á¤º¸ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ZoneInfo(Table table, CompoundStreamReader sr)
-    {
-        int count = sr.ReadUInt2();
-        for (int index = 0; index < count; index++)
-        {
-            var zi = table.AddNewZoneInfo();
-            zi.StartColumn = sr.ReadUInt2();
-            zi.StartRow = sr.ReadUInt2();
-            zi.EndColumn = sr.ReadUInt2();
-            zi.EndRow = sr.ReadUInt2();
-            zi.BorderFillId = sr.ReadUInt2();
-        }
-    }
 }

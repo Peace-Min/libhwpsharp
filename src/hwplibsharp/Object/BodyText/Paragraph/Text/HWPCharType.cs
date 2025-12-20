@@ -1,27 +1,30 @@
-namespace HwpLib.Object.BodyText.Paragraph.Text;
-
-/// <summary>
-/// 한글(HWP) 글자의 종류
-/// </summary>
-public enum HWPCharType
+﻿namespace HwpLib.Object.BodyText.Paragraph.Text
 {
-    /// <summary>
-    /// 일반
-    /// </summary>
-    Normal,
 
     /// <summary>
-    /// 문자 컨트롤
+    /// 한글(HWP) 글자의 종류
     /// </summary>
-    ControlChar,
+    public enum HWPCharType
+    {
+        /// <summary>
+        /// 일반
+        /// </summary>
+        Normal,
 
-    /// <summary>
-    /// 인라인 컨트롤
-    /// </summary>
-    ControlInline,
+        /// <summary>
+        /// 문자 컨트롤
+        /// </summary>
+        ControlChar,
 
-    /// <summary>
-    /// 확장 컨트롤
-    /// </summary>
-    ControlExtend,
+        /// <summary>
+        /// 인라인 컨트롤
+        /// </summary>
+        ControlInline,
+
+        /// <summary>
+        /// 확장 컨트롤
+        /// </summary>
+        ControlExtend,
+    }
+
 }

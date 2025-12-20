@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Reader;
 using HwpLib.Tool.TextExtractor;
 
@@ -16,12 +15,12 @@ public class ExtractingTextWithParaHeadTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("extracting_ParaHead.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         var text = TextExtractor.Extract(hwpFile, TextExtractMethod.AppendControlTextAfterParagraphText);
-        
+
         // Assert
         Assert.IsNotNull(text);
         Console.WriteLine(text);

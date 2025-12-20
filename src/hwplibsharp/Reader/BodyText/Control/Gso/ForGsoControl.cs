@@ -1,4 +1,4 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Bookmark;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
@@ -6,213 +6,218 @@ using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.Caption;
 using HwpLib.Object.Etc;
 using HwpLib.Reader.BodyText.Control.Gso.Part;
+using System;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// ±×¸®±â °³Ã¼ ÄÁÆ®·ÑµéÀ» ÀÐ´Â´Ù.
-/// </summary>
-public class ForGsoControl
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
-    /// <summary>
-    /// ¹®´Ü °´Ã¼
-    /// </summary>
-    private Object.BodyText.Paragraph.Paragraph? _paragraph;
 
     /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
+    /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Æ®ï¿½Ñµï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
     /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// »ý¼ºµÈ ±×¸®±â °³Ã¼ ÄÁÆ®·Ñ
-    /// </summary>
-    private GsoControl? _gsoControl;
-
-    private CtrlHeaderGso? _header;
-    private Caption? _caption;
-    private CtrlData? _ctrlData;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForGsoControl()
+    public class ForGsoControl
     {
-    }
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+        /// </summary>
+        private Object.BodyText.Paragraph.Paragraph? _paragraph;
 
-    /// <summary>
-    /// ±×¸®±â °³Ã¼ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="paragraph">¹®´Ü °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(Object.BodyText.Paragraph.Paragraph paragraph, CompoundStreamReader sr)
-    {
-        _paragraph = paragraph;
-        _sr = sr;
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-        CtrlHeader();
-        CaptionAndCtrlData();
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Æ®ï¿½ï¿½
+        /// </summary>
+        private GsoControl? _gsoControl;
 
-        long gsoId = GsoIDFromShapeComponent();
-        _gsoControl = CreateGsoControl(gsoId);
-        RestPartOfShapeComponent();
-        RestPartOfControl();
-    }
+        private CtrlHeaderGso? _header;
+        private Caption? _caption;
+        private CtrlData? _ctrlData;
 
-    /// <summary>
-    /// ±×¸®±â °³Ã¼ÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlHeader()
-    {
-        _header = new CtrlHeaderGso();
-        ForCtrlHeaderGso.Read(_header, _sr!);
-    }
-
-    /// <summary>
-    /// Ä¸¼Ç°ú ÄÁÆ®·Ñ µ¥ÀÌÅÍ¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CaptionAndCtrlData()
-    {
-        _caption = null;
-        _ctrlData = null;
-
-        _sr!.ReadRecordHeader();
-        while (_sr.CurrentRecordHeader?.TagId != HWPTag.ShapeComponent)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForGsoControl()
         {
-            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
+        }
+
+        /// <summary>
+        /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="paragraph">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(Object.BodyText.Paragraph.Paragraph paragraph, CompoundStreamReader sr)
+        {
+            _paragraph = paragraph;
+            _sr = sr;
+
+            CtrlHeader();
+            CaptionAndCtrlData();
+
+            long gsoId = GsoIDFromShapeComponent();
+            _gsoControl = CreateGsoControl(gsoId);
+            RestPartOfShapeComponent();
+            RestPartOfControl();
+        }
+
+        /// <summary>
+        /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlHeader()
+        {
+            _header = new CtrlHeaderGso();
+            ForCtrlHeaderGso.Read(_header, _sr!);
+        }
+
+        /// <summary>
+        /// Ä¸ï¿½Ç°ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CaptionAndCtrlData()
+        {
+            _caption = null;
+            _ctrlData = null;
+
+            _sr!.ReadRecordHeader();
+            while (_sr.CurrentRecordHeader?.TagId != HWPTag.ShapeComponent)
             {
-                _caption = new Caption();
-                ForCaption.Read(_caption, _sr);
-                if (!_sr.IsImmediatelyAfterReadingHeader)
+                if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
                 {
-                    _sr.ReadRecordHeader();
+                    _caption = new Caption();
+                    ForCaption.Read(_caption, _sr);
+                    if (!_sr.IsImmediatelyAfterReadingHeader)
+                    {
+                        _sr.ReadRecordHeader();
+                    }
+                }
+                else if (_sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
+                {
+                    _ctrlData = ForCtrlData.Read(_sr);
+                    if (!_sr.IsImmediatelyAfterReadingHeader)
+                    {
+                        _sr.ReadRecordHeader();
+                    }
                 }
             }
-            else if (_sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½Îºï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ idï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <returns>ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ id</returns>
+        private long GsoIDFromShapeComponent()
+        {
+            if (!_sr!.IsImmediatelyAfterReadingHeader)
             {
-                _ctrlData = ForCtrlData.Read(_sr);
-                if (!_sr.IsImmediatelyAfterReadingHeader)
-                {
-                    _sr.ReadRecordHeader();
-                }
+                _sr.ReadRecordHeader();
+            }
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponent)
+            {
+                long id = _sr.ReadUInt4();
+                _sr.Skip(4); // id2
+                return id;
+            }
+            else
+            {
+                throw new InvalidOperationException("Shape Component must come after CtrlHeader for gso control.");
+            }
+        }
+
+        /// <summary>
+        /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+        /// </summary>
+        /// <param name="gsoId">ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½Ìµï¿½</param>
+        /// <returns>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Æ®ï¿½ï¿½</returns>
+        private GsoControl CreateGsoControl(long gsoId)
+        {
+            var gc = _paragraph!.AddNewGsoControl((uint)gsoId, _header!);
+            gc?.SetCaption(_caption);
+            gc?.SetCtrlData(_ctrlData);
+            return gc!;
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void RestPartOfShapeComponent()
+        {
+            ForShapeComponent.Read(_gsoControl!, _sr!);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void RestPartOfControl()
+        {
+            switch (_gsoControl!.GsoType)
+            {
+                case GsoControlType.Line:
+                    ForControlLine.ReadRest((ControlLine)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.Rectangle:
+                    ForControlRectangle.ReadRest((ControlRectangle)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.Ellipse:
+                    ForControlEllipse.ReadRest((ControlEllipse)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.Arc:
+                    ForControlArc.ReadRest((ControlArc)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.Polygon:
+                    ForControlPolygon.ReadRest((ControlPolygon)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.Curve:
+                    ForControlCurve.ReadRest((ControlCurve)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.Picture:
+                    ForControlPicture.ReadRest((ControlPicture)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.OLE:
+                    ForControlOLE.ReadRest((ControlOLE)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.Container:
+                    ForControlContainer.ReadRest((ControlContainer)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.ObjectLinkLine:
+                    ForControlObjectLinkLine.ReadRest((ControlObjectLinkLine)_gsoControl, _sr!);
+                    break;
+                case GsoControlType.TextArt:
+                    ForControlTextArt.ReadRest((ControlTextArt)_gsoControl, _sr!);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        /// <returns>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</returns>
+        public GsoControl ReadInContainer(CompoundStreamReader sr)
+        {
+            _sr = sr;
+            ShapeComponentInContainer();
+            RestPartOfControl();
+            return _gsoControl!;
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ShapeComponentInContainer()
+        {
+            _sr!.ReadRecordHeader();
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponent)
+            {
+                long id = _sr.ReadUInt4();
+                _gsoControl = FactoryForControl.CreateGso((uint)id, null!);
+                ForShapeComponent.Read(_gsoControl!, _sr);
+            }
+            else
+            {
+                throw new InvalidOperationException("Shape Component must come after CtrlHeader for gso control.");
             }
         }
     }
 
-    /// <summary>
-    /// °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµå·ÎºÎÅÍ ±×¸®±â °³Ã¼ÀÇ id¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <returns>±×¸®±â °³Ã¼ÀÇ id</returns>
-    private long GsoIDFromShapeComponent()
-    {
-        if (!_sr!.IsImmediatelyAfterReadingHeader)
-        {
-            _sr.ReadRecordHeader();
-        }
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponent)
-        {
-            long id = _sr.ReadUInt4();
-            _sr.Skip(4); // id2
-            return id;
-        }
-        else
-        {
-            throw new InvalidOperationException("Shape Component must come after CtrlHeader for gso control.");
-        }
-    }
-
-    /// <summary>
-    /// ±×¸®±â °³Ã¼ ÄÁÆ®·ÑÀ» »ý¼ºÇÑ´Ù.
-    /// </summary>
-    /// <param name="gsoId">±×¸®±â °³Ã¼ ¾ÆÀÌµð</param>
-    /// <returns>»ý¼ºµÈ ±×¸®±â °³Ã¼ ÄÁÆ®·Ñ</returns>
-    private GsoControl CreateGsoControl(long gsoId)
-    {
-        var gc = _paragraph!.AddNewGsoControl((uint)gsoId, _header!);
-        gc?.SetCaption(_caption);
-        gc?.SetCtrlData(_ctrlData);
-        return gc!;
-    }
-
-    /// <summary>
-    /// °´Ã¼ °øÅë ¼Ó¼º ·¹ÄÚµåÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    private void RestPartOfShapeComponent()
-    {
-        ForShapeComponent.Read(_gsoControl!, _sr!);
-    }
-
-    /// <summary>
-    /// ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    private void RestPartOfControl()
-    {
-        switch (_gsoControl!.GsoType)
-        {
-            case GsoControlType.Line:
-                ForControlLine.ReadRest((ControlLine)_gsoControl, _sr!);
-                break;
-            case GsoControlType.Rectangle:
-                ForControlRectangle.ReadRest((ControlRectangle)_gsoControl, _sr!);
-                break;
-            case GsoControlType.Ellipse:
-                ForControlEllipse.ReadRest((ControlEllipse)_gsoControl, _sr!);
-                break;
-            case GsoControlType.Arc:
-                ForControlArc.ReadRest((ControlArc)_gsoControl, _sr!);
-                break;
-            case GsoControlType.Polygon:
-                ForControlPolygon.ReadRest((ControlPolygon)_gsoControl, _sr!);
-                break;
-            case GsoControlType.Curve:
-                ForControlCurve.ReadRest((ControlCurve)_gsoControl, _sr!);
-                break;
-            case GsoControlType.Picture:
-                ForControlPicture.ReadRest((ControlPicture)_gsoControl, _sr!);
-                break;
-            case GsoControlType.OLE:
-                ForControlOLE.ReadRest((ControlOLE)_gsoControl, _sr!);
-                break;
-            case GsoControlType.Container:
-                ForControlContainer.ReadRest((ControlContainer)_gsoControl, _sr!);
-                break;
-            case GsoControlType.ObjectLinkLine:
-                ForControlObjectLinkLine.ReadRest((ControlObjectLinkLine)_gsoControl, _sr!);
-                break;
-            case GsoControlType.TextArt:
-                ForControlTextArt.ReadRest((ControlTextArt)_gsoControl, _sr!);
-                break;
-        }
-    }
-
-    /// <summary>
-    /// ¹­À½ ÄÁÆ®·Ñ ¾È¿¡ Æ÷ÇÔµÈ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    /// <returns>¹­À½ ÄÁÆ®·Ñ ¾È¿¡ Æ÷ÇÔµÈ ÄÁÆ®·Ñ</returns>
-    public GsoControl ReadInContainer(CompoundStreamReader sr)
-    {
-        _sr = sr;
-        ShapeComponentInContainer();
-        RestPartOfControl();
-        return _gsoControl!;
-    }
-
-    /// <summary>
-    /// ¹­À½ ÄÁÆ®·Ñ ¾È¿¡ Æ÷ÇÔµÈ ÄÁÆ®·ÑÀ» À§ÇÑ ±×¸®±â °³Ã¼ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ShapeComponentInContainer()
-    {
-        _sr!.ReadRecordHeader();
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponent)
-        {
-            long id = _sr.ReadUInt4();
-            _gsoControl = FactoryForControl.CreateGso((uint)id, null!);
-            ForShapeComponent.Read(_gsoControl!, _sr);
-        }
-        else
-        {
-            throw new InvalidOperationException("Shape Component must come after CtrlHeader for gso control.");
-        }
-    }
 }

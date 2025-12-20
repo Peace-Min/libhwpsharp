@@ -1,31 +1,35 @@
-using HwpLib.Object.BodyText;
+﻿using HwpLib.Object.BodyText;
 
-namespace HwpLib.Writer.AutoSetter;
 
-/// <summary>
-/// 문단 리스트 객체를 쓰기 전에 자동 설정하기 위한 객체
-/// </summary>
-public static class ForParagraphList
+namespace HwpLib.Writer.AutoSetter
 {
+
     /// <summary>
-    /// 문단 리스트를 자동 설정한다.
+    /// 문단 리스트 객체를 쓰기 전에 자동 설정하기 위한 객체
     /// </summary>
-    /// <param name="pli">문단 리스트 객체</param>
-    /// <param name="iid">인스턴스 ID</param>
-    public static void AutoSet(IParagraphList pli, InstanceID iid)
+    public static class ForParagraphList
     {
-        int count = pli.ParagraphCount;
-        for (int index = 0; index < count; index++)
+        /// <summary>
+        /// 문단 리스트를 자동 설정한다.
+        /// </summary>
+        /// <param name="pli">문단 리스트 객체</param>
+        /// <param name="iid">인스턴스 ID</param>
+        public static void AutoSet(IParagraphList pli, InstanceID iid)
         {
-            var p = pli.GetParagraph(index);
-            if (index == count - 1)
+            int count = pli.ParagraphCount;
+            for (int index = 0; index < count; index++)
             {
-                ForParagraph.AutoSet(p, true, iid);
-            }
-            else
-            {
-                ForParagraph.AutoSet(p, false, iid);
+                var p = pli.GetParagraph(index);
+                if (index == count - 1)
+                {
+                    ForParagraph.AutoSet(p, true, iid);
+                }
+                else
+                {
+                    ForParagraph.AutoSet(p, false, iid);
+                }
             }
         }
     }
+
 }

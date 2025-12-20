@@ -1,74 +1,78 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Bookmark;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 
-namespace HwpLib.Reader.BodyText.Control.Gso.Part;
 
-/// <summary>
-/// ±Û»óÀÚ¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForTextBox
+namespace HwpLib.Reader.BodyText.Control.Gso.Part
 {
-    /// <summary>
-    /// ±Û»óÀÚ¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="textBox">±Û»óÀÚ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(TextBox textBox, CompoundStreamReader sr)
-    {
-        ListHeader(textBox.ListHeader, sr);
-        ForParagraphList.Read(textBox.ParagraphList, sr);
-    }
 
     /// <summary>
-    /// ±Û»óÀÚÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½Û»ï¿½ï¿½Ú¸ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="lh">±Û»óÀÚÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ListHeader(ListHeaderForTextBox lh, CompoundStreamReader sr)
+    public static class ForTextBox
     {
-        lh.ParaCount = sr.ReadSInt4();
-        lh.Property.Value = sr.ReadUInt4();
-        lh.LeftMargin = sr.ReadUInt2();
-        lh.RightMargin = sr.ReadUInt2();
-        lh.TopMargin = sr.ReadUInt2();
-        lh.BottomMargin = sr.ReadUInt2();
-        lh.TextWidth = sr.ReadUInt4();
-
-        if (sr.IsEndOfRecord()) return;
-
-        sr.Skip(8); // unknown bytes
-
-        if (sr.IsEndOfRecord()) return;
-
-        int temp = sr.ReadSInt4();
-        lh.EditableAtFormMode = (temp == 1);
-
-        short flag = sr.ReadUInt1();
-        if (flag == 0xff)
+        /// <summary>
+        /// ï¿½Û»ï¿½ï¿½Ú¸ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="textBox">ï¿½Û»ï¿½ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(TextBox textBox, CompoundStreamReader sr)
         {
-            FieldName(lh, sr);
+            ListHeader(textBox.ListHeader, sr);
+            ForParagraphList.Read(textBox.ParagraphList, sr);
         }
-    }
 
-    /// <summary>
-    /// ÇÊµå ÀÌ¸§À» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="lh">±Û»óÀÚÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void FieldName(ListHeaderForTextBox lh, CompoundStreamReader sr)
-    {
-        var ps = new ParameterSet();
-        ForParameterSet.Read(ps, sr);
-
-        if (ps.Id != 0x21b) return;
-
-        foreach (var pi in ps.ParameterItemList)
+        /// <summary>
+        /// ï¿½Û»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="lh">ï¿½Û»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ListHeader(ListHeaderForTextBox lh, CompoundStreamReader sr)
         {
-            if (pi.Id == 0x4000 && pi.Type == ParameterType.String)
+            lh.ParaCount = sr.ReadSInt4();
+            lh.Property.Value = sr.ReadUInt4();
+            lh.LeftMargin = sr.ReadUInt2();
+            lh.RightMargin = sr.ReadUInt2();
+            lh.TopMargin = sr.ReadUInt2();
+            lh.BottomMargin = sr.ReadUInt2();
+            lh.TextWidth = sr.ReadUInt4();
+
+            if (sr.IsEndOfRecord()) return;
+
+            sr.Skip(8); // unknown bytes
+
+            if (sr.IsEndOfRecord()) return;
+
+            int temp = sr.ReadSInt4();
+            lh.EditableAtFormMode = (temp == 1);
+
+            short flag = sr.ReadUInt1();
+            if (flag == 0xff)
             {
-                lh.FieldName = pi.Value_BSTR;
+                FieldName(lh, sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½Êµï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="lh">ï¿½Û»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void FieldName(ListHeaderForTextBox lh, CompoundStreamReader sr)
+        {
+            var ps = new ParameterSet();
+            ForParameterSet.Read(ps, sr);
+
+            if (ps.Id != 0x21b) return;
+
+            foreach (var pi in ps.ParameterItemList)
+            {
+                if (pi.Id == 0x4000 && pi.Type == ParameterType.String)
+                {
+                    lh.FieldName = pi.Value_BSTR;
+                }
             }
         }
     }
+
 }

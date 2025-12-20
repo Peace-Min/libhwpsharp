@@ -1,56 +1,60 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Arc;
 using HwpLib.Object.Etc;
 using HwpLib.Reader.BodyText.Control.Gso.Part;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// È£ ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlArc
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
-    /// <summary>
-    /// È£ ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="arc">È£ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlArc arc, CompoundStreamReader sr)
-    {
-        sr.ReadRecordHeader();
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
-        {
-            arc.CreateTextBox();
-            ForTextBox.Read(arc.TextBox!, sr);
 
-            if (!sr.IsImmediatelyAfterReadingHeader)
+    /// <summary>
+    /// È£ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    /// </summary>
+    public static class ForControlArc
+    {
+        /// <summary>
+        /// È£ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="arc">È£ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlArc arc, CompoundStreamReader sr)
+        {
+            sr.ReadRecordHeader();
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
             {
-                sr.ReadRecordHeader();
+                arc.CreateTextBox();
+                ForTextBox.Read(arc.TextBox!, sr);
+
+                if (!sr.IsImmediatelyAfterReadingHeader)
+                {
+                    sr.ReadRecordHeader();
+                }
+            }
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentArc)
+            {
+                ShapeComponentArc(arc.ShapeComponentArc, sr);
             }
         }
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentArc)
+
+        /// <summary>
+        /// È£ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="sca">È£ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentArc(ShapeComponentArc sca, CompoundStreamReader sr)
         {
-            ShapeComponentArc(arc.ShapeComponentArc, sr);
+            sca.ArcType = ArcTypeExtensions.FromValue(sr.ReadUInt1());
+            sca.CenterX = sr.ReadSInt4();
+            sca.CenterY = sr.ReadSInt4();
+            sca.Axis1X = sr.ReadSInt4();
+            sca.Axis1Y = sr.ReadSInt4();
+            sca.Axis2X = sr.ReadSInt4();
+            sca.Axis2Y = sr.ReadSInt4();
         }
     }
 
-    /// <summary>
-    /// È£ °³Ã¼ ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="sca">È£ °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentArc(ShapeComponentArc sca, CompoundStreamReader sr)
-    {
-        sca.ArcType = ArcTypeExtensions.FromValue(sr.ReadUInt1());
-        sca.CenterX = sr.ReadSInt4();
-        sca.CenterY = sr.ReadSInt4();
-        sca.Axis1X = sr.ReadSInt4();
-        sca.Axis1Y = sr.ReadSInt4();
-        sca.Axis2X = sr.ReadSInt4();
-        sca.Axis2Y = sr.ReadSInt4();
-    }
 }

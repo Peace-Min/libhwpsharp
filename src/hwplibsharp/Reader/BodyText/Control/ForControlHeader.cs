@@ -1,86 +1,91 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader.Header;
 using HwpLib.Object.BodyText.Control.HeaderFooter;
 using HwpLib.Object.Etc;
+using System;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ¸Ó¸®¸» ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public class ForControlHeader
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ¸Ó¸®¸» ÄÁÆ®·Ñ
-    /// </summary>
-    private ControlHeader? _head;
 
     /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
+    /// ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForControlHeader()
+    public class ForControlHeader
     {
-    }
+        /// <summary>
+        /// ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
+        /// </summary>
+        private ControlHeader? _head;
 
-    /// <summary>
-    /// ¸Ó¸®¸» ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="head">¸Ó¸®¸» ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(ControlHeader head, CompoundStreamReader sr)
-    {
-        _head = head;
-        _sr = sr;
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-        CtrlHeader();
-        ListHeader();
-        ParagraphList();
-    }
-
-    /// <summary>
-    /// ¸Ó¸®¸» ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlHeader()
-    {
-        _head!.Header.ApplyPage = HeaderFooterApplyPageExtensions.FromValue((byte)_sr!.ReadUInt4());
-
-        if (_sr.IsEndOfRecord()) return;
-
-        _head.Header.CreateIndex = _sr.ReadSInt4();
-    }
-
-    /// <summary>
-    /// ¸Ó¸®¸» ÄÁÆ®·ÑÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ListHeader()
-    {
-        _sr!.ReadRecordHeader();
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForControlHeader()
         {
-            ListHeaderForHeaderFooter lh = _head!.ListHeader;
-            lh.ParaCount = _sr.ReadSInt4();
-            lh.Property.Value = _sr.ReadUInt4();
-            lh.TextWidth = _sr.ReadUInt4();
-            lh.TextHeight = _sr.ReadUInt4();
-            _sr.SkipToEndRecord();
         }
-        else
+
+        /// <summary>
+        /// ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="head">ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(ControlHeader head, CompoundStreamReader sr)
         {
-            throw new InvalidOperationException("List header must be located.");
+            _head = head;
+            _sr = sr;
+
+            CtrlHeader();
+            ListHeader();
+            ParagraphList();
+        }
+
+        /// <summary>
+        /// ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlHeader()
+        {
+            _head!.Header.ApplyPage = HeaderFooterApplyPageExtensions.FromValue((byte)_sr!.ReadUInt4());
+
+            if (_sr.IsEndOfRecord()) return;
+
+            _head.Header.CreateIndex = _sr.ReadSInt4();
+        }
+
+        /// <summary>
+        /// ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ListHeader()
+        {
+            _sr!.ReadRecordHeader();
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
+            {
+                ListHeaderForHeaderFooter lh = _head!.ListHeader;
+                lh.ParaCount = _sr.ReadSInt4();
+                lh.Property.Value = _sr.ReadUInt4();
+                lh.TextWidth = _sr.ReadUInt4();
+                lh.TextHeight = _sr.ReadUInt4();
+                _sr.SkipToEndRecord();
+            }
+            else
+            {
+                throw new InvalidOperationException("List header must be located.");
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParagraphList()
+        {
+            ForParagraphList.Read(_head!.ParagraphList, _sr!);
         }
     }
 
-    /// <summary>
-    /// ¹®´Ü ¸®½ºÆ®¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ParagraphList()
-    {
-        ForParagraphList.Read(_head!.ParagraphList, _sr!);
-    }
 }

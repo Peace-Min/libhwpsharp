@@ -1,4 +1,4 @@
-using HwpLib.Object.BodyText.Control.Gso;
+﻿using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 using HwpLib.Tool.ParagraphAdder.DocInfo;

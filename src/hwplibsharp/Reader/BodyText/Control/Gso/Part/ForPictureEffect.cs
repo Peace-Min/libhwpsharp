@@ -1,133 +1,138 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Picture;
+using System;
 
-namespace HwpLib.Reader.BodyText.Control.Gso.Part;
 
-/// <summary>
-/// ±×¸² °³Ã¼ ¼Ó¼º ·¹ÄÚµåÀÇ ±×¸² È¿°ú ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForPictureEffect
+namespace HwpLib.Reader.BodyText.Control.Gso.Part
 {
+
     /// <summary>
-    /// ±×¸² °³Ã¼ ¼Ó¼º ·¹ÄÚµåÀÇ ±×¸² È¿°ú ºÎºÐÀ» ÀÐ´Â´Ù.
+    /// ï¿½×¸ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½×¸ï¿½ È¿ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="pe">±×¸² °³Ã¼ ¼Ó¼º ·¹ÄÚµåÀÇ ±×¸² È¿°ú¸¦ ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(PictureEffect pe, CompoundStreamReader sr)
+    public static class ForPictureEffect
     {
-        pe.Property.Value = sr.ReadUInt4();
-        if (pe.Property.HasShadowEffect)
+        /// <summary>
+        /// ï¿½×¸ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½×¸ï¿½ È¿ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pe">ï¿½×¸ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½×¸ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(PictureEffect pe, CompoundStreamReader sr)
         {
-            pe.CreateShadowEffect();
-            ShadowEffect(pe.ShadowEffect!, sr);
+            pe.Property.Value = sr.ReadUInt4();
+            if (pe.Property.HasShadowEffect)
+            {
+                pe.CreateShadowEffect();
+                ShadowEffect(pe.ShadowEffect!, sr);
+            }
+            if (pe.Property.HasNeonEffect)
+            {
+                pe.CreateNeonEffect();
+                NeonEffect(pe.NeonEffect!, sr);
+            }
+            if (pe.Property.HasSoftBorderEffect)
+            {
+                pe.CreateSoftEdgeEffect();
+                SoftEdgeEffect(pe.SoftEdgeEffect!, sr);
+            }
+            if (pe.Property.HasReflectionEffect)
+            {
+                pe.CreateReflectionEffect();
+                ReflectionEffect(pe.ReflectionEffect!, sr);
+            }
         }
-        if (pe.Property.HasNeonEffect)
+
+        /// <summary>
+        /// ï¿½×¸ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="se">ï¿½×¸ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShadowEffect(ShadowEffect se, CompoundStreamReader sr)
         {
-            pe.CreateNeonEffect();
-            NeonEffect(pe.NeonEffect!, sr);
+            se.Style = sr.ReadSInt4();
+            se.Transparency = sr.ReadFloat();
+            se.Cloudy = sr.ReadFloat();
+            se.Direction = sr.ReadFloat();
+            se.Distance = sr.ReadFloat();
+            se.Sort = sr.ReadSInt4();
+            se.TiltAngleX = sr.ReadFloat();
+            se.TiltAngleY = sr.ReadFloat();
+            se.ZoomRateX = sr.ReadFloat();
+            se.ZoomRateY = sr.ReadFloat();
+            se.RotateWithShape = sr.ReadSInt4();
+
+            ColorProperty(se.Color, sr);
         }
-        if (pe.Property.HasSoftBorderEffect)
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="cp">ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ColorProperty(ColorWithEffect cp, CompoundStreamReader sr)
         {
-            pe.CreateSoftEdgeEffect();
-            SoftEdgeEffect(pe.SoftEdgeEffect!, sr);
+            cp.Type = sr.ReadSInt4();
+            if (cp.Type == 0)
+            {
+                byte[] color = sr.ReadBytes(4);
+                cp.Color = color;
+            }
+            else
+            {
+                throw new InvalidOperationException("not supported color type !!!");
+            }
+            int colorEffectCount = (int)sr.ReadUInt4();
+            for (int index = 0; index < colorEffectCount; index++)
+            {
+                var ce = cp.AddNewColorEffect();
+                ce.Sort = ColorEffectSortExtensions.FromValue(sr.ReadSInt4());
+                ce.Value = sr.ReadFloat();
+            }
         }
-        if (pe.Property.HasReflectionEffect)
+
+        /// <summary>
+        /// ï¿½×¿ï¿½ È¿ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="ne">ï¿½×¿ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void NeonEffect(NeonEffect ne, CompoundStreamReader sr)
         {
-            pe.CreateReflectionEffect();
-            ReflectionEffect(pe.ReflectionEffect!, sr);
+            ne.Transparency = sr.ReadFloat();
+            ne.Radius = sr.ReadFloat();
+            ColorProperty(ne.Color, sr);
+        }
+
+        /// <summary>
+        /// ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ È¿ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="see">ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void SoftEdgeEffect(SoftEdgeEffect see, CompoundStreamReader sr)
+        {
+            see.Radius = sr.ReadFloat();
+        }
+
+        /// <summary>
+        /// ï¿½Ý»ï¿½ È¿ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="re">ï¿½Ý»ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ReflectionEffect(ReflectionEffect re, CompoundStreamReader sr)
+        {
+            re.Style = sr.ReadSInt4();
+            re.Radius = sr.ReadFloat();
+            re.Direction = sr.ReadFloat();
+            re.Distance = sr.ReadFloat();
+            re.TiltAngleX = sr.ReadFloat();
+            re.TiltAngleY = sr.ReadFloat();
+            re.ZoomRateX = sr.ReadFloat();
+            re.ZoomRateY = sr.ReadFloat();
+            re.RotationStyle = sr.ReadSInt4();
+            re.StartTransparency = sr.ReadFloat();
+            re.StartPosition = sr.ReadFloat();
+            re.EndTransparency = sr.ReadFloat();
+            re.EndPosition = sr.ReadFloat();
+            re.OffsetDirection = sr.ReadFloat();
         }
     }
 
-    /// <summary>
-    /// ±×¸²ÀÚ È¿°ú ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="se">±×¸²ÀÚ È¿°ú ºÎºÐÀ» ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShadowEffect(ShadowEffect se, CompoundStreamReader sr)
-    {
-        se.Style = sr.ReadSInt4();
-        se.Transparency = sr.ReadFloat();
-        se.Cloudy = sr.ReadFloat();
-        se.Direction = sr.ReadFloat();
-        se.Distance = sr.ReadFloat();
-        se.Sort = sr.ReadSInt4();
-        se.TiltAngleX = sr.ReadFloat();
-        se.TiltAngleY = sr.ReadFloat();
-        se.ZoomRateX = sr.ReadFloat();
-        se.ZoomRateY = sr.ReadFloat();
-        se.RotateWithShape = sr.ReadSInt4();
-
-        ColorProperty(se.Color, sr);
-    }
-
-    /// <summary>
-    /// »ö»ó ¼Ó¼º ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="cp">»ö»ó ¼Ó¼ºÀ» ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ColorProperty(ColorWithEffect cp, CompoundStreamReader sr)
-    {
-        cp.Type = sr.ReadSInt4();
-        if (cp.Type == 0)
-        {
-            byte[] color = sr.ReadBytes(4);
-            cp.Color = color;
-        }
-        else
-        {
-            throw new InvalidOperationException("not supported color type !!!");
-        }
-        int colorEffectCount = (int)sr.ReadUInt4();
-        for (int index = 0; index < colorEffectCount; index++)
-        {
-            var ce = cp.AddNewColorEffect();
-            ce.Sort = ColorEffectSortExtensions.FromValue(sr.ReadSInt4());
-            ce.Value = sr.ReadFloat();
-        }
-    }
-
-    /// <summary>
-    /// ³×¿Â È¿°ú ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="ne">³×¿Â È¿°ú¸¦ ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void NeonEffect(NeonEffect ne, CompoundStreamReader sr)
-    {
-        ne.Transparency = sr.ReadFloat();
-        ne.Radius = sr.ReadFloat();
-        ColorProperty(ne.Color, sr);
-    }
-
-    /// <summary>
-    /// ºÎµå·¯¿î °¡ÀåÀÚ¸® È¿°ú ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="see">ºÎµå·¯¿î °¡ÀåÀÚ¸® È¿°ú¸¦ ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void SoftEdgeEffect(SoftEdgeEffect see, CompoundStreamReader sr)
-    {
-        see.Radius = sr.ReadFloat();
-    }
-
-    /// <summary>
-    /// ¹Ý»ç È¿°ú ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="re">¹Ý»ç È¿°ú¸¦ ³ªÅ¸³»´Â °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ReflectionEffect(ReflectionEffect re, CompoundStreamReader sr)
-    {
-        re.Style = sr.ReadSInt4();
-        re.Radius = sr.ReadFloat();
-        re.Direction = sr.ReadFloat();
-        re.Distance = sr.ReadFloat();
-        re.TiltAngleX = sr.ReadFloat();
-        re.TiltAngleY = sr.ReadFloat();
-        re.ZoomRateX = sr.ReadFloat();
-        re.ZoomRateY = sr.ReadFloat();
-        re.RotationStyle = sr.ReadSInt4();
-        re.StartTransparency = sr.ReadFloat();
-        re.StartPosition = sr.ReadFloat();
-        re.EndTransparency = sr.ReadFloat();
-        re.EndPosition = sr.ReadFloat();
-        re.OffsetDirection = sr.ReadFloat();
-    }
 }

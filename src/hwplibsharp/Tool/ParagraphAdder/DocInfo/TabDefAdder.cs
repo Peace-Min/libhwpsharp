@@ -1,5 +1,6 @@
-using HwpLib.Object.DocInfo;
+﻿using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.TabDef;
+using System.Collections.Generic;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo
 {

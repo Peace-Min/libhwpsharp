@@ -1,10 +1,6 @@
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.BodyText.Paragraph.CharShape;
-using HwpLib.Object.BodyText.Paragraph.Header;
-using HwpLib.Object.BodyText.Paragraph.LineSeg;
-using HwpLib.Object.BodyText.Paragraph.RangeTag;
 using HwpLib.Tool.ParagraphAdder.Control;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 using System;

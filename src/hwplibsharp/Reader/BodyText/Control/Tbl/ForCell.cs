@@ -1,99 +1,103 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Bookmark;
 using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Object.Etc;
-using HwpLib.Reader.BodyText.Control;
+using System;
 
-namespace HwpLib.Reader.BodyText.Control.Tbl;
 
-/// <summary>
-/// Ç¥ÀÇ ¼¿À» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForCell
+namespace HwpLib.Reader.BodyText.Control.Tbl
 {
-    /// <summary>
-    /// Ç¥ÀÇ ¼¿À» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="cell">Ç¥ÀÇ ¼¿</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(Cell cell, CompoundStreamReader sr)
-    {
-        if (!sr.IsImmediatelyAfterReadingHeader)
-        {
-            sr.ReadRecordHeader();
-        }
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
-        {
-            ListHeader(cell.ListHeader, sr);
-        }
-        else
-        {
-            throw new InvalidOperationException("Cell's list header does not exist.");
-        }
-        ForParagraphList.Read(cell.ParagraphList, sr);
-    }
 
     /// <summary>
-    /// ¼¿ÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="lh">¼¿ÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ListHeader(ListHeaderForCell lh, CompoundStreamReader sr)
+    public static class ForCell
     {
-        lh.ParaCount = sr.ReadSInt4();
-        lh.Property.Value = sr.ReadUInt4();
-        lh.ColIndex = sr.ReadUInt2();
-        lh.RowIndex = sr.ReadUInt2();
-        lh.ColSpan = sr.ReadUInt2();
-        lh.RowSpan = sr.ReadUInt2();
-        lh.Width = sr.ReadUInt4();
-        lh.Height = sr.ReadUInt4();
-        lh.LeftMargin = sr.ReadUInt2();
-        lh.RightMargin = sr.ReadUInt2();
-        lh.TopMargin = sr.ReadUInt2();
-        lh.BottomMargin = sr.ReadUInt2();
-        lh.BorderFillId = sr.ReadUInt2();
-        lh.TextWidth = sr.ReadUInt4();
-
-        if (sr.CurrentRecordHeader!.Size > (sr.CurrentPosition - sr.CurrentPositionAfterHeader))
+        /// <summary>
+        /// Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="cell">Ç¥ï¿½ï¿½ ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(Cell cell, CompoundStreamReader sr)
         {
-            byte flag = sr.ReadUInt1();
-            if (flag == 0xff)
+            if (!sr.IsImmediatelyAfterReadingHeader)
             {
-                FieldName(lh, sr);
+                sr.ReadRecordHeader();
             }
-            UnknownRestBytes(sr);
-        }
-    }
-
-    /// <summary>
-    /// ÇÊµå ÀÌ¸§À» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="lh">¼¿ÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void FieldName(ListHeaderForCell lh, CompoundStreamReader sr)
-    {
-        var ps = new ParameterSet();
-        ForParameterSet.Read(ps, sr);
-
-        if (ps.Id == 0x21b)
-        {
-            foreach (var pi in ps.ParameterItemList)
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
             {
-                if (pi.Id == 0x4000 && pi.Type == ParameterType.String)
+                ListHeader(cell.ListHeader, sr);
+            }
+            else
+            {
+                throw new InvalidOperationException("Cell's list header does not exist.");
+            }
+            ForParagraphList.Read(cell.ParagraphList, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="lh">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ListHeader(ListHeaderForCell lh, CompoundStreamReader sr)
+        {
+            lh.ParaCount = sr.ReadSInt4();
+            lh.Property.Value = sr.ReadUInt4();
+            lh.ColIndex = sr.ReadUInt2();
+            lh.RowIndex = sr.ReadUInt2();
+            lh.ColSpan = sr.ReadUInt2();
+            lh.RowSpan = sr.ReadUInt2();
+            lh.Width = sr.ReadUInt4();
+            lh.Height = sr.ReadUInt4();
+            lh.LeftMargin = sr.ReadUInt2();
+            lh.RightMargin = sr.ReadUInt2();
+            lh.TopMargin = sr.ReadUInt2();
+            lh.BottomMargin = sr.ReadUInt2();
+            lh.BorderFillId = sr.ReadUInt2();
+            lh.TextWidth = sr.ReadUInt4();
+
+            if (sr.CurrentRecordHeader!.Size > (sr.CurrentPosition - sr.CurrentPositionAfterHeader))
+            {
+                byte flag = sr.ReadUInt1();
+                if (flag == 0xff)
                 {
-                    lh.FieldName = pi.Value_BSTR;
+                    FieldName(lh, sr);
+                }
+                UnknownRestBytes(sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½Êµï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="lh">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void FieldName(ListHeaderForCell lh, CompoundStreamReader sr)
+        {
+            var ps = new ParameterSet();
+            ForParameterSet.Read(ps, sr);
+
+            if (ps.Id == 0x21b)
+            {
+                foreach (var pi in ps.ParameterItemList)
+                {
+                    if (pi.Id == 0x4000 && pi.Type == ParameterType.String)
+                    {
+                        lh.FieldName = pi.Value_BSTR;
+                    }
                 }
             }
         }
+
+        /// <summary>
+        /// ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ñ´ï¿½.
+        /// </summary>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void UnknownRestBytes(CompoundStreamReader sr)
+        {
+            sr.SkipToEndRecord();
+        }
     }
 
-    /// <summary>
-    /// ¾Ë·ÁÁöÁö ¾ÊÀº ³ª¸ÓÁö ¹ÙÀÌÆ®¸¦ Ã³¸®ÇÑ´Ù.
-    /// </summary>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void UnknownRestBytes(CompoundStreamReader sr)
-    {
-        sr.SkipToEndRecord();
-    }
 }

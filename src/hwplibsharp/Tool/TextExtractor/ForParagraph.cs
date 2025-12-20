@@ -1,7 +1,8 @@
-using HwpLib.Object.BodyText.Control;
+﻿using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Object.BodyText.Paragraph.Text;
 using HwpLib.Tool.TextExtractor.ParaHead;
+using System.Collections.Generic;
 using System.Text;
 
 namespace HwpLib.Tool.TextExtractor

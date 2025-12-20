@@ -1,12 +1,12 @@
-using HwpLib.Object;
+﻿using HwpLib.Object;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.Etc;
 using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.Numbering;
 using HwpLib.Object.DocInfo.ParaShape;
 using HwpLib.Util;
+using System.Collections.Generic;
 
 namespace HwpLib.Tool.TextExtractor.ParaHead
 {
@@ -48,7 +48,7 @@ namespace HwpLib.Tool.TextExtractor.ParaHead
                     {
                         lv.ParagraphHeadInfo.Property.ParagraphNumberFormat = ParagraphNumberFormat.Number;
                     }
-                    
+
                     string format = i == 0 ? "" : GetDefaultFormat(i + 1);
                     lv.NumberFormat?.FromUTF16LEString(format);
                 }

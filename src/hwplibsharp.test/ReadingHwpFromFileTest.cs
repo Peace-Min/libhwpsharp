@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Reader;
 
 namespace HwpLibSharp.Test;
@@ -41,10 +40,10 @@ public class ReadingHwpFromFileTest
     {
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath(filename);
-        
+
         // Act
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         // Assert
         Assert.IsNotNull(hwpFile);
         Assert.IsNotEmpty(hwpFile.BodyText.SectionList, $"{filename} 읽기 성공");

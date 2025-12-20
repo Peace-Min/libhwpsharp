@@ -1,5 +1,4 @@
-using HwpLib.Object.BodyText.Control.CtrlHeader;
-using HwpLib.Object.BodyText.Control.HiddenComment;
+﻿using HwpLib.Object.BodyText.Control.HiddenComment;
 using HwpLib.Object.BodyText.Paragraph;
 
 namespace HwpLib.Object.BodyText.Control

@@ -1,35 +1,39 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ÀÚµ¿ ¹øÈ£ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlAutoNumber
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ÀÚµ¿ ¹øÈ£ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="an">ÀÚµ¿¹øÈ£ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlAutoNumber an, CompoundStreamReader sr)
-    {
-        CtrlHeader(an.GetHeader()!, sr);
-    }
 
     /// <summary>
-    /// ÀÚµ¿ ¹øÈ£ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½Úµï¿½ ï¿½ï¿½È£ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="h">ÀÚµ¿ ¹øÈ£ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlHeader(CtrlHeaderAutoNumber h, CompoundStreamReader sr)
+    public static class ForControlAutoNumber
     {
-        h.Property.Value = sr.ReadUInt4();
-        h.Number = sr.ReadUInt2();
-        h.UserSymbol.Bytes = sr.ReadWChar();
-        h.BeforeDecorationLetter.Bytes = sr.ReadWChar();
-        h.AfterDecorationLetter.Bytes = sr.ReadWChar();
+        /// <summary>
+        /// ï¿½Úµï¿½ ï¿½ï¿½È£ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="an">ï¿½Úµï¿½ï¿½ï¿½È£ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlAutoNumber an, CompoundStreamReader sr)
+        {
+            CtrlHeader(an.GetHeader()!, sr);
+        }
+
+        /// <summary>
+        /// ï¿½Úµï¿½ ï¿½ï¿½È£ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="h">ï¿½Úµï¿½ ï¿½ï¿½È£ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlHeader(CtrlHeaderAutoNumber h, CompoundStreamReader sr)
+        {
+            h.Property.Value = sr.ReadUInt4();
+            h.Number = sr.ReadUInt2();
+            h.UserSymbol.Bytes = sr.ReadWChar();
+            h.BeforeDecorationLetter.Bytes = sr.ReadWChar();
+            h.AfterDecorationLetter.Bytes = sr.ReadWChar();
+        }
     }
+
 }

@@ -1,107 +1,111 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.Etc;
 using HwpLib.Reader.BodyText.Control.Eqed;
 using HwpLib.Reader.BodyText.Control.Gso.Part;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ¼ö½Ä ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public class ForControlEquation
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ¼ö½Ä ÄÁÆ®·Ñ
-    /// </summary>
-    private ControlEquation? _eqed;
 
     /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµåÀÇ ·¹º§
-    /// </summary>
-    private int _ctrlHeaderLevel;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForControlEquation()
+    public class ForControlEquation
     {
-    }
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
+        /// </summary>
+        private ControlEquation? _eqed;
 
-    /// <summary>
-    /// ¼ö½Ä ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="eqed">¼ö½Ä ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(ControlEquation eqed, CompoundStreamReader sr)
-    {
-        _eqed = eqed;
-        _sr = sr;
-        _ctrlHeaderLevel = sr.CurrentRecordHeader!.Level;
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-        CtrlHeader();
-        Caption();
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private int _ctrlHeaderLevel;
 
-        while (!sr.IsEndOfStream())
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForControlEquation()
         {
-            if (!sr.IsImmediatelyAfterReadingHeader)
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="eqed">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(ControlEquation eqed, CompoundStreamReader sr)
+        {
+            _eqed = eqed;
+            _sr = sr;
+            _ctrlHeaderLevel = sr.CurrentRecordHeader!.Level;
+
+            CtrlHeader();
+            Caption();
+
+            while (!sr.IsEndOfStream())
             {
-                sr.ReadRecordHeader();
-            }
+                if (!sr.IsImmediatelyAfterReadingHeader)
+                {
+                    sr.ReadRecordHeader();
+                }
 
-            if (_ctrlHeaderLevel >= sr.CurrentRecordHeader!.Level)
+                if (_ctrlHeaderLevel >= sr.CurrentRecordHeader!.Level)
+                {
+                    break;
+                }
+                ReadBody();
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlHeader()
+        {
+            ForCtrlHeaderGso.Read(_eqed!.GetHeader()!, _sr!);
+        }
+
+        /// <summary>
+        /// Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void Caption()
+        {
+            _sr!.ReadRecordHeader();
+            if (_sr.CurrentRecordHeader?.TagId != HWPTag.ListHeader) return;
+
+            _eqed!.CreateCaption();
+            ForCaption.Read(_eqed.Caption!, _sr);
+        }
+
+        /// <summary>
+        /// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ReadBody()
+        {
+            if (_sr!.CurrentRecordHeader?.TagId == HWPTag.EqEdit)
             {
-                break;
+                EqEdit();
             }
-            ReadBody();
+            else
+            {
+                _sr.SkipToEndRecord();
+            }
         }
-    }
 
-    /// <summary>
-    /// ¼ö½Ä ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlHeader()
-    {
-        ForCtrlHeaderGso.Read(_eqed!.GetHeader()!, _sr!);
-    }
-
-    /// <summary>
-    /// Ä¸¼Ç Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void Caption()
-    {
-        _sr!.ReadRecordHeader();
-        if (_sr.CurrentRecordHeader?.TagId != HWPTag.ListHeader) return;
-
-        _eqed!.CreateCaption();
-        ForCaption.Read(_eqed.Caption!, _sr);
-    }
-
-    /// <summary>
-    /// ÀÌ¹Ì ÀÐÀº ·¹ÄÚµå Çì´õ¿¡ µû¸¥ ·¹ÄÚµå ³»¿ëÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    private void ReadBody()
-    {
-        if (_sr!.CurrentRecordHeader?.TagId == HWPTag.EqEdit)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void EqEdit()
         {
-            EqEdit();
-        }
-        else
-        {
-            _sr.SkipToEndRecord();
+            ForEQEdit.Read(_eqed!.EQEdit, _sr!);
         }
     }
 
-    /// <summary>
-    /// ¼ö½Ä Á¤º¸ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void EqEdit()
-    {
-        ForEQEdit.Read(_eqed!.EQEdit, _sr!);
-    }
 }

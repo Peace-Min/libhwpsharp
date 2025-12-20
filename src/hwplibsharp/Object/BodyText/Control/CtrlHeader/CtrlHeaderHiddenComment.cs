@@ -1,4 +1,4 @@
-namespace HwpLib.Object.BodyText.Control.CtrlHeader
+﻿namespace HwpLib.Object.BodyText.Control.CtrlHeader
 {
     /// <summary>
     /// 숨은 설명 컨트롤을 위한 컨트롤 헤더 레코드

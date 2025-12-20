@@ -1,4 +1,3 @@
-using HwpLib.Object;
 using HwpLib.Reader;
 using HwpLib.Tool.TextExtractor;
 
@@ -43,19 +42,19 @@ public class ExtractingTextTest
         // Arrange
         var filePath = TestHelper.GetBasicSamplePath(filename);
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile, $"{filename} 읽기 성공");
         Console.WriteLine($"{filename} 읽기 성공 !!");
         Console.WriteLine();
-        
+
         // Act
         var option = new TextExtractOption();
         option.SetMethod(TextExtractMethod.InsertControlTextBetweenParagraphText);
         option.SetWithControlChar(false);
         option.SetAppendEndingLF(true);
-        
+
         var hwpText = TextExtractor.Extract(hwpFile, option);
-        
+
         // Assert
         Assert.IsNotNull(hwpText);
         Console.WriteLine(hwpText);

@@ -1,48 +1,52 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Util.Binary;
 
-namespace HwpLib.Reader.BodyText.Control.Gso.Part;
 
-/// <summary>
-/// ±×¸®±â °³Ã¼ÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForCtrlHeaderGso
+namespace HwpLib.Reader.BodyText.Control.Gso.Part
 {
+
     /// <summary>
-    /// ±×¸®±â °³Ã¼ÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="header">±×¸®±â °³Ã¼ÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(CtrlHeaderGso header, CompoundStreamReader sr)
+    public static class ForCtrlHeaderGso
     {
-        header.Property.Value = sr.ReadUInt4();
-        header.YOffset = sr.ReadUInt4();
-        header.XOffset = sr.ReadUInt4();
-        header.Width = sr.ReadUInt4();
-        header.Height = sr.ReadUInt4();
-        header.ZOrder = sr.ReadSInt4();
-        header.OutterMarginLeft = sr.ReadUInt2();
-        header.OutterMarginRight = sr.ReadUInt2();
-        header.OutterMarginTop = sr.ReadUInt2();
-        header.OutterMarginBottom = sr.ReadUInt2();
-        header.InstanceId = sr.ReadUInt4();
-
-        if (sr.IsEndOfRecord()) return;
-
-        int temp = sr.ReadSInt4();
-        header.PreventPageDivide = BitFlag.Get(temp, 0);
-
-        if (sr.IsEndOfRecord()) return;
-
-        header.Explanation.Bytes = sr.ReadHWPString();
-
-        if (sr.IsEndOfRecord()) return;
-
-        int length = (int)(sr.CurrentRecordHeader!.Size - (sr.CurrentPosition - sr.CurrentPositionAfterHeader));
-        if (length > 0)
+        /// <summary>
+        /// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(CtrlHeaderGso header, CompoundStreamReader sr)
         {
-            header.Unknown = sr.ReadBytes(length);
+            header.Property.Value = sr.ReadUInt4();
+            header.YOffset = sr.ReadUInt4();
+            header.XOffset = sr.ReadUInt4();
+            header.Width = sr.ReadUInt4();
+            header.Height = sr.ReadUInt4();
+            header.ZOrder = sr.ReadSInt4();
+            header.OutterMarginLeft = sr.ReadUInt2();
+            header.OutterMarginRight = sr.ReadUInt2();
+            header.OutterMarginTop = sr.ReadUInt2();
+            header.OutterMarginBottom = sr.ReadUInt2();
+            header.InstanceId = sr.ReadUInt4();
+
+            if (sr.IsEndOfRecord()) return;
+
+            int temp = sr.ReadSInt4();
+            header.PreventPageDivide = BitFlag.Get(temp, 0);
+
+            if (sr.IsEndOfRecord()) return;
+
+            header.Explanation.Bytes = sr.ReadHWPString();
+
+            if (sr.IsEndOfRecord()) return;
+
+            int length = (int)(sr.CurrentRecordHeader!.Size - (sr.CurrentPosition - sr.CurrentPositionAfterHeader));
+            if (length > 0)
+            {
+                header.Unknown = sr.ReadBytes(length);
+            }
         }
     }
+
 }

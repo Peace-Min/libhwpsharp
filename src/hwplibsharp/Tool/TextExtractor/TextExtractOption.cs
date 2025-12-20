@@ -1,4 +1,4 @@
-namespace HwpLib.Tool.TextExtractor
+﻿namespace HwpLib.Tool.TextExtractor
 {
     /// <summary>
     /// 텍스트 추출 옵션

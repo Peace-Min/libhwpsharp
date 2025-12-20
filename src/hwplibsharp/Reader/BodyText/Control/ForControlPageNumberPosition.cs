@@ -1,35 +1,39 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ÂÊ ¹øÈ£ À§Ä¡ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlPageNumberPosition
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ÂÊ ¹øÈ£ À§Ä¡ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="pgnp">ÂÊ ¹øÈ£ À§Ä¡ ÄÁÆ®·Ñ °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlPageNumberPosition pgnp, CompoundStreamReader sr)
-    {
-        CtrlHeader(pgnp.GetHeader()!, sr);
-    }
 
     /// <summary>
-    /// ÂÊ ¹øÈ£ À§Ä¡ ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½Ä¡ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="header">ÂÊ ¹øÈ£ À§Ä¡ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlHeader(CtrlHeaderPageNumberPosition header, CompoundStreamReader sr)
+    public static class ForControlPageNumberPosition
     {
-        header.Property.Value = sr.ReadUInt4();
-        header.Number = sr.ReadUInt2();
-        header.UserSymbol.Bytes = sr.ReadWChar();
-        header.BeforeDecorationLetter.Bytes = sr.ReadWChar();
-        header.AfterDecorationLetter.Bytes = sr.ReadWChar();
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½Ä¡ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pgnp">ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½Ä¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlPageNumberPosition pgnp, CompoundStreamReader sr)
+        {
+            CtrlHeader(pgnp.GetHeader()!, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½Ä¡ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="header">ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½Ä¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlHeader(CtrlHeaderPageNumberPosition header, CompoundStreamReader sr)
+        {
+            header.Property.Value = sr.ReadUInt4();
+            header.Number = sr.ReadUInt2();
+            header.UserSymbol.Bytes = sr.ReadWChar();
+            header.BeforeDecorationLetter.Bytes = sr.ReadWChar();
+            header.AfterDecorationLetter.Bytes = sr.ReadWChar();
+        }
     }
+
 }

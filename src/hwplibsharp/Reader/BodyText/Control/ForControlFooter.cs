@@ -1,87 +1,92 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader.Header;
 using HwpLib.Object.BodyText.Control.HeaderFooter;
 using HwpLib.Object.Etc;
+using System;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ²¿¸®¸» ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public class ForControlFooter
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// ²¿¸®¸» ÄÁÆ®·Ñ
-    /// </summary>
-    private ControlFooter? _foot;
 
     /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForControlFooter()
+    public class ForControlFooter
     {
-    }
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
+        /// </summary>
+        private ControlFooter? _foot;
 
-    /// <summary>
-    /// ²¿¸®¸» ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="foot">²¿¸®¸» ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(ControlFooter foot, CompoundStreamReader sr)
-    {
-        _foot = foot;
-        _sr = sr;
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-        CtrlHeader();
-        ListHeader();
-        ParagraphList();
-    }
-
-    /// <summary>
-    /// ²¿¸®¸» ÄÁÆ®·ÑÀÇ ÄÁÆ®·Ñ Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void CtrlHeader()
-    {
-        _foot!.Header.ApplyPage = HeaderFooterApplyPageExtensions.FromValue((byte)_sr!.ReadUInt4());
-        
-        if (_sr.CurrentRecordHeader!.Size > (_sr.CurrentPosition - _sr.CurrentPositionAfterHeader))
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForControlFooter()
         {
-            _foot.Header.CreateIndex = _sr.ReadSInt4();
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="foot">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(ControlFooter foot, CompoundStreamReader sr)
+        {
+            _foot = foot;
+            _sr = sr;
+
+            CtrlHeader();
+            ListHeader();
+            ParagraphList();
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void CtrlHeader()
+        {
+            _foot!.Header.ApplyPage = HeaderFooterApplyPageExtensions.FromValue((byte)_sr!.ReadUInt4());
+
+            if (_sr.CurrentRecordHeader!.Size > (_sr.CurrentPosition - _sr.CurrentPositionAfterHeader))
+            {
+                _foot.Header.CreateIndex = _sr.ReadSInt4();
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ListHeader()
+        {
+            _sr!.ReadRecordHeader();
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
+            {
+                ListHeaderForHeaderFooter lh = _foot!.ListHeader;
+                lh.ParaCount = _sr.ReadSInt4();
+                lh.Property.Value = _sr.ReadUInt4();
+                lh.TextWidth = _sr.ReadUInt4();
+                lh.TextHeight = _sr.ReadUInt4();
+                _sr.SkipToEndRecord();
+            }
+            else
+            {
+                throw new InvalidOperationException("List header must be located.");
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParagraphList()
+        {
+            ForParagraphList.Read(_foot!.ParagraphList, _sr!);
         }
     }
 
-    /// <summary>
-    /// ²¿¸®¸» ÄÁÆ®·ÑÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ListHeader()
-    {
-        _sr!.ReadRecordHeader();
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
-        {
-            ListHeaderForHeaderFooter lh = _foot!.ListHeader;
-            lh.ParaCount = _sr.ReadSInt4();
-            lh.Property.Value = _sr.ReadUInt4();
-            lh.TextWidth = _sr.ReadUInt4();
-            lh.TextHeight = _sr.ReadUInt4();
-            _sr.SkipToEndRecord();
-        }
-        else
-        {
-            throw new InvalidOperationException("List header must be located.");
-        }
-    }
-
-    /// <summary>
-    /// ¹®´Ü ¸®½ºÆ®¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ParagraphList()
-    {
-        ForParagraphList.Read(_foot!.ParagraphList, _sr!);
-    }
 }

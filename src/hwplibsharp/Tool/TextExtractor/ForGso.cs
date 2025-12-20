@@ -1,4 +1,4 @@
-using HwpLib.Object.BodyText.Control.Gso;
+﻿using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 using HwpLib.Tool.TextExtractor.ParaHead;
 using System.Text;

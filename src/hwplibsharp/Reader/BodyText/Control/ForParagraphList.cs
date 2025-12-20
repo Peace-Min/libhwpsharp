@@ -1,271 +1,275 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.Etc;
-using HwpLib.Reader.BodyText.Control.Gso;
 using HwpLib.Reader.BodyText.Paragraph;
+using System;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ¹®´Ü ¸®½ºÆ®¸¦ ÀÐ´Â °´Ã¼ (Ä¸¼Ç, Ç¥, ¸Ó¸®±Û/²¿¸®±Û, °¢ÁÖ/¹ÌÁÖ µîµî µî)
-/// </summary>
-public static class ForParagraphList
+namespace HwpLib.Reader.BodyText.Control
 {
+
     /// <summary>
-    /// ¹®´Ü ¸®½ºÆ®¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ð´ï¿½ ï¿½ï¿½Ã¼ (Ä¸ï¿½ï¿½, Ç¥, ï¿½Ó¸ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½)
     /// </summary>
-    /// <param name="pli">¹®´Ü ¸®½ºÆ® °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(IParagraphList pli, CompoundStreamReader sr)
+    public static class ForParagraphList
     {
-        var fp = new ForParagraph();
-        sr.ReadRecordHeader();
-        
-        while (!sr.IsEndOfStream())
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pli">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(IParagraphList pli, CompoundStreamReader sr)
         {
-            var para = pli.AddNewParagraph();
-            fp.Read(para, sr);
-            if (para.Header.LastInList)
+            var fp = new ForParagraph();
+            sr.ReadRecordHeader();
+
+            while (!sr.IsEndOfStream())
             {
-                break;
-            }
-        }
-    }
-}
-
-/// <summary>
-/// ÇÏ³ªÀÇ ¹®´ÜÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public class ForParagraph
-{
-    /// <summary>
-    /// ½ºÆ®¸² ¸®´õ
-    /// </summary>
-    private CompoundStreamReader? _sr;
-
-    /// <summary>
-    /// ¹®´Ü Çì´õÀÇ level
-    /// </summary>
-    private short _paraHeaderLevel;
-
-    /// <summary>
-    /// ¹®´Ü °´Ã¼
-    /// </summary>
-    private Object.BodyText.Paragraph.Paragraph? _paragraph;
-
-    /// <summary>
-    /// »ý¼ºÀÚ
-    /// </summary>
-    public ForParagraph()
-    {
-    }
-
-    /// <summary>
-    /// ÇÏ³ªÀÇ ¹®´ÜÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="paragraph">¹®´Ü °´Ã¼</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public void Read(Object.BodyText.Paragraph.Paragraph paragraph, CompoundStreamReader sr)
-    {
-        if (sr.CurrentRecordHeader?.TagId != HWPTag.ParaHeader)
-        {
-            throw new InvalidOperationException("This is not paragraph.");
-        }
-
-        _sr = sr;
-        _paragraph = paragraph;
-        _paraHeaderLevel = (short)sr.CurrentRecordHeader.Level;
-        
-        ParaHeaderBody();
-        ParaText();
-        ParaCharShape();
-        ParaLineSeg();
-        ParaRangeTag();
-
-        while (!sr.IsEndOfStream())
-        {
-            if (!sr.IsImmediatelyAfterReadingHeader)
-            {
-                sr.ReadRecordHeader();
-            }
-            if (IsOutOfParagraph() || IsFollowLastBatangPageInfo() || IsFollowMemo())
-            {
-                break;
-            }
-            if (sr.CurrentRecordHeader?.TagId == HWPTag.CtrlHeader)
-            {
-                Control();
-            }
-            else
-            {
-                SkipETCRecord();
+                var para = pli.AddNewParagraph();
+                fp.Read(para, sr);
+                if (para.Header.LastInList)
+                {
+                    break;
+                }
             }
         }
     }
 
     /// <summary>
-    /// ¹®´Ü Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    private void ParaHeaderBody()
+    public class ForParagraph
     {
-        ForParaHeader.Read(_paragraph!.Header, _sr!);
-    }
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        private CompoundStreamReader? _sr;
 
-    /// <summary>
-    /// ¹®´ÜÀÇ ÅØ½ºÆ® ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ParaText()
-    {
-        if (_sr!.IsEndOfStream()) return;
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ level
+        /// </summary>
+        private short _paraHeaderLevel;
 
-        if (!_sr.IsImmediatelyAfterReadingHeader)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+        /// </summary>
+        private Object.BodyText.Paragraph.Paragraph? _paragraph;
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        /// </summary>
+        public ForParagraph()
         {
-            _sr.ReadRecordHeader();
         }
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaText)
+
+        /// <summary>
+        /// ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="paragraph">ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public void Read(Object.BodyText.Paragraph.Paragraph paragraph, CompoundStreamReader sr)
         {
-            ForParaText.Read(_paragraph!, _sr);
+            if (sr.CurrentRecordHeader?.TagId != HWPTag.ParaHeader)
+            {
+                throw new InvalidOperationException("This is not paragraph.");
+            }
+
+            _sr = sr;
+            _paragraph = paragraph;
+            _paraHeaderLevel = (short)sr.CurrentRecordHeader.Level;
+
+            ParaHeaderBody();
+            ParaText();
+            ParaCharShape();
+            ParaLineSeg();
+            ParaRangeTag();
+
+            while (!sr.IsEndOfStream())
+            {
+                if (!sr.IsImmediatelyAfterReadingHeader)
+                {
+                    sr.ReadRecordHeader();
+                }
+                if (IsOutOfParagraph() || IsFollowLastBatangPageInfo() || IsFollowMemo())
+                {
+                    break;
+                }
+                if (sr.CurrentRecordHeader?.TagId == HWPTag.CtrlHeader)
+                {
+                    Control();
+                }
+                else
+                {
+                    SkipETCRecord();
+                }
+            }
         }
-    }
 
-    /// <summary>
-    /// ¹®´ÜÀÇ ¹®ÀÚ ¸ð¾ç ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ParaCharShape()
-    {
-        if (_sr!.IsEndOfStream()) return;
-
-        if (!_sr.IsImmediatelyAfterReadingHeader)
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParaHeaderBody()
         {
-            _sr.ReadRecordHeader();
+            ForParaHeader.Read(_paragraph!.Header, _sr!);
         }
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaCharShape)
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParaText()
         {
-            if (_paragraph!.CharShape == null) _paragraph.CreateCharShape();
-            ForParaCharShape.Read(_paragraph.CharShape!, _sr);
-        }
-    }
+            if (_sr!.IsEndOfStream()) return;
 
-    /// <summary>
-    /// ¹®´ÜÀÇ ·¹ÀÌ¾Æ¿ô ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ParaLineSeg()
-    {
-        if (_sr!.IsEndOfStream()) return;
-
-        if (!_sr.IsImmediatelyAfterReadingHeader)
-        {
-            _sr.ReadRecordHeader();
-        }
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaLineSeg)
-        {
-            ForParaLineSeg.Read(_paragraph!, _sr);
-        }
-    }
-
-    /// <summary>
-    /// ¹®´ÜÀÇ ¿µ¿ª ÅÂ±× ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    private void ParaRangeTag()
-    {
-        if (_sr!.IsEndOfStream()) return;
-
-        if (!_sr.IsImmediatelyAfterReadingHeader)
-        {
-            _sr.ReadRecordHeader();
-        }
-        if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaRangeTag)
-        {
-            if (_paragraph!.RangeTag == null) _paragraph.CreateRangeTag();
-            ForParaRangeTag.Read(_paragraph.RangeTag!, _sr);
-        }
-    }
-
-    /// <summary>
-    /// ÀÐÀº ·¹ÄÚµå Çì´õ°¡ ¹®´Ü ¹Ù±ùÂÊÀÎÁö ¿©ºÎ¸¦ ¹ÝÈ¯ÇÑ´Ù.
-    /// </summary>
-    private bool IsOutOfParagraph()
-    {
-        return _paraHeaderLevel >= _sr!.CurrentRecordHeader!.Level;
-    }
-
-    /// <summary>
-    /// ¸¶Áö¸· ¹ÙÅÁÂÊ Á¤º¸°¡ µÚ¿¡ ºÙ¾î ÀÖ´ÂÁö ¿©ºÎ¸¦ ¹ÝÈ¯ÇÑ´Ù.
-    /// </summary>
-    private bool IsFollowLastBatangPageInfo()
-    {
-        return _paraHeaderLevel == 0
-            && _sr!.CurrentRecordHeader?.TagId == HWPTag.ListHeader
-            && _sr.CurrentRecordHeader.Level == 1;
-    }
-
-    /// <summary>
-    /// ¸Þ¸ð Á¤º¸°¡ µÚ¿¡ ºÙ¾î ÀÖ´ÂÁö ¿©ºÎ¸¦ ¹ÝÈ¯ÇÑ´Ù.
-    /// </summary>
-    private bool IsFollowMemo()
-    {
-        return _paraHeaderLevel == 0
-            && _sr!.CurrentRecordHeader?.TagId == HWPTag.MemoList
-            && _sr.CurrentRecordHeader.Level == 1;
-    }
-
-    /// <summary>
-    /// ¹®´Ü¿¡ Æ÷ÇÔµÈ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    private void Control()
-    {
-        uint id = _sr!.ReadUInt4();
-        
-        // Gso ÄÁÆ®·ÑÀÎ °æ¿ì - ÀÓ½Ã·Î ½ºÅµ
-        if (id == ControlType.Gso.GetCtrlId())
-        {
-            SkipControlWithSubRecords();
-            return;
-        }
-        
-        // Form ÄÁÆ®·ÑÀÎ °æ¿ì (ÇöÀç Áö¿øÇÏÁö ¾ÊÀ½)
-        if (id == ControlType.Form.GetCtrlId())
-        {
-            SkipControlWithSubRecords();
-            return;
-        }
-        
-        // ´Ù¸¥ ÄÁÆ®·ÑÀº ForControlÀ» ÅëÇØ ÀÐ´Â´Ù
-        var c = _paragraph!.AddNewControl(id);
-        if (c != null)
-        {
-            ForControl.Read(c, _sr);
-        }
-    }
-
-    /// <summary>
-    /// ÇÏÀ§ ·¹ÄÚµå¸¦ °¡Áø ÄÁÆ®·ÑÀ» °Ç³Ê¶Ú´Ù.
-    /// </summary>
-    private void SkipControlWithSubRecords()
-    {
-        var ctrlHeaderLevel = _sr!.CurrentRecordHeader!.Level;
-        _sr.SkipToEndRecord();
-
-        while (!_sr.IsEndOfStream())
-        {
             if (!_sr.IsImmediatelyAfterReadingHeader)
             {
                 _sr.ReadRecordHeader();
             }
-            if (ctrlHeaderLevel >= _sr.CurrentRecordHeader!.Level)
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaText)
             {
-                break;
+                ForParaText.Read(_paragraph!, _sr);
             }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParaCharShape()
+        {
+            if (_sr!.IsEndOfStream()) return;
+
+            if (!_sr.IsImmediatelyAfterReadingHeader)
+            {
+                _sr.ReadRecordHeader();
+            }
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaCharShape)
+            {
+                if (_paragraph!.CharShape == null) _paragraph.CreateCharShape();
+                ForParaCharShape.Read(_paragraph.CharShape!, _sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾Æ¿ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParaLineSeg()
+        {
+            if (_sr!.IsEndOfStream()) return;
+
+            if (!_sr.IsImmediatelyAfterReadingHeader)
+            {
+                _sr.ReadRecordHeader();
+            }
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaLineSeg)
+            {
+                ForParaLineSeg.Read(_paragraph!, _sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Â±ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void ParaRangeTag()
+        {
+            if (_sr!.IsEndOfStream()) return;
+
+            if (!_sr.IsImmediatelyAfterReadingHeader)
+            {
+                _sr.ReadRecordHeader();
+            }
+            if (_sr.CurrentRecordHeader?.TagId == HWPTag.ParaRangeTag)
+            {
+                if (_paragraph!.RangeTag == null) _paragraph.CreateRangeTag();
+                ForParaRangeTag.Read(_paragraph.RangeTag!, _sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
+        /// </summary>
+        private bool IsOutOfParagraph()
+        {
+            return _paraHeaderLevel >= _sr!.CurrentRecordHeader!.Level;
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ ï¿½Ù¾ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
+        /// </summary>
+        private bool IsFollowLastBatangPageInfo()
+        {
+            return _paraHeaderLevel == 0
+                && _sr!.CurrentRecordHeader?.TagId == HWPTag.ListHeader
+                && _sr.CurrentRecordHeader.Level == 1;
+        }
+
+        /// <summary>
+        /// ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ ï¿½Ù¾ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
+        /// </summary>
+        private bool IsFollowMemo()
+        {
+            return _paraHeaderLevel == 0
+                && _sr!.CurrentRecordHeader?.TagId == HWPTag.MemoList
+                && _sr.CurrentRecordHeader.Level == 1;
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½Ü¿ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        private void Control()
+        {
+            uint id = _sr!.ReadUInt4();
+
+            // Gso ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ - ï¿½Ó½Ã·ï¿½ ï¿½ï¿½Åµ
+            if (id == ControlType.Gso.GetCtrlId())
+            {
+                SkipControlWithSubRecords();
+                return;
+            }
+
+            // Form ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+            if (id == ControlType.Form.GetCtrlId())
+            {
+                SkipControlWithSubRecords();
+                return;
+            }
+
+            // ï¿½Ù¸ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ForControlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½
+            var c = _paragraph!.AddNewControl(id);
+            if (c != null)
+            {
+                ForControl.Read(c, _sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶Ú´ï¿½.
+        /// </summary>
+        private void SkipControlWithSubRecords()
+        {
+            var ctrlHeaderLevel = _sr!.CurrentRecordHeader!.Level;
             _sr.SkipToEndRecord();
+
+            while (!_sr.IsEndOfStream())
+            {
+                if (!_sr.IsImmediatelyAfterReadingHeader)
+                {
+                    _sr.ReadRecordHeader();
+                }
+                if (ctrlHeaderLevel >= _sr.CurrentRecordHeader!.Level)
+                {
+                    break;
+                }
+                _sr.SkipToEndRecord();
+            }
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½ï¿½Åµï¿½Ñ´ï¿½.
+        /// </summary>
+        private void SkipETCRecord()
+        {
+            _sr!.SkipToEndRecord();
         }
     }
 
-    /// <summary>
-    /// ±âÅ¸ ·¹ÄÚµå¸¦ ½ºÅµÇÑ´Ù.
-    /// </summary>
-    private void SkipETCRecord()
-    {
-        _sr!.SkipToEndRecord();
-    }
 }

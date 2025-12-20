@@ -1,25 +1,29 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.SectionDefine;
 
-namespace HwpLib.Reader.BodyText.Control.Secd;
 
-/// <summary>
-/// ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForPageBorderFill
+namespace HwpLib.Reader.BodyText.Control.Secd
 {
+
     /// <summary>
-    /// ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="pbf">ÂÊ Å×µÎ¸®/¹è°æ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(PageBorderFill pbf, CompoundStreamReader sr)
+    public static class ForPageBorderFill
     {
-        pbf.Property.Value = sr.ReadUInt4();
-        pbf.LeftGap = sr.ReadUInt2();
-        pbf.RightGap = sr.ReadUInt2();
-        pbf.TopGap = sr.ReadUInt2();
-        pbf.BottomGap = sr.ReadUInt2();
-        pbf.BorderFillId = sr.ReadUInt2();
+        /// <summary>
+        /// ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pbf">ï¿½ï¿½ ï¿½×µÎ¸ï¿½/ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(PageBorderFill pbf, CompoundStreamReader sr)
+        {
+            pbf.Property.Value = sr.ReadUInt4();
+            pbf.LeftGap = sr.ReadUInt2();
+            pbf.RightGap = sr.ReadUInt2();
+            pbf.TopGap = sr.ReadUInt2();
+            pbf.BottomGap = sr.ReadUInt2();
+            pbf.BorderFillId = sr.ReadUInt2();
+        }
     }
+
 }

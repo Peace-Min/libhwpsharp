@@ -1,5 +1,7 @@
-using HwpLib.Object.DocInfo.BorderFill.FillInfo;
+﻿using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 using HwpLib.Object.Etc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo
 {

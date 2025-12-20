@@ -1,22 +1,26 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Bookmark;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// ÀÓÀÇ µ¥ÀÌÅ¸ ·¹ÄÚµå¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForCtrlData
+namespace HwpLib.Reader.BodyText.Control
 {
+
     /// <summary>
-    /// ÀÓÀÇ µ¥ÀÌÅÍ °´Ã¼¸¦ ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    /// <returns>ÀÐÀº ÀÓÀÇ µ¥ÀÌÅÍ °´Ã¼</returns>
-    public static CtrlData Read(CompoundStreamReader sr)
+    public static class ForCtrlData
     {
-        var ctrlData = new CtrlData();
-        ForParameterSet.Read(ctrlData.ParameterSet, sr);
-        return ctrlData;
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        /// <returns>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼</returns>
+        public static CtrlData Read(CompoundStreamReader sr)
+        {
+            var ctrlData = new CtrlData();
+            ForParameterSet.Read(ctrlData.ParameterSet, sr);
+            return ctrlData;
+        }
     }
+
 }

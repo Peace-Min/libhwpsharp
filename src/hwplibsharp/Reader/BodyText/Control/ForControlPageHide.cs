@@ -1,20 +1,24 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// °¨Ãß±â ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlPageHide
+namespace HwpLib.Reader.BodyText.Control
 {
+
     /// <summary>
-    /// °¨Ãß±â ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
+    /// ï¿½ï¿½ï¿½ß±ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="pghd">°¨Ãß±â ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlPageHide pghd, CompoundStreamReader sr)
+    public static class ForControlPageHide
     {
-        pghd.GetHeader()!.Property.Value = sr.ReadUInt4();
+        /// <summary>
+        /// ï¿½ï¿½ï¿½ß±ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pghd">ï¿½ï¿½ï¿½ß±ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlPageHide pghd, CompoundStreamReader sr)
+        {
+            pghd.GetHeader()!.Property.Value = sr.ReadUInt4();
+        }
     }
+
 }

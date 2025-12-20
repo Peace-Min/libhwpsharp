@@ -1,62 +1,66 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Curve;
 using HwpLib.Object.Etc;
 using HwpLib.Reader.BodyText.Control.Gso.Part;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// °î¼± ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlCurve
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
-    /// <summary>
-    /// °î¼± ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="curve">°î¼± ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlCurve curve, CompoundStreamReader sr)
-    {
-        sr.ReadRecordHeader();
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
-        {
-            curve.CreateTextBox();
-            ForTextBox.Read(curve.TextBox!, sr);
 
-            if (!sr.IsImmediatelyAfterReadingHeader)
+    /// <summary>
+    /// ï¿½î¼± ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    /// </summary>
+    public static class ForControlCurve
+    {
+        /// <summary>
+        /// ï¿½î¼± ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="curve">ï¿½î¼± ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlCurve curve, CompoundStreamReader sr)
+        {
+            sr.ReadRecordHeader();
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ListHeader)
             {
-                sr.ReadRecordHeader();
+                curve.CreateTextBox();
+                ForTextBox.Read(curve.TextBox!, sr);
+
+                if (!sr.IsImmediatelyAfterReadingHeader)
+                {
+                    sr.ReadRecordHeader();
+                }
+            }
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentCurve)
+            {
+                ShapeComponentCurve(curve.ShapeComponentCurve, sr);
             }
         }
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentCurve)
+
+        /// <summary>
+        /// ï¿½î¼± ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scc">ï¿½î¼± ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentCurve(ShapeComponentCurve scc, CompoundStreamReader sr)
         {
-            ShapeComponentCurve(curve.ShapeComponentCurve, sr);
+            int positionCount = sr.ReadSInt4();
+            for (int index = 0; index < positionCount; index++)
+            {
+                var p = scc.AddNewPosition();
+                p.X = (uint)sr.ReadSInt4();
+                p.Y = (uint)sr.ReadSInt4();
+            }
+            for (int index = 0; index < positionCount - 1; index++)
+            {
+                var cst = CurveSegmentTypeExtensions.FromValue(sr.ReadUInt1());
+                scc.AddCurveSegmentType(cst);
+            }
+            sr.Skip(4);
         }
     }
 
-    /// <summary>
-    /// °î¼± °³Ã¼ ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scc">°î¼± °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentCurve(ShapeComponentCurve scc, CompoundStreamReader sr)
-    {
-        int positionCount = sr.ReadSInt4();
-        for (int index = 0; index < positionCount; index++)
-        {
-            var p = scc.AddNewPosition();
-            p.X = (uint)sr.ReadSInt4();
-            p.Y = (uint)sr.ReadSInt4();
-        }
-        for (int index = 0; index < positionCount - 1; index++)
-        {
-            var cst = CurveSegmentTypeExtensions.FromValue(sr.ReadUInt1());
-            scc.AddCurveSegmentType(cst);
-        }
-        sr.Skip(4);
-    }
 }

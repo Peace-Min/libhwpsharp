@@ -1,11 +1,7 @@
-using HwpLib.Object.BodyText;
+﻿using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
-using HwpLib.Object.BodyText.Control.CtrlHeader;
-using HwpLib.Object.BodyText.Control.Table;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.BodyText.Paragraph.LineSeg;
 using HwpLib.Object.BodyText.Paragraph.Text;
-using HwpLib.Object.Etc;
 using HwpLib.Tool.ObjectFinder.ForField.GetText;
 using HwpLib.Tool.ObjectFinder.ForField.SetText;
 using HwpLib.Tool.ParagraphAdder;
@@ -66,7 +62,7 @@ namespace HwpLib.Tool.ObjectFinder.ForField
             {
                 Para? para = paraList.GetParagraph(paraIndex);
                 if (para == null) continue;
-                
+
                 if (!findPosition.FindStartPosition)
                 {
                     FindStartPosition(para, fieldType, fieldName, findPosition, paraIndex);
@@ -149,7 +145,7 @@ namespace HwpLib.Tool.ObjectFinder.ForField
             var charList = pt.CharList;
             int depth = 0;
             int startCharIndex = (paraIndex == findPosition.StartParaIndex) ? findPosition.StartCharIndex + 1 : 0;
-            
+
             for (int charIndex = startCharIndex; charIndex < charList.Count; charIndex++)
             {
                 var hwpChar = charList[charIndex];
@@ -224,7 +220,7 @@ namespace HwpLib.Tool.ObjectFinder.ForField
             {
                 Para? para = paraList.GetParagraph(paraIndex);
                 if (para == null) continue;
-                
+
                 if (!findPosition.FindStartPosition)
                 {
                     FindStartPosition(para, fieldType, fieldName, findPosition, paraIndex);

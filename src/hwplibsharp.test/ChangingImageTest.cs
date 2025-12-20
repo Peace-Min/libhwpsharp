@@ -1,5 +1,4 @@
 using HwpLib.Object;
-using HwpLib.Object.BinData;
 using HwpLib.Reader;
 using HwpLib.Writer;
 using SkiaSharp;
@@ -18,15 +17,15 @@ public class ChangingImageTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("changing-image.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         ProcessAllImages(hwpFile);
-        
+
         var writePath = TestHelper.GetResultPath("result-changing-image.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "이미지 변경 성공");
     }
@@ -36,12 +35,12 @@ public class ChangingImageTest
         foreach (var ebd in hwpFile.BinData.EmbeddedBinaryDataList)
         {
             if (ebd.Data == null) continue;
-            
+
             using var img = LoadImage(ebd.Data);
             if (img != null && ebd.Name != null)
             {
                 using var grayImg = MakeGray(img);
-                
+
                 var changedFileBinary = MakeFileBinary(ebd.Name, grayImg);
                 if (changedFileBinary != null)
                 {
@@ -66,10 +65,10 @@ public class ChangingImageTest
     private static SKBitmap MakeGray(SKBitmap img)
     {
         var grayBitmap = new SKBitmap(img.Width, img.Height);
-        
+
         using var canvas = new SKCanvas(grayBitmap);
         using var paint = new SKPaint();
-        
+
         paint.ColorFilter = SKColorFilter.CreateColorMatrix(
         [
             0.2126f, 0.7152f, 0.0722f, 0, 0,
@@ -77,7 +76,7 @@ public class ChangingImageTest
             0.2126f, 0.7152f, 0.0722f, 0, 0,
             0,       0,       0,       1, 0
         ]);
-        
+
         canvas.DrawBitmap(img, 0, 0, paint);
         return grayBitmap;
     }
@@ -86,7 +85,7 @@ public class ChangingImageTest
     {
         var ext = GetExtension(name);
         if (ext == null) return null;
-        
+
         var format = ext.ToLowerInvariant() switch
         {
             "jpg" or "jpeg" => SKEncodedImageFormat.Jpeg,
@@ -96,7 +95,7 @@ public class ChangingImageTest
             "webp" => SKEncodedImageFormat.Webp,
             _ => SKEncodedImageFormat.Png
         };
-        
+
         using var image = SKImage.FromBitmap(img);
         using var data = image.Encode(format, 90);
         return data.ToArray();

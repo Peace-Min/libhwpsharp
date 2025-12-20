@@ -1,67 +1,70 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
-using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Polygon;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.TextArt;
 using HwpLib.Object.DocInfo.FaceName;
 using HwpLib.Object.Etc;
 
-namespace HwpLib.Reader.BodyText.Control.Gso;
 
-/// <summary>
-/// ±Û¸Ê½Ã ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlTextArt
+namespace HwpLib.Reader.BodyText.Control.Gso
 {
+
     /// <summary>
-    /// ±Û¸Ê½Ã ÄÁÆ®·ÑÀÇ ³ª¸ÓÁö ºÎºÐÀ» ÀÐ´Â´Ù.
+    /// ï¿½Û¸Ê½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="textArt">±Û¸Ê½Ã ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void ReadRest(ControlTextArt textArt, CompoundStreamReader sr)
+    public static class ForControlTextArt
     {
-        sr.ReadRecordHeader();
-        
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentTextArt)
+        /// <summary>
+        /// ï¿½Û¸Ê½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="textArt">ï¿½Û¸Ê½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void ReadRest(ControlTextArt textArt, CompoundStreamReader sr)
         {
-            ShapeComponentTextArt(textArt.ShapeComponentTextArt, sr);
+            sr.ReadRecordHeader();
+
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.ShapeComponentTextArt)
+            {
+                ShapeComponentTextArt(textArt.ShapeComponentTextArt, sr);
+            }
+        }
+
+        /// <summary>
+        /// ï¿½Û¸Ê½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="scta">ï¿½Û¸Ê½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ShapeComponentTextArt(ShapeComponentTextArt scta, CompoundStreamReader sr)
+        {
+            scta.X1 = sr.ReadSInt4();
+            scta.Y1 = sr.ReadSInt4();
+            scta.X2 = sr.ReadSInt4();
+            scta.Y2 = sr.ReadSInt4();
+            scta.X3 = sr.ReadSInt4();
+            scta.Y3 = sr.ReadSInt4();
+            scta.X4 = sr.ReadSInt4();
+            scta.Y4 = sr.ReadSInt4();
+            scta.Content.Bytes = sr.ReadHWPString();
+            scta.FontName.Bytes = sr.ReadHWPString();
+            scta.FontStyle.Bytes = sr.ReadHWPString();
+            scta.FontType = FontTypeExtensions.FromValue((byte)sr.ReadSInt4());
+            scta.TextArtShape = TextArtShapeExtensions.FromValue((byte)sr.ReadSInt4());
+            scta.LineSpace = sr.ReadSInt4();
+            scta.CharSpace = sr.ReadSInt4();
+            scta.ParaAlignment = TextArtAlignExtensions.FromValue((byte)sr.ReadSInt4());
+            scta.ShadowType = sr.ReadSInt4();
+            scta.ShadowOffsetX = sr.ReadSInt4();
+            scta.ShadowOffsetY = sr.ReadSInt4();
+            scta.ShadowColor.Value = sr.ReadUInt4();
+
+            int outlinePointCount = sr.ReadSInt4();
+            for (int index = 0; index < outlinePointCount; index++)
+            {
+                var positionXY = scta.AddNewOutlinePoint();
+                positionXY.X = (uint)sr.ReadSInt4();
+                positionXY.Y = (uint)sr.ReadSInt4();
+            }
         }
     }
 
-    /// <summary>
-    /// ±Û¸Ê½Ã °³Ã¼ ¼Ó¼º ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="scta">±Û¸Ê½Ã °³Ã¼ ¼Ó¼º ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ShapeComponentTextArt(ShapeComponentTextArt scta, CompoundStreamReader sr)
-    {
-        scta.X1 = sr.ReadSInt4();
-        scta.Y1 = sr.ReadSInt4();
-        scta.X2 = sr.ReadSInt4();
-        scta.Y2 = sr.ReadSInt4();
-        scta.X3 = sr.ReadSInt4();
-        scta.Y3 = sr.ReadSInt4();
-        scta.X4 = sr.ReadSInt4();
-        scta.Y4 = sr.ReadSInt4();
-        scta.Content.Bytes = sr.ReadHWPString();
-        scta.FontName.Bytes = sr.ReadHWPString();
-        scta.FontStyle.Bytes = sr.ReadHWPString();
-        scta.FontType = FontTypeExtensions.FromValue((byte)sr.ReadSInt4());
-        scta.TextArtShape = TextArtShapeExtensions.FromValue((byte)sr.ReadSInt4());
-        scta.LineSpace = sr.ReadSInt4();
-        scta.CharSpace = sr.ReadSInt4();
-        scta.ParaAlignment = TextArtAlignExtensions.FromValue((byte)sr.ReadSInt4());
-        scta.ShadowType = sr.ReadSInt4();
-        scta.ShadowOffsetX = sr.ReadSInt4();
-        scta.ShadowOffsetY = sr.ReadSInt4();
-        scta.ShadowColor.Value = sr.ReadUInt4();
-
-        int outlinePointCount = sr.ReadSInt4();
-        for (int index = 0; index < outlinePointCount; index++)
-        {
-            var positionXY = scta.AddNewOutlinePoint();
-            positionXY.X = (uint)sr.ReadSInt4();
-            positionXY.Y = (uint)sr.ReadSInt4();
-        }
-    }
 }

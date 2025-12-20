@@ -1,37 +1,41 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.Etc;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// Ã¥°¥ÇÇ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlBookmark
+namespace HwpLib.Reader.BodyText.Control
 {
-    /// <summary>
-    /// Ã¥°¥ÇÇ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="b">Ã¥°¥ÇÇ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlBookmark b, CompoundStreamReader sr)
-    {
-        CtrlData(b, sr);
-    }
 
     /// <summary>
-    /// ÄÁÆ®·Ñ µ¥ÀÌÅÍ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// Ã¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="b">Ã¥°¥ÇÇ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void CtrlData(ControlBookmark b, CompoundStreamReader sr)
+    public static class ForControlBookmark
     {
-        sr.ReadRecordHeader();
-        if (sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
+        /// <summary>
+        /// Ã¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="b">Ã¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlBookmark b, CompoundStreamReader sr)
         {
-            b.CreateCtrlData();
-            var ctrlData = ForCtrlData.Read(sr);
-            b.SetCtrlData(ctrlData);
+            CtrlData(b, sr);
+        }
+
+        /// <summary>
+        /// ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="b">Ã¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void CtrlData(ControlBookmark b, CompoundStreamReader sr)
+        {
+            sr.ReadRecordHeader();
+            if (sr.CurrentRecordHeader?.TagId == HWPTag.CtrlData)
+            {
+                b.CreateCtrlData();
+                var ctrlData = ForCtrlData.Read(sr);
+                b.SetCtrlData(ctrlData);
+            }
         }
     }
+
 }

@@ -1,20 +1,24 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 
-namespace HwpLib.Reader.BodyText.Control;
 
-/// <summary>
-/// È¦/Â¦¼ö Á¶Á¤ ÄÁÆ®·ÑÀ» ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForControlPageOddEvenAdjust
+namespace HwpLib.Reader.BodyText.Control
 {
+
     /// <summary>
-    /// È¦/Â¦¼ö Á¶Á¤ ÄÁÆ®·ÑÀ» ÀÐ´Â´Ù.
+    /// È¦/Â¦ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="pgoea">È¦/Â¦¼ö Á¶Á¤ ÄÁÆ®·Ñ</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(ControlPageOddEvenAdjust pgoea, CompoundStreamReader sr)
+    public static class ForControlPageOddEvenAdjust
     {
-        pgoea.GetHeader()!.Property.Value = sr.ReadUInt4();
+        /// <summary>
+        /// È¦/Â¦ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="pgoea">È¦/Â¦ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(ControlPageOddEvenAdjust pgoea, CompoundStreamReader sr)
+        {
+            pgoea.GetHeader()!.Property.Value = sr.ReadUInt4();
+        }
     }
+
 }

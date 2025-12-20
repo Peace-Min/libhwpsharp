@@ -1,64 +1,68 @@
-using HwpLib.Object.BodyText.Control.CtrlHeader;
+﻿using System;
 
-namespace HwpLib.Object.BodyText.Control.Form;
 
-/// <summary>
-/// 양식 개체 타입
-/// </summary>
-public enum FormObjectType : uint
+namespace HwpLib.Object.BodyText.Control.Form
 {
-    /// <summary>
-    /// 양식개체_명령단추
-    /// </summary>
-    PushButton = 0x2B706274, // CtrlID.Make('+', 'p', 'b', 't')
 
     /// <summary>
-    /// 양식개체_선택상자
+    /// 양식 개체 타입
     /// </summary>
-    CheckBox = 0x2B636274, // CtrlID.Make('+', 'c', 'b', 't')
-
-    /// <summary>
-    /// 양식개체_목록상자
-    /// </summary>
-    ComboBox = 0x2B636F62, // CtrlID.Make('+', 'c', 'o', 'b')
-
-    /// <summary>
-    /// 양식개체_라디오단추
-    /// </summary>
-    RadioButton = 0x2B726274, // CtrlID.Make('+', 'r', 'b', 't')
-
-    /// <summary>
-    /// 양식개체_입력상자
-    /// </summary>
-    EditorBox = 0x2B656474, // CtrlID.Make('+', 'e', 'd', 't')
-}
-
-/// <summary>
-/// FormObjectType 열거형에 대한 확장 메서드
-/// </summary>
-public static class FormObjectTypeExtensions
-{
-    /// <summary>
-    /// 컨트롤 id를 반환한다.
-    /// </summary>
-    /// <param name="type">FormObjectType 값</param>
-    /// <returns>컨트롤 id</returns>
-    public static uint GetId(this FormObjectType type) => (uint)type;
-
-    /// <summary>
-    /// id에서 FormObjectType을 반환한다.
-    /// </summary>
-    /// <param name="id">컨트롤 id</param>
-    /// <returns>FormObjectType 값 또는 null</returns>
-    public static FormObjectType? FromUint4(uint id)
+    public enum FormObjectType : uint
     {
-        foreach (FormObjectType fot in Enum.GetValues(typeof(FormObjectType)))
-        {
-            if ((uint)fot == id)
-            {
-                return fot;
-            }
-        }
-        return null;
+        /// <summary>
+        /// 양식개체_명령단추
+        /// </summary>
+        PushButton = 0x2B706274, // CtrlID.Make('+', 'p', 'b', 't')
+
+        /// <summary>
+        /// 양식개체_선택상자
+        /// </summary>
+        CheckBox = 0x2B636274, // CtrlID.Make('+', 'c', 'b', 't')
+
+        /// <summary>
+        /// 양식개체_목록상자
+        /// </summary>
+        ComboBox = 0x2B636F62, // CtrlID.Make('+', 'c', 'o', 'b')
+
+        /// <summary>
+        /// 양식개체_라디오단추
+        /// </summary>
+        RadioButton = 0x2B726274, // CtrlID.Make('+', 'r', 'b', 't')
+
+        /// <summary>
+        /// 양식개체_입력상자
+        /// </summary>
+        EditorBox = 0x2B656474, // CtrlID.Make('+', 'e', 'd', 't')
     }
+
+    /// <summary>
+    /// FormObjectType 열거형에 대한 확장 메서드
+    /// </summary>
+    public static class FormObjectTypeExtensions
+    {
+        /// <summary>
+        /// 컨트롤 id를 반환한다.
+        /// </summary>
+        /// <param name="type">FormObjectType 값</param>
+        /// <returns>컨트롤 id</returns>
+        public static uint GetId(this FormObjectType type) => (uint)type;
+
+        /// <summary>
+        /// id에서 FormObjectType을 반환한다.
+        /// </summary>
+        /// <param name="id">컨트롤 id</param>
+        /// <returns>FormObjectType 값 또는 null</returns>
+        public static FormObjectType? FromUint4(uint id)
+        {
+            foreach (FormObjectType fot in Enum.GetValues(typeof(FormObjectType)))
+            {
+                if ((uint)fot == id)
+                {
+                    return fot;
+                }
+            }
+            return null;
+        }
+    }
+
 }

@@ -1,38 +1,42 @@
-using HwpLib.CompoundFile;
+ï»¿using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso.Caption;
 
-namespace HwpLib.Reader.BodyText.Control.Gso.Part;
 
-/// <summary>
-/// Ä¸¼Ç Á¤º¸¸¦ ÀÐ±â À§ÇÑ °´Ã¼
-/// </summary>
-public static class ForCaption
+namespace HwpLib.Reader.BodyText.Control.Gso.Part
 {
-    /// <summary>
-    /// Ä¸¼Ç Á¤º¸¸¦ ÀÐ´Â´Ù.
-    /// </summary>
-    /// <param name="caption">Ä¸¼Ç Á¤º¸</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    public static void Read(Caption caption, CompoundStreamReader sr)
-    {
-        ListHeader(caption.ListHeader, sr);
-        ForParagraphList.Read(caption.ParagraphList, sr);
-    }
 
     /// <summary>
-    /// Ä¸¼Ç Á¤º¸ÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå¸¦ ÀÐ´Â´Ù.
+    /// Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
     /// </summary>
-    /// <param name="listHeader">Ä¸¼Ç Á¤º¸ÀÇ ¹®´Ü ¸®½ºÆ® Çì´õ ·¹ÄÚµå</param>
-    /// <param name="sr">½ºÆ®¸² ¸®´õ</param>
-    private static void ListHeader(ListHeaderForCaption listHeader, CompoundStreamReader sr)
+    public static class ForCaption
     {
-        listHeader.ParaCount = sr.ReadSInt4();
-        listHeader.Property.Value = sr.ReadUInt4();
-        listHeader.CaptionProperty.Value = sr.ReadUInt4();
-        listHeader.CaptionWidth = sr.ReadUInt4();
-        listHeader.SpaceBetweenCaptionAndFrame = sr.ReadUInt2();
-        listHeader.TextWidth = sr.ReadUInt4();
-        // ¹öÀü¿¡ µû¶ó 8bytes°¡ ÀÖÀ» ¼ö ÀÖÀ½.
-        sr.SkipToEndRecord();
+        /// <summary>
+        /// Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="caption">Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        public static void Read(Caption caption, CompoundStreamReader sr)
+        {
+            ListHeader(caption.ListHeader, sr);
+            ForParagraphList.Read(caption.ParagraphList, sr);
+        }
+
+        /// <summary>
+        /// Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµå¸¦ ï¿½Ð´Â´ï¿½.
+        /// </summary>
+        /// <param name="listHeader">Ä¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½</param>
+        /// <param name="sr">ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</param>
+        private static void ListHeader(ListHeaderForCaption listHeader, CompoundStreamReader sr)
+        {
+            listHeader.ParaCount = sr.ReadSInt4();
+            listHeader.Property.Value = sr.ReadUInt4();
+            listHeader.CaptionProperty.Value = sr.ReadUInt4();
+            listHeader.CaptionWidth = sr.ReadUInt4();
+            listHeader.SpaceBetweenCaptionAndFrame = sr.ReadUInt2();
+            listHeader.TextWidth = sr.ReadUInt4();
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 8bytesï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+            sr.SkipToEndRecord();
+        }
     }
+
 }

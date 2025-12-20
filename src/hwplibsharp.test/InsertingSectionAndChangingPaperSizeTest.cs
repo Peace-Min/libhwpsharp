@@ -1,7 +1,4 @@
-using HwpLib.Object;
-using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Control;
-using HwpLib.Reader;
 using HwpLib.Tool.BlankFileMaker;
 using HwpLib.Writer;
 
@@ -25,13 +22,13 @@ public class InsertingSectionAndChangingPaperSizeTest
         // Arrange
         var hwpFile = BlankFileMaker.Make();
         Assert.IsNotNull(hwpFile);
-        
+
         // Act - 새 섹션 추가
         var newSection = hwpFile.BodyText.AddNewSection();
-        
+
         // 새 섹션에 빈 문단 추가
         var newParagraph = newSection.AddNewParagraph();
-        
+
         // 새 섹션의 용지 크기를 A3로 변경
         var firstParagraph = newSection.GetParagraph(0);
         if (firstParagraph.ControlList != null)
@@ -45,10 +42,10 @@ public class InsertingSectionAndChangingPaperSizeTest
                 }
             }
         }
-        
+
         // Assert
         Assert.HasCount(2, hwpFile.BodyText.SectionList, "섹션이 2개여야 합니다.");
-        
+
         var writePath = TestHelper.GetResultPath("result-inserting-section.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
         Assert.IsTrue(File.Exists(writePath));

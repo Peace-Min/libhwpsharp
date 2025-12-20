@@ -1,5 +1,4 @@
-using HwpLib.Object;
-using HwpLib.Object.Etc;
+﻿using HwpLib.Object;
 using HwpLib.Tool.TextExtractor.ParaHead;
 using System.Text;
 

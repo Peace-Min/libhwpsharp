@@ -1,12 +1,7 @@
 using HwpLib.Object;
 using HwpLib.Object.BodyText.Paragraph;
-using HwpLib.Object.BodyText.Paragraph.CharShape;
-using HwpLib.Object.BodyText.Paragraph.Header;
-using HwpLib.Object.BodyText.Paragraph.LineSeg;
-using HwpLib.Object.BodyText.Paragraph.Text;
 using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.CharShape;
-using HwpLib.Object.DocInfo.FaceName;
 using HwpLib.Reader;
 using HwpLib.Writer;
 
@@ -29,15 +24,15 @@ public class InsertingCharShapeTest
         // Arrange
         var filePath = TestHelper.GetSamplePath("blank.hwp");
         var hwpFile = HWPReader.FromFile(filePath);
-        
+
         Assert.IsNotNull(hwpFile);
-        
+
         // Act
         Test(hwpFile);
-        
+
         var writePath = TestHelper.GetResultPath("result-inserting-charshape.hwp");
         HWPWriter.ToFile(hwpFile, writePath);
-        
+
         // Assert
         Assert.IsTrue(File.Exists(writePath), "글자 모양 삽입 성공");
     }
@@ -143,7 +138,7 @@ public class InsertingCharShapeTest
     {
         var p = _hwpFile!.BodyText.SectionList[0].AddNewParagraph();
         if (p == null) return;
-        
+
         SetParaHeader(p);
         SetParaText(p, "This is a Paragraph. Bold on. Bold off.");
         SetParaCharShape(p);
