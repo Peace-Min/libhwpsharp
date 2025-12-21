@@ -64,6 +64,10 @@ namespace HwpLib.CompoundFile
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// 리소스를 해제합니다.
+        /// </summary>
+        /// <param name="disposing">관리되는 리소스를 해제할지 여부</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -76,6 +80,9 @@ namespace HwpLib.CompoundFile
             }
         }
 
+        /// <summary>
+        /// 소멸자. 관리되지 않는 리소스를 정리합니다.
+        /// </summary>
         ~CompoundFileSystem()
         {
             Dispose(false);

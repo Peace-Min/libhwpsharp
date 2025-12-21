@@ -19,6 +19,10 @@ namespace HwpLib.Tool.ParagraphAdder
         private bool _includingSectionInfo;
         private bool _excludedSectionDefine;
 
+        /// <summary>
+        /// <see cref="ParagraphCopier"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">문서 정보 추가기 인스턴스입니다. null일 수 있습니다.</param>
         public ParagraphCopier(DocInfoAdder? docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
@@ -324,9 +328,21 @@ namespace HwpLib.Tool.ParagraphAdder
             CopyMemoList(_source, _target, _docInfoAdder);
         }
 
+        /// <summary>
+        /// 소스 문단의 메모 리스트를 대상 문단으로 복사합니다.
+        /// </summary>
+        /// <remarks>
+        /// 현재는 구현되어 있지 않습니다.
+        /// </remarks>
+        /// <param name="source">복사할 소스 문단</param>
+        /// <param name="target">복사 대상 문단</param>
+        /// <param name="docInfoAdder">문서 정보 추가기</param>
         public static void CopyMemoList(Paragraph? source, Paragraph? target, DocInfoAdder? docInfoAdder)
         {
             // 메모 리스트 복사 - 추후 구현
+            _ = source;
+            _ = target;
+            _ = docInfoAdder;
         }
     }
 }

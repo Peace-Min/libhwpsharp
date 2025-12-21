@@ -63,6 +63,10 @@
         /// <returns>수식 정보 객체</returns>
         public EQEdit EQEdit => eqEdit;
 
+        /// <summary>
+        /// 이 컨트롤을 복제합니다.
+        /// </summary>
+        /// <returns>복제된 <see cref="ControlAdditionalText"/> 인스턴스</returns>
         public override Control Clone()
         {
             ControlEquation cloned = new ControlEquation();

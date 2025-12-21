@@ -29,6 +29,12 @@ namespace HwpLib.CompoundFile
         /// </summary>
         public uint Size { get; }
 
+        /// <summary>
+        /// 레코드 헤더를 생성합니다.
+        /// </summary>
+        /// <param name="tagId">태그 ID</param>
+        /// <param name="level">레벨</param>
+        /// <param name="size">데이터 크기</param>
         public RecordHeader(ushort tagId, ushort level, uint size)
         {
             TagId = tagId;
@@ -492,12 +498,19 @@ namespace HwpLib.CompoundFile
             }
         }
 
+        /// <summary>
+        /// 리소스를 해제합니다.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// 리소스를 해제합니다.
+        /// </summary>
+        /// <param name="disposing">관리되는 리소스를 해제할지 여부</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -510,6 +523,9 @@ namespace HwpLib.CompoundFile
             }
         }
 
+        /// <summary>
+        /// 소멸자. 관리되지 않는 리소스를 정리합니다.
+        /// </summary>
         ~CompoundStreamReader()
         {
             Dispose(false);

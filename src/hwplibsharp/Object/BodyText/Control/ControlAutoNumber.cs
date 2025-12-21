@@ -22,6 +22,10 @@
         /// <returns>자동번호 컨트롤용 컨트롤 헤더</returns>
         public new CtrlHeaderAutoNumber? GetHeader() => Header as CtrlHeaderAutoNumber;
 
+        /// <summary>
+        /// 이 컨트롤을 복제합니다.
+        /// </summary>
+        /// <returns>복제된 <see cref="ControlAdditionalText"/> 인스턴스</returns>
         public override Control Clone()
         {
             ControlAutoNumber cloned = new ControlAutoNumber();

@@ -11,10 +11,16 @@ namespace HwpLib.Object.DocInfo.CharShape
     {
         private uint _value;
 
+        /// <summary>
+        /// CharShapeProperty 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public CharShapeProperty()
         {
         }
 
+        /// <summary>
+        /// 글자 모양 속성의 원시 값을 가져오거나 설정합니다.
+        /// </summary>
         public uint Value
         {
             get => _value;
@@ -156,11 +162,19 @@ namespace HwpLib.Object.DocInfo.CharShape
             set => _value = BitFlag.Set(_value, 30, value);
         }
 
+        /// <summary>
+        /// 다른 CharShapeProperty 객체로부터 복사한다.
+        /// </summary>
+        /// <param name="from">복사할 원본 객체</param>
         public void Copy(CharShapeProperty from)
         {
             _value = from._value;
         }
 
+        /// <summary>
+        /// 취소선 및 밑줄 모드(StrikeUnderLineMode)를 가져오거나 설정합니다.
+        /// 취소선과 밑줄의 조합 상태를 나타냅니다.
+        /// </summary>
         public StrikeUnderLineMode StrikeUnderLineMode
         {
             get

@@ -12,12 +12,21 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private DocInfoAdder _docInfoAdder;
         private Dictionary<int, int> _idMatchingMap;
 
+        /// <summary>
+        /// NumberingAdder 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">DocInfoAdder 인스턴스</param>
         public NumberingAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
             _idMatchingMap = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 소스 ID를 기반으로 Numbering을 처리하고 대상 ID를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 Numbering ID</param>
+        /// <returns>대상 Numbering ID</returns>
         public int ProcessById(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -163,6 +172,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             target.CharShapeID = (uint)_docInfoAdder.ForCharShapeInfo().ProcessById((int)source.CharShapeID);
         }
 
+        /// <summary>
+        /// 소스 ID와 대상 ID를 기반으로 두 Numbering이 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 Numbering ID</param>
+        /// <param name="targetId">대상 Numbering ID</param>
+        /// <returns>두 Numbering이 동일하면 true, 그렇지 않으면 false</returns>
         public bool EqualById(int sourceId, int targetId)
         {
             try

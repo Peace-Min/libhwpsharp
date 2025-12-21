@@ -9,6 +9,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class GsoCopier
     {
+        /// <summary>
+        /// 소스 GsoControl을 대상 GsoControl에 복사합니다.
+        /// </summary>
+        /// <param name="source">소스 GsoControl</param>
+        /// <param name="target">대상 GsoControl</param>
+        /// <param name="docInfoAdder">DocInfoAdder 인스턴스</param>
         public static void Copy(GsoControl source, GsoControl target, DocInfoAdder? docInfoAdder)
         {
             GsoCommonPartCopier.Copy(source, target, docInfoAdder);

@@ -9,6 +9,14 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
     /// </summary>
     public static class ForEmbeddedBinaryData
     {
+        /// <summary>
+        /// 소스 HWP 파일의 <see cref="EmbeddedBinaryData"/>를 찾아 타겟 HWP 파일에 복사하고,
+        /// 새로 추가된 <see cref="EmbeddedBinaryData"/>의 인덱스를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">복사할 소스 <see cref="EmbeddedBinaryData"/>의 ID</param>
+        /// <param name="imageFileExt">이미지 파일 확장자(예: "jpg", "png")</param>
+        /// <param name="docInfoAdder">소스 및 타겟 HWP 파일 정보를 포함하는 <see cref="DocInfoAdder"/></param>
+        /// <returns>추가된 <see cref="EmbeddedBinaryData"/>의 인덱스, 실패 시 -1</returns>
         public static int AddAndCopy(int sourceId, string? imageFileExt, DocInfoAdder docInfoAdder)
         {
             var source = FindByName(docInfoAdder.GetSourceHWPFile()?.BinData?.EmbeddedBinaryDataList, Name(sourceId, imageFileExt));

@@ -11,16 +11,26 @@ namespace HwpLib.Object.DocInfo
     {
         private CompatibleDocumentSort _targetProgram;
 
+        /// <summary>
+        /// <see cref="CompatibleDocumentInfo"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public CompatibleDocumentInfo()
         {
         }
 
+        /// <summary>
+        /// 호환 문서의 대상 프로그램을 가져오거나 설정합니다.
+        /// </summary>
         public CompatibleDocumentSort TargetProgram
         {
             get => _targetProgram;
             set => _targetProgram = value;
         }
 
+        /// <summary>
+        /// 이 인스턴스의 복사본을 생성합니다.
+        /// </summary>
+        /// <returns>멤버 값이 동일한 <see cref="CompatibleDocumentInfo"/>의 새 인스턴스입니다.</returns>
         public CompatibleDocumentInfo Clone()
         {
             var cloned = new CompatibleDocumentInfo();

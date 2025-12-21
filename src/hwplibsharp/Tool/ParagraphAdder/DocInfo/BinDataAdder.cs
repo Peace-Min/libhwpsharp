@@ -9,6 +9,10 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
     {
         private DocInfoAdder _docInfoAdder;
 
+        /// <summary>
+        /// <see cref="BinDataAdder"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">복사 작업에 사용할 <see cref="DocInfoAdder"/> 인스턴스입니다.</param>
         public BinDataAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;

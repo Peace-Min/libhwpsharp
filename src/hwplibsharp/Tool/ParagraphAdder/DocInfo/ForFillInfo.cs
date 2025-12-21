@@ -10,6 +10,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
     /// </summary>
     public static class ForFillInfo
     {
+        /// <summary>
+        /// 두 <see cref="FillInfo"/> 객체가 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="source">비교할 첫 번째 <see cref="FillInfo"/> 객체입니다.</param>
+        /// <param name="target">비교할 두 번째 <see cref="FillInfo"/> 객체입니다.</param>
+        /// <returns>두 객체가 동일하면 true, 그렇지 않으면 false를 반환합니다.</returns>
         public static bool Equal(FillInfo? source, FillInfo? target)
         {
             if (source == null || target == null)
@@ -112,6 +118,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 && source.Effect == target.Effect;
         }
 
+        /// <summary>
+        /// <see cref="FillInfo"/>의 내용을 다른 <see cref="FillInfo"/> 객체에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="FillInfo"/> 객체입니다.</param>
+        /// <param name="target">복사 대상 <see cref="FillInfo"/> 객체입니다.</param>
+        /// <param name="docInfoAdder">BinData 등 참조 정보를 처리할 <see cref="DocInfoAdder"/> 객체입니다.</param>
         public static void Copy(FillInfo? source, FillInfo? target, DocInfoAdder? docInfoAdder)
         {
             if (source == null || target == null) return;
@@ -189,6 +201,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             CopyPictureInfo(source.PictureInfo, target.PictureInfo, docInfoAdder);
         }
 
+        /// <summary>
+        /// <see cref="PictureInfo"/>의 내용을 다른 <see cref="PictureInfo"/> 객체에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="PictureInfo"/> 객체입니다.</param>
+        /// <param name="target">복사 대상 <see cref="PictureInfo"/> 객체입니다.</param>
+        /// <param name="docInfoAdder">BinData 등 참조 정보를 처리할 <see cref="DocInfoAdder"/> 객체입니다.</param>
         public static void CopyPictureInfo(PictureInfo? source, PictureInfo? target, DocInfoAdder? docInfoAdder)
         {
             if (source == null || target == null) return;

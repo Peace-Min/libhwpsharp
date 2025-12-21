@@ -22,10 +22,23 @@
         DashDotDot = 6
     }
 
+    /// <summary>
+    /// <c>OutterLineSort</c> 열거형에 대한 확장 메서드를 제공합니다.
+    /// </summary>
     public static class OutterLineSortExtensions
     {
+        /// <summary>
+        /// <see cref="OutterLineSort"/> 값을 byte로 반환합니다.
+        /// </summary>
+        /// <param name="sort">변환할 <see cref="OutterLineSort"/> 값입니다.</param>
+        /// <returns>byte 값으로 변환된 <see cref="OutterLineSort"/> 값입니다.</returns>
         public static byte GetValue(this OutterLineSort sort) => (byte)sort;
 
+        /// <summary>
+        /// byte 값을 <see cref="OutterLineSort"/> 열거형 값으로 변환합니다.
+        /// </summary>
+        /// <param name="value">변환할 byte 값입니다.</param>
+        /// <returns>변환된 <see cref="OutterLineSort"/> 값입니다. 유효하지 않은 값인 경우 <see cref="OutterLineSort.None"/>을 반환합니다.</returns>
         public static OutterLineSort FromValue(byte value) => value switch
         {
             0 => OutterLineSort.None,

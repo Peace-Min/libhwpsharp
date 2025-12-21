@@ -14,6 +14,10 @@ namespace HwpLib.CompoundFile
     {
         private readonly Storage _storage;
 
+        /// <summary>
+        /// StorageWrapper를 생성합니다.
+        /// </summary>
+        /// <param name="storage">래핑할 Storage 객체</param>
         public StorageWrapper(Storage storage)
         {
             _storage = storage;
@@ -108,6 +112,10 @@ namespace HwpLib.CompoundFile
     {
         private readonly CfbStream _stream;
 
+        /// <summary>
+        /// StreamWrapper를 생성합니다.
+        /// </summary>
+        /// <param name="stream">래핑할 CfbStream 객체</param>
         public StreamWrapper(CfbStream stream)
         {
             _stream = stream;

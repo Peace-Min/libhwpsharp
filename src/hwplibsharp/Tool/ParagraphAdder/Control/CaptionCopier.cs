@@ -8,6 +8,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class CaptionCopier
     {
+        /// <summary>
+        /// 소스 Caption을 대상에 복사합니다.
+        /// </summary>
+        /// <param name="source">소스 Caption</param>
+        /// <param name="target">대상 Caption</param>
+        /// <param name="docInfoAdder">DocInfoAdder 인스턴스</param>
         public static void Copy(Caption source, Caption target, DocInfoAdder? docInfoAdder)
         {
             var sourceLH = source.ListHeader;

@@ -23,6 +23,9 @@ namespace HwpLib.CompoundFile
         /// </summary>
         private readonly Stack<StorageWrapper> _storageStack = new Stack<StorageWrapper>();
 
+        /// <summary>
+        /// 리소스가 해제되었는지 여부
+        /// </summary>
         private bool _disposed;
 
         /// <summary>
@@ -178,19 +181,18 @@ namespace HwpLib.CompoundFile
         public IDirectoryEntry CurrentDirectory => CurrentStorage;
 
         /// <summary>
-        /// 현재 열려진 MS Compound 파일을 닫는다.
+        /// 현재 열려진 MS Compound 파일을 닫고, 리소스를 해제합니다.
         /// </summary>
-        public void Close()
-        {
-            Dispose();
-        }
-
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// 리소스를 해제합니다.
+        /// </summary>
+        /// <param name="disposing">관리되는 리소스를 해제할지 여부</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -204,6 +206,9 @@ namespace HwpLib.CompoundFile
             }
         }
 
+        /// <summary>
+        /// 소멸자. 관리되지 않는 리소스를 정리합니다.
+        /// </summary>
         ~CompoundFileReader()
         {
             Dispose(false);

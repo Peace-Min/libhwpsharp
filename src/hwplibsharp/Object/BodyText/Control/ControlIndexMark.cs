@@ -22,6 +22,10 @@
         /// <returns>찾아보기 표식용 컨트롤 헤더</returns>
         public new CtrlHeaderIndexMark? GetHeader() => Header as CtrlHeaderIndexMark;
 
+        /// <summary>
+        /// 이 컨트롤을 복제합니다.
+        /// </summary>
+        /// <returns>복제된 <see cref="ControlAdditionalText"/> 인스턴스</returns>
         public override Control Clone()
         {
             ControlIndexMark cloned = new ControlIndexMark();

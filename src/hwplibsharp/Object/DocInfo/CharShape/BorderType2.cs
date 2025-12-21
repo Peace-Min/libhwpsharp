@@ -45,10 +45,23 @@ namespace HwpLib.Object.DocInfo.CharShape
         Solid3DReverseLighting = 16
     }
 
+    /// <summary>
+    /// BorderType2 열거형에 대한 확장 메서드를 제공합니다.
+    /// </summary>
     public static class BorderType2Extensions
     {
+        /// <summary>
+        /// BorderType2 값의 byte 표현을 반환합니다.
+        /// </summary>
+        /// <param name="type">변환할 BorderType2 값</param>
+        /// <returns>byte로 변환된 값</returns>
         public static byte GetValue(this BorderType2 type) => (byte)type;
 
+        /// <summary>
+        /// byte 값을 BorderType2 열거형 값으로 변환합니다.
+        /// </summary>
+        /// <param name="value">변환할 byte 값</param>
+        /// <returns>변환된 BorderType2 값</returns>
         public static BorderType2 FromValue(byte value) => value switch
         {
             0 => BorderType2.Solid,
@@ -71,6 +84,11 @@ namespace HwpLib.Object.DocInfo.CharShape
             _ => BorderType2.Solid
         };
 
+        /// <summary>
+        /// BorderType2 값을 BorderType 값으로 변환합니다.
+        /// </summary>
+        /// <param name="type">변환할 BorderType2 값</param>
+        /// <returns>변환된 BorderType 값</returns>
         public static BorderType ToBorderType(this BorderType2 type) => type switch
         {
             BorderType2.Solid => BorderType.Solid,

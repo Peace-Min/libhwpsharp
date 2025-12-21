@@ -89,6 +89,10 @@
             pi.Value_BSTR = name;
         }
 
+        /// <summary>
+        /// 이 컨트롤을 복제합니다.
+        /// </summary>
+        /// <returns>복제된 <see cref="ControlAdditionalText"/> 인스턴스</returns>
         public override Control Clone()
         {
             ControlField cloned = new ControlField(Header!.CtrlId);

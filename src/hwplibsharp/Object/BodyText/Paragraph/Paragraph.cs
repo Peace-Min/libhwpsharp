@@ -18,6 +18,9 @@ namespace HwpLib.Object.BodyText.Paragraph
     /// </summary>
     public class Paragraph
     {
+        /// <summary>
+        /// 비어 있는 <see cref="Paragraph"/> 배열입니다.
+        /// </summary>
         public static readonly Paragraph[] Zero_Array = Array.Empty<Paragraph>();
 
         /// <summary>

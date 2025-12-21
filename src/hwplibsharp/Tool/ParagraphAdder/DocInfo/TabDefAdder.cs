@@ -12,12 +12,22 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private DocInfoAdder _docInfoAdder;
         private Dictionary<int, int> _idMatchingMap;
 
+        /// <summary>
+        /// <see cref="TabDefInfoAdder"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">문서 정보 복사에 사용되는 <see cref="DocInfoAdder"/> 인스턴스입니다.</param>
         public TabDefInfoAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
             _idMatchingMap = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 원본 TabDefInfo의 인덱스를 기반으로 대상 문서에 TabDefInfo를 복사하고, 대상 인덱스를 반환합니다.
+        /// 이미 복사된 경우 매핑된 인덱스를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 TabDefInfo의 인덱스</param>
+        /// <returns>대상 문서의 TabDefInfo 인덱스</returns>
         public int ProcessById(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -138,6 +148,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             target.FillSort = source.FillSort;
         }
 
+        /// <summary>
+        /// sourceId와 targetId에 해당하는 TabDefInfo 객체가 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 TabDefInfo의 인덱스</param>
+        /// <param name="targetId">대상 TabDefInfo의 인덱스</param>
+        /// <returns>두 TabDefInfo가 동일하면 true, 그렇지 않으면 false를 반환합니다.</returns>
         public bool EqualById(int sourceId, int targetId)
         {
             try

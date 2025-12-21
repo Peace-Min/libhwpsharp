@@ -15,11 +15,17 @@ namespace HwpLib.Object.DocInfo
         private int _binDataId;
         private string? _extensionForEmbedding;
 
+        /// <summary>
+        /// <see cref="BinDataInfo"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public BinDataInfo()
         {
             _property = new BinDataProperty();
         }
 
+        /// <summary>
+        /// 바이너리 데이터의 속성 정보를 가져옵니다.
+        /// </summary>
         public BinDataProperty Property => _property;
 
         /// <summary>
@@ -58,6 +64,10 @@ namespace HwpLib.Object.DocInfo
             set => _extensionForEmbedding = value;
         }
 
+        /// <summary>
+        /// 이 인스턴스의 복사본을 생성합니다.
+        /// </summary>
+        /// <returns>멤버 값이 동일한 <see cref="BinDataInfo"/>의 새 인스턴스입니다.</returns>
         public BinDataInfo Clone()
         {
             var cloned = new BinDataInfo();

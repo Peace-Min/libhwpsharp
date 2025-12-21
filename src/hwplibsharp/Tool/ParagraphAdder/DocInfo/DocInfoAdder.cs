@@ -20,6 +20,11 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private StyleAdder _styleAdder;
         private TabDefInfoAdder _tabDefAdder;
 
+        /// <summary>
+        /// DocInfoAdder의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="sourceHWPFile">복사할 원본 HWP 파일</param>
+        /// <param name="targetHWPFile">복사 대상 HWP 파일</param>
         public DocInfoAdder(HWPFile? sourceHWPFile, HWPFile? targetHWPFile)
         {
             _sourceHWPFile = sourceHWPFile;
@@ -36,17 +41,70 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             _tabDefAdder = new TabDefInfoAdder(this);
         }
 
+        /// <summary>
+        /// 원본 HWP 파일을 반환합니다.
+        /// </summary>
+        /// <returns>원본 HWP 파일</returns>
         public HWPFile? GetSourceHWPFile() => _sourceHWPFile;
+
+        /// <summary>
+        /// 대상 HWP 파일을 반환합니다.
+        /// </summary>
+        /// <returns>대상 HWP 파일</returns>
         public HWPFile? GetTargetHWPFile() => _targetHWPFile;
 
+        /// <summary>
+        /// BinDataAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>BinDataAdder 인스턴스</returns>
         public BinDataAdder ForBinData() => _binDataAdder;
+
+        /// <summary>
+        /// BorderFillInfoAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>BorderFillInfoAdder 인스턴스</returns>
         public BorderFillInfoAdder ForBorderFillInfo() => _borderFillAdder;
+
+        /// <summary>
+        /// BulletAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>BulletAdder 인스턴스</returns>
         public BulletAdder ForBullet() => _bulletAdder;
+
+        /// <summary>
+        /// CharShapeInfoAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>CharShapeInfoAdder 인스턴스</returns>
         public CharShapeInfoAdder ForCharShapeInfo() => _charShapeAdder;
+
+        /// <summary>
+        /// FaceNameInfoAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>FaceNameInfoAdder 인스턴스</returns>
         public FaceNameInfoAdder ForFaceNameInfo() => _faceNameAdder;
+
+        /// <summary>
+        /// NumberingAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>NumberingAdder 인스턴스</returns>
         public NumberingAdder ForNumbering() => _numberingAdder;
+
+        /// <summary>
+        /// ParaShapeInfoAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>ParaShapeInfoAdder 인스턴스</returns>
         public ParaShapeInfoAdder ForParaShapeInfo() => _paraShapeAdder;
+
+        /// <summary>
+        /// StyleAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>StyleAdder 인스턴스</returns>
         public StyleAdder ForStyle() => _styleAdder;
+
+        /// <summary>
+        /// TabDefInfoAdder 인스턴스를 반환합니다.
+        /// </summary>
+        /// <returns>TabDefInfoAdder 인스턴스</returns>
         public TabDefInfoAdder ForTabDefInfo() => _tabDefAdder;
     }
 }

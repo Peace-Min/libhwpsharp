@@ -8,6 +8,13 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class EquationCopier
     {
+        /// <summary>
+        /// source의 <see cref="ControlEquation"/>을 target의 <see cref="ControlEquation"/>으로 복사합니다.
+        /// <paramref name="docInfoAdder"/>가 제공되면 문서 정보 매핑을 수행합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="ControlEquation"/> 인스턴스</param>
+        /// <param name="target">복사 대상 <see cref="ControlEquation"/> 인스턴스</param>
+        /// <param name="docInfoAdder">문서 정보 매핑에 사용할 <see cref="DocInfoAdder"/> 인스턴스, null일 수 있음</param>
         public static void Copy(ControlEquation source, ControlEquation target, DocInfoAdder? docInfoAdder)
         {
             var sourceH = source.GetHeader();

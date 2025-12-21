@@ -12,12 +12,22 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private DocInfoAdder _docInfoAdder;
         private Dictionary<int, int> _idMatchingMap;
 
+        /// <summary>
+        /// <see cref="BorderFillInfoAdder"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">복사 작업에 사용할 <see cref="DocInfoAdder"/> 인스턴스입니다.</param>
         public BorderFillInfoAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
             _idMatchingMap = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 소스 BorderFillInfo의 ID를 타겟 BorderFillInfo의 ID로 변환합니다.
+        /// 이미 복사된 경우 매핑된 ID를 반환하고, 그렇지 않으면 복사 후 새 ID를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 BorderFillInfo의 ID</param>
+        /// <returns>타겟 BorderFillInfo의 ID</returns>
         public int ProcessById(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -130,6 +140,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             }
         }
 
+        /// <summary>
+        /// 소스와 타겟 BorderFillInfo의 ID를 비교하여 동일한 BorderFillInfo인지 여부를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 BorderFillInfo의 ID</param>
+        /// <param name="targetId">타겟 BorderFillInfo의 ID</param>
+        /// <returns>두 BorderFillInfo가 동일하면 true, 그렇지 않으면 false를 반환합니다.</returns>
         public bool EqualById(int sourceId, int targetId)
         {
             if (sourceId == 0 || targetId == 0)

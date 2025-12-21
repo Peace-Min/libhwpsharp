@@ -20,11 +20,18 @@ namespace HwpLib.Tool.ParagraphAdder
         private int _sourceCharShapeIndex;
         private int _sourceControlIndex;
 
+        /// <summary>
+        /// <see cref="ParagraphMerger"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public ParagraphMerger()
         {
             _docInfoAdder = null;
         }
 
+        /// <summary>
+        /// <see cref="ParagraphMerger"/> 클래스의 새 인스턴스를 지정된 <see cref="DocInfoAdder"/>와 함께 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">문서 정보 병합을 위한 <see cref="DocInfoAdder"/> 인스턴스</param>
         public ParagraphMerger(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;

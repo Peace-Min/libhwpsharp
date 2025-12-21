@@ -30,6 +30,10 @@
             set => Value = (uint)BitFlag.Set(Value, 0, 3, value.GetValue());
         }
 
+        /// <summary>
+        /// 다른 <see cref="NewNumberHeaderProperty"/> 인스턴스의 값을 이 인스턴스에 복사합니다.
+        /// </summary>
+        /// <param name="from">복사할 원본 <see cref="NewNumberHeaderProperty"/> 인스턴스입니다.</param>
         public void Copy(NewNumberHeaderProperty from)
         {
             Value = from.Value;

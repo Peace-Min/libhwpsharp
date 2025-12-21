@@ -25,94 +25,142 @@
         private int _trackChangeCount;
         private int _trackChangeAuthorCount;
 
+        /// <summary>
+        /// <see cref="IDMappings"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public IDMappings()
         {
         }
 
+        /// <summary>
+        /// BinData 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int BinDataCount
         {
             get => _binDataCount;
             set => _binDataCount = value;
         }
 
+        /// <summary>
+        /// 한글 글꼴 이름 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int HangulFaceNameCount
         {
             get => _hangulFaceNameCount;
             set => _hangulFaceNameCount = value;
         }
 
+        /// <summary>
+        /// 영문 글꼴 이름 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int EnglishFaceNameCount
         {
             get => _englishFaceNameCount;
             set => _englishFaceNameCount = value;
         }
 
+        /// <summary>
+        /// 한자 글꼴 이름 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int HanjaFaceNameCount
         {
             get => _hanjaFaceNameCount;
             set => _hanjaFaceNameCount = value;
         }
 
+        /// <summary>
+        /// 일본어 글꼴 이름 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int JapaneseFaceNameCount
         {
             get => _japaneseFaceNameCount;
             set => _japaneseFaceNameCount = value;
         }
 
+        /// <summary>
+        /// 기타 글꼴 이름 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int EtcFaceNameCount
         {
             get => _etcFaceNameCount;
             set => _etcFaceNameCount = value;
         }
 
+        /// <summary>
+        /// 기호 글꼴 이름 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int SymbolFaceNameCount
         {
             get => _symbolFaceNameCount;
             set => _symbolFaceNameCount = value;
         }
 
+        /// <summary>
+        /// 사용자 글꼴 이름 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int UserFaceNameCount
         {
             get => _userFaceNameCount;
             set => _userFaceNameCount = value;
         }
 
+        /// <summary>
+        /// 테두리/배경 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int BorderFillCount
         {
             get => _borderFillCount;
             set => _borderFillCount = value;
         }
 
+        /// <summary>
+        /// 글자 모양 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int CharShapeCount
         {
             get => _charShapeCount;
             set => _charShapeCount = value;
         }
 
+        /// <summary>
+        /// 탭 정의 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int TabDefCount
         {
             get => _tabDefCount;
             set => _tabDefCount = value;
         }
 
+        /// <summary>
+        /// 번호 매기기 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int NumberingCount
         {
             get => _numberingCount;
             set => _numberingCount = value;
         }
 
+        /// <summary>
+        /// 글머리표 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int BulletCount
         {
             get => _bulletCount;
             set => _bulletCount = value;
         }
 
+        /// <summary>
+        /// 문단 모양 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int ParaShapeCount
         {
             get => _paraShapeCount;
             set => _paraShapeCount = value;
         }
 
+        /// <summary>
+        /// 스타일 객체의 개수를 가져오거나 설정합니다.
+        /// </summary>
         public int StyleCount
         {
             get => _styleCount;
@@ -146,6 +194,10 @@
             set => _trackChangeAuthorCount = value;
         }
 
+        /// <summary>
+        /// <paramref name="from"/>의 값을 이 인스턴스에 복사합니다.
+        /// </summary>
+        /// <param name="from">복사할 원본 <see cref="IDMappings"/> 인스턴스입니다.</param>
         public void Copy(IDMappings from)
         {
             _binDataCount = from._binDataCount;

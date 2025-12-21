@@ -22,6 +22,10 @@
         /// <returns>단 정의용 컨트롤 헤더</returns>
         public new CtrlHeaderColumnDefine? GetHeader() => Header as CtrlHeaderColumnDefine;
 
+        /// <summary>
+        /// 이 컨트롤을 복제합니다.
+        /// </summary>
+        /// <returns>복제된 <see cref="ControlAdditionalText"/> 인스턴스</returns>
         public override Control Clone()
         {
             ControlColumnDefine cloned = new ControlColumnDefine();

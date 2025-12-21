@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net472;net8.0</TargetFrameworks>
@@ -27,6 +27,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>hwp;hangul;word-processor;document;korean</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<!-- .NET 8.0+ Native AOT Compatibility -->

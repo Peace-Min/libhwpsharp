@@ -21,6 +21,11 @@
             return (uint)(((byte)a << 24) | ((byte)b << 16) | ((byte)c << 8) | (byte)d);
         }
 
+        /// <summary>
+        /// 컨트롤 아이디로부터 4개의 문자 배열을 생성한다.
+        /// </summary>
+        /// <param name="id">컨트롤 아이디</param>
+        /// <returns>4개의 문자 배열</returns>
         public static char[] Make(uint id)
         {
             char[] ret = new char[4];

@@ -8,6 +8,13 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class ParameterSetCopier
     {
+        /// <summary>
+        /// <para>source의 <see cref="ParameterSet"/> 내용을 target에 복사합니다.</para>
+        /// <para>필요시 <paramref name="docInfoAdder"/>를 사용하여 BinData 등 부가 정보를 처리합니다.</para>
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="ParameterSet"/></param>
+        /// <param name="target">복사 대상 <see cref="ParameterSet"/></param>
+        /// <param name="docInfoAdder">부가 정보 처리를 위한 <see cref="DocInfoAdder"/> 인스턴스 (null 허용)</param>
         public static void Copy(ParameterSet? source, ParameterSet? target, DocInfoAdder? docInfoAdder)
         {
             if (source == null || target == null) return;

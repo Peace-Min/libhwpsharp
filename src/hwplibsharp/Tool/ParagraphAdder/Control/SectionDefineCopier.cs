@@ -9,6 +9,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class SectionDefineCopier
     {
+        /// <summary>
+        /// source 구역 정의 컨트롤의 내용을 target 구역 정의 컨트롤로 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="ControlSectionDefine"/> 인스턴스</param>
+        /// <param name="target">복사 대상 <see cref="ControlSectionDefine"/> 인스턴스</param>
+        /// <param name="docInfoAdder">문서 정보 매핑을 위한 <see cref="DocInfoAdder"/> 인스턴스, null 가능</param>
         public static void Copy(ControlSectionDefine source, ControlSectionDefine target, DocInfoAdder? docInfoAdder)
         {
             CopyHeader(source.Header, target.Header, docInfoAdder);

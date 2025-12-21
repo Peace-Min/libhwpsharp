@@ -26,6 +26,9 @@ namespace HwpLib.Object.DocInfo
         private int _borderFillId;
         private readonly Color4Byte _strikeLineColor;
 
+        /// <summary>
+        /// CharShapeInfo 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public CharShapeInfo()
         {
             _faceNameIds = new FaceNameIds();
@@ -41,37 +44,86 @@ namespace HwpLib.Object.DocInfo
             _strikeLineColor = new Color4Byte();
         }
 
+        /// <summary>
+        /// 글꼴 이름 ID 정보를 가져옵니다.
+        /// </summary>
         public FaceNameIds FaceNameIds => _faceNameIds;
+
+        /// <summary>
+        /// 각 문자 종류별 비율 정보를 가져옵니다.
+        /// </summary>
         public Ratios Ratios => _ratios;
+
+        /// <summary>
+        /// 각 문자 종류별 자간 정보를 가져옵니다.
+        /// </summary>
         public CharSpaces CharSpaces => _charSpaces;
+
+        /// <summary>
+        /// 각 문자 종류별 상대 크기 정보를 가져옵니다.
+        /// </summary>
         public RelativeSizes RelativeSizes => _relativeSizes;
+
+        /// <summary>
+        /// 각 문자 종류별 오프셋 정보를 가져옵니다.
+        /// </summary>
         public CharOffsets CharOffsets => _charOffsets;
 
+        /// <summary>
+        /// 기본 글자 크기를 가져오거나 설정합니다.
+        /// </summary>
         public int BaseSize
         {
             get => _baseSize;
             set => _baseSize = value;
         }
 
+        /// <summary>
+        /// 글자 모양 속성 정보를 가져옵니다.
+        /// </summary>
         public CharShapeProperty Property => _property;
 
+        /// <summary>
+        /// 그림자 간격 1을 가져오거나 설정합니다.
+        /// </summary>
         public sbyte ShadowGap1
         {
             get => _shadowGap1;
             set => _shadowGap1 = value;
         }
 
+        /// <summary>
+        /// 그림자 간격 2를 가져오거나 설정합니다.
+        /// </summary>
         public sbyte ShadowGap2
         {
             get => _shadowGap2;
             set => _shadowGap2 = value;
         }
 
+        /// <summary>
+        /// 글자 색상을 가져옵니다.
+        /// </summary>
         public Color4Byte CharColor => _charColor;
+
+        /// <summary>
+        /// 밑줄 색상을 가져옵니다.
+        /// </summary>
         public Color4Byte UnderLineColor => _underLineColor;
+
+        /// <summary>
+        /// 음영 색상을 가져옵니다.
+        /// </summary>
         public Color4Byte ShadeColor => _shadeColor;
+
+        /// <summary>
+        /// 그림자 색상을 가져옵니다.
+        /// </summary>
         public Color4Byte ShadowColor => _shadowColor;
 
+        /// <summary>
+        /// 테두리 채우기 ID를 가져오거나 설정합니다.
+        /// </summary>
         public int BorderFillId
         {
             get => _borderFillId;
@@ -83,6 +135,10 @@ namespace HwpLib.Object.DocInfo
         /// </summary>
         public Color4Byte StrikeLineColor => _strikeLineColor;
 
+        /// <summary>
+        /// 이 인스턴스의 복사본을 생성합니다.
+        /// </summary>
+        /// <returns>멤버 값이 동일한 <see cref="CharShapeInfo"/>의 새 인스턴스입니다.</returns>
         public CharShapeInfo Clone()
         {
             var cloned = new CharShapeInfo();

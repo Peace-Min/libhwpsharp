@@ -105,38 +105,169 @@
         /// </summary>
         Form = ('f' << 24) | ('o' << 16) | ('r' << 8) | 'm',
 
+        /// <summary>
+        /// 알 수 없는 필드
+        /// </summary>
         FIELD_UNKNOWN = ('%' << 24) | ('u' << 16) | ('n' << 8) | 'k',
+
+        /// <summary>
+        /// 날짜 필드
+        /// </summary>
         FIELD_DATE = ('%' << 24) | ('d' << 16) | ('t' << 8) | 'e',
+
+        /// <summary>
+        /// 문서 날짜 필드
+        /// </summary>
         FIELD_DOCDATE = ('%' << 24) | ('d' << 16) | ('d' << 8) | 't',
+
+        /// <summary>
+        /// 경로 필드
+        /// </summary>
         FIELD_PATH = ('%' << 24) | ('p' << 16) | ('a' << 8) | 't',
+
+        /// <summary>
+        /// 책갈피 필드
+        /// </summary>
         FIELD_BOOKMARK = ('%' << 24) | ('b' << 16) | ('m' << 8) | 'k',
+
+        /// <summary>
+        /// 메일 머지 필드
+        /// </summary>
         FIELD_MAILMERGE = ('%' << 24) | ('m' << 16) | ('m' << 8) | 'g',
+
+        /// <summary>
+        /// 상호 참조 필드
+        /// </summary>
         FIELD_CROSSREF = ('%' << 24) | ('x' << 16) | ('r' << 8) | 'f',
+
+        /// <summary>
+        /// 수식 필드
+        /// </summary>
         FIELD_FORMULA = ('%' << 24) | ('f' << 16) | ('m' << 8) | 'u',
+
+        /// <summary>
+        /// 클릭 유도 필드
+        /// </summary>
         FIELD_CLICKHERE = ('%' << 24) | ('c' << 16) | ('l' << 8) | 'k',
+
+        /// <summary>
+        /// 요약 정보 필드
+        /// </summary>
         FIELD_SUMMARY = ('%' << 24) | ('s' << 16) | ('m' << 8) | 'r',
+
+        /// <summary>
+        /// 사용자 정보 필드
+        /// </summary>
         FIELD_USERINFO = ('%' << 24) | ('u' << 16) | ('s' << 8) | 'r',
+
+        /// <summary>
+        /// 하이퍼링크 필드
+        /// </summary>
         FIELD_HYPERLINK = ('%' << 24) | ('h' << 16) | ('l' << 8) | 'k',
+
+        /// <summary>
+        /// 개정 서명 필드
+        /// </summary>
         FIELD_REVISION_SIGN = ('%' << 24) | ('s' << 16) | ('i' << 8) | 'g',
+
+        /// <summary>
+        /// 개정 삭제 필드
+        /// </summary>
         FIELD_REVISION_DELETE = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'd',
+
+        /// <summary>
+        /// 개정 첨부 필드
+        /// </summary>
         FIELD_REVISION_ATTACH = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'a',
+
+        /// <summary>
+        /// 개정 클리핑 필드
+        /// </summary>
         FIELD_REVISION_CLIPPING = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'C',
+
+        /// <summary>
+        /// 개정 생각 필드
+        /// </summary>
         FIELD_REVISION_THINKING = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'T',
+
+        /// <summary>
+        /// 개정 칭찬 필드
+        /// </summary>
         FIELD_REVISION_PRAISE = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'P',
+
+        /// <summary>
+        /// 개정 선 필드
+        /// </summary>
         FIELD_REVISION_LINE = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'L',
+
+        /// <summary>
+        /// 개정 단순 변경 필드
+        /// </summary>
         FIELD_REVISION_SIMPLECHANGE = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'c',
+
+        /// <summary>
+        /// 개정 하이퍼링크 필드
+        /// </summary>
         FIELD_REVISION_HYPERLINK = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'h',
+
+        /// <summary>
+        /// 개정 선 첨부 필드
+        /// </summary>
         FIELD_REVISION_LINEATTACH = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'A',
+
+        /// <summary>
+        /// 개정 선 링크 필드
+        /// </summary>
         FIELD_REVISION_LINELINK = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'i',
+
+        /// <summary>
+        /// 개정 선 이동 필드
+        /// </summary>
         FIELD_REVISION_LINETRANSFER = ('%' << 24) | ('%' << 16) | ('*' << 8) | 't',
+
+        /// <summary>
+        /// 개정 오른쪽 이동 필드
+        /// </summary>
         FIELD_REVISION_RIGHTMOVE = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'r',
+
+        /// <summary>
+        /// 개정 왼쪽 이동 필드
+        /// </summary>
         FIELD_REVISION_LEFTMOVE = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'l',
+
+        /// <summary>
+        /// 개정 이동 필드
+        /// </summary>
         FIELD_REVISION_TRANSFER = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'n',
+
+        /// <summary>
+        /// 개정 단순 삽입 필드
+        /// </summary>
         FIELD_REVISION_SIMPLEINSERT = ('%' << 24) | ('%' << 16) | ('*' << 8) | 'e',
+
+        /// <summary>
+        /// 개정 분할 필드
+        /// </summary>
         FIELD_REVISION_SPLIT = ('%' << 24) | ('s' << 16) | ('p' << 8) | 'l',
+
+        /// <summary>
+        /// 개정 변경 필드
+        /// </summary>
         FIELD_REVISION_CHANGE = ('%' << 24) | ('%' << 16) | ('m' << 8) | 'r',
+
+        /// <summary>
+        /// 메모 필드
+        /// </summary>
         FIELD_MEMO = ('%' << 24) | ('%' << 16) | ('m' << 8) | 'e',
+
+        /// <summary>
+        /// 개인정보 보호 필드
+        /// </summary>
         FIELD_PRIVATE_INFO_SECURITY = ('%' << 24) | ('c' << 16) | ('p' << 8) | 'r',
+
+        /// <summary>
+        /// 목차 필드
+        /// </summary>
         FIELD_TABLEOFCONTENTS = ('%' << 24) | ('t' << 16) | ('o' << 8) | 'c',
     }
 

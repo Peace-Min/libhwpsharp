@@ -28,6 +28,9 @@ namespace HwpLib.Object.DocInfo
         private uint _lineSpace2;
         private uint _paraLevel;
 
+        /// <summary>
+        /// ParaShapeInfo 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public ParaShapeInfo()
         {
             _property1 = new ParaShapeProperty1();
@@ -35,32 +38,50 @@ namespace HwpLib.Object.DocInfo
             _property3 = new ParaShapeProperty3();
         }
 
+        /// <summary>
+        /// 문단 모양의 첫 번째 속성 정보를 가져옵니다.
+        /// </summary>
         public ParaShapeProperty1 Property1 => _property1;
 
+        /// <summary>
+        /// 문단의 왼쪽 여백을 가져오거나 설정합니다.
+        /// </summary>
         public int LeftMargin
         {
             get => _leftMargin;
             set => _leftMargin = value;
         }
 
+        /// <summary>
+        /// 문단의 오른쪽 여백을 가져오거나 설정합니다.
+        /// </summary>
         public int RightMargin
         {
             get => _rightMargin;
             set => _rightMargin = value;
         }
 
+        /// <summary>
+        /// 문단의 들여쓰기 값을 가져오거나 설정합니다.
+        /// </summary>
         public int Indent
         {
             get => _indent;
             set => _indent = value;
         }
 
+        /// <summary>
+        /// 문단의 위쪽 간격을 가져오거나 설정합니다.
+        /// </summary>
         public int TopParaSpace
         {
             get => _topParaSpace;
             set => _topParaSpace = value;
         }
 
+        /// <summary>
+        /// 문단의 아래쪽 간격을 가져오거나 설정합니다.
+        /// </summary>
         public int BottomParaSpace
         {
             get => _bottomParaSpace;
@@ -76,42 +97,63 @@ namespace HwpLib.Object.DocInfo
             set => _lineSpace = value;
         }
 
+        /// <summary>
+        /// 탭 정의 ID를 가져오거나 설정합니다.
+        /// </summary>
         public int TabDefId
         {
             get => _tabDefId;
             set => _tabDefId = value;
         }
 
+        /// <summary>
+        /// 문단 머리글 ID를 가져오거나 설정합니다.
+        /// </summary>
         public int ParaHeadId
         {
             get => _paraHeadId;
             set => _paraHeadId = value;
         }
 
+        /// <summary>
+        /// 테두리/배경 채우기 ID를 가져오거나 설정합니다.
+        /// </summary>
         public int BorderFillId
         {
             get => _borderFillId;
             set => _borderFillId = value;
         }
 
+        /// <summary>
+        /// 왼쪽 테두리 간격을 가져오거나 설정합니다.
+        /// </summary>
         public short LeftBorderSpace
         {
             get => _leftBorderSpace;
             set => _leftBorderSpace = value;
         }
 
+        /// <summary>
+        /// 오른쪽 테두리 간격을 가져오거나 설정합니다.
+        /// </summary>
         public short RightBorderSpace
         {
             get => _rightBorderSpace;
             set => _rightBorderSpace = value;
         }
 
+        /// <summary>
+        /// 위쪽 테두리 간격을 가져오거나 설정합니다.
+        /// </summary>
         public short TopBorderSpace
         {
             get => _topBorderSpace;
             set => _topBorderSpace = value;
         }
 
+        /// <summary>
+        /// 아래쪽 테두리 간격을 가져오거나 설정합니다.
+        /// </summary>
         public short BottomBorderSpace
         {
             get => _bottomBorderSpace;
@@ -147,6 +189,10 @@ namespace HwpLib.Object.DocInfo
             set => _paraLevel = value;
         }
 
+        /// <summary>
+        /// 이 인스턴스의 복사본을 생성합니다.
+        /// </summary>
+        /// <returns>멤버 값이 동일한 <see cref="ParaShapeInfo"/>의 새 인스턴스입니다.</returns>
         public ParaShapeInfo Clone()
         {
             var cloned = new ParaShapeInfo();

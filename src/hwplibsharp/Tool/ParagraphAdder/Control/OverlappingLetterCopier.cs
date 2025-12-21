@@ -8,6 +8,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class OverlappingLetterCopier
     {
+        /// <summary>
+        /// 글자 겹침 컨트롤을 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="ControlOverlappingLetter"/> 인스턴스입니다.</param>
+        /// <param name="target">복사 대상 <see cref="ControlOverlappingLetter"/> 인스턴스입니다.</param>
+        /// <param name="docInfoAdder">문서 정보 매핑을 위한 <see cref="DocInfoAdder"/> 인스턴스입니다. null일 수 있습니다.</param>
         public static void Copy(ControlOverlappingLetter source, ControlOverlappingLetter target, DocInfoAdder? docInfoAdder)
         {
             CopyHeader(source.GetHeader(), target.GetHeader(), docInfoAdder);

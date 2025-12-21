@@ -41,6 +41,10 @@
         /// <returns>양식 개체</returns>
         public FormObject FormObject => formObject;
 
+        /// <summary>
+        /// 이 컨트롤을 복제합니다.
+        /// </summary>
+        /// <returns>복제된 <see cref="ControlAdditionalText"/> 인스턴스</returns>
         public override Control Clone()
         {
             ControlForm cloned = new ControlForm();

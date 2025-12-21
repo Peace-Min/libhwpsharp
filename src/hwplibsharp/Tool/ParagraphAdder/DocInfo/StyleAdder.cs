@@ -11,12 +11,22 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private DocInfoAdder _docInfoAdder;
         private Dictionary<int, int> _idMatchingMap;
 
+        /// <summary>
+        /// <see cref="StyleAdder"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">DocInfo 복사 작업을 위한 <see cref="DocInfoAdder"/> 인스턴스</param>
         public StyleAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
             _idMatchingMap = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 원본 StyleInfo의 ID를 대상 문서에 맞게 변환하여 반환합니다.
+        /// 이미 복사된 경우 매핑된 ID를 반환하며, 그렇지 않으면 복사 후 매핑합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 StyleInfo의 ID</param>
+        /// <returns>대상 문서의 StyleInfo ID</returns>
         public int ProcessById(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -128,6 +138,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return targetId;
         }
 
+        /// <summary>
+        /// sourceId와 targetId에 해당하는 StyleInfo가 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 StyleInfo의 ID</param>
+        /// <param name="targetId">대상 StyleInfo의 ID</param>
+        /// <returns>동일하면 true, 다르면 false</returns>
         public bool EqualById(short sourceId, short targetId)
         {
             try

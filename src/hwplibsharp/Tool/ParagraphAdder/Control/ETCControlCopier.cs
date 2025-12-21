@@ -10,6 +10,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class ETCControlCopier
     {
+        /// <summary>
+        /// ControlAutoNumber의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlAutoNumber</param>
+        /// <param name="target">복사 대상 ControlAutoNumber</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyAutoNumber(ControlAutoNumber source, ControlAutoNumber target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -20,6 +26,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlColumnDefine의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlColumnDefine</param>
+        /// <param name="target">복사 대상 ControlColumnDefine</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyColumnDefine(ControlColumnDefine source, ControlColumnDefine target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -30,6 +42,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlEndnote의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlEndnote</param>
+        /// <param name="target">복사 대상 ControlEndnote</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyEndnote(ControlEndnote source, ControlEndnote target, DocInfoAdder? docInfoAdder)
         {
             target.Header.Copy(source.Header);
@@ -38,6 +56,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             ParagraphCopier.ListCopy(source.ParagraphList, target.ParagraphList, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlField의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlField</param>
+        /// <param name="target">복사 대상 ControlField</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyField(ControlField source, ControlField target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -136,6 +160,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             }
         }
 
+        /// <summary>
+        /// ControlFooter의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlFooter</param>
+        /// <param name="target">복사 대상 ControlFooter</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyFooter(ControlFooter source, ControlFooter target, DocInfoAdder? docInfoAdder)
         {
             target.Header.Copy(source.Header);
@@ -144,6 +174,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             ParagraphCopier.ListCopy(source.ParagraphList, target.ParagraphList, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlFootnote의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlFootnote</param>
+        /// <param name="target">복사 대상 ControlFootnote</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyFootnote(ControlFootnote source, ControlFootnote target, DocInfoAdder? docInfoAdder)
         {
             target.Header.Copy(source.Header);
@@ -152,6 +188,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             ParagraphCopier.ListCopy(source.ParagraphList, target.ParagraphList, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlHeader의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlHeader</param>
+        /// <param name="target">복사 대상 ControlHeader</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyHeader(ControlHeader source, ControlHeader target, DocInfoAdder? docInfoAdder)
         {
             target.Header.Copy(source.Header);
@@ -160,6 +202,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             ParagraphCopier.ListCopy(source.ParagraphList, target.ParagraphList, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlIndexMark의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlIndexMark</param>
+        /// <param name="target">복사 대상 ControlIndexMark</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyIndexMark(ControlIndexMark source, ControlIndexMark target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -170,6 +218,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlNewNumber의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlNewNumber</param>
+        /// <param name="target">복사 대상 ControlNewNumber</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyNewNumber(ControlNewNumber source, ControlNewNumber target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -180,6 +234,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlPageHide의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlPageHide</param>
+        /// <param name="target">복사 대상 ControlPageHide</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyPageHide(ControlPageHide source, ControlPageHide target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -190,6 +250,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlPageNumberPosition의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlPageNumberPosition</param>
+        /// <param name="target">복사 대상 ControlPageNumberPosition</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyPageNumberPosition(ControlPageNumberPosition source, ControlPageNumberPosition target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -200,6 +266,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlPageOddEvenAdjust의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlPageOddEvenAdjust</param>
+        /// <param name="target">복사 대상 ControlPageOddEvenAdjust</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyPageOddEvenAdjust(ControlPageOddEvenAdjust source, ControlPageOddEvenAdjust target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -210,6 +282,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlBookmark의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlBookmark</param>
+        /// <param name="target">복사 대상 ControlBookmark</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyBookmark(ControlBookmark source, ControlBookmark target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -220,6 +298,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             CtrlDataCopier.Copy(source, target, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlHiddenComment의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlHiddenComment</param>
+        /// <param name="target">복사 대상 ControlHiddenComment</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyHiddenComment(ControlHiddenComment source, ControlHiddenComment target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();
@@ -232,6 +316,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             ParagraphCopier.ListCopy(source.ParagraphList, target.ParagraphList, docInfoAdder);
         }
 
+        /// <summary>
+        /// ControlForm의 내용을 target에 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 ControlForm</param>
+        /// <param name="target">복사 대상 ControlForm</param>
+        /// <param name="docInfoAdder">문서 정보 추가자</param>
         public static void CopyForm(ControlForm source, ControlForm target, DocInfoAdder? docInfoAdder)
         {
             var sourceHeader = source.GetHeader();

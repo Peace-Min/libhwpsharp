@@ -21,6 +21,10 @@ namespace HwpLib.Tool.TextExtractor.ParaHead
         private ParaNumber? _paraNumberForOutline;
         private NumberingInfo _defaultNumbering = new NumberingInfo();
 
+        /// <summary>
+        /// ParaHeadMaker 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="hwpFile">HWP 파일 객체</param>
         public ParaHeadMaker(HWPFile hwpFile)
         {
             _hwpFile = hwpFile;
@@ -65,12 +69,19 @@ namespace HwpLib.Tool.TextExtractor.ParaHead
             return string.Join(".", parts) + ".";
         }
 
+        /// <summary>
+        /// 섹션의 문단 머리 번호를 초기화합니다.
+        /// </summary>
+        /// <param name="section">초기화할 섹션 객체</param>
         public void StartSection(Section section)
         {
             SetSectionDefine(section);
             _paraNumberForOutline = new ParaNumber();
         }
 
+        /// <summary>
+        /// 섹션의 문단 머리 번호 초기화를 종료합니다.
+        /// </summary>
         public void EndSection()
         {
             _paraNumberForOutline = null;
@@ -101,6 +112,11 @@ namespace HwpLib.Tool.TextExtractor.ParaHead
             }
         }
 
+        /// <summary>
+        /// 문단의 머리 문자열을 반환합니다.
+        /// </summary>
+        /// <param name="paragraph">문단 객체</param>
+        /// <returns>문단 머리 문자열, 없으면 null</returns>
         public string? ParaHeadString(Paragraph paragraph)
         {
             var paraShapeList = _hwpFile.DocInfo?.ParaShapeList;

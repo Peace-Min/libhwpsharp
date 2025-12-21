@@ -22,6 +22,10 @@
         /// <returns>홀/짝수 조정(페이지 번호 제어) 컨트롤 헤더</returns>
         public new CtrlHeaderPageOddEvenAdjust? GetHeader() => Header as CtrlHeaderPageOddEvenAdjust;
 
+        /// <summary>
+        /// 이 컨트롤을 복제합니다.
+        /// </summary>
+        /// <returns>복제된 <see cref="ControlAdditionalText"/> 인스턴스</returns>
         public override Control Clone()
         {
             ControlPageOddEvenAdjust cloned = new ControlPageOddEvenAdjust();

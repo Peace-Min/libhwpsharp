@@ -5,6 +5,10 @@
     /// </summary>
     public interface ITextExtractorListener
     {
+        /// <summary>
+        /// 단락의 텍스트를 처리합니다.
+        /// </summary>
+        /// <param name="text">단락에서 추출된 텍스트입니다.</param>
         void ParagraphText(string text);
     }
 }

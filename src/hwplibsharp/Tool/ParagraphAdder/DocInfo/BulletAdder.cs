@@ -12,12 +12,22 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private DocInfoAdder _docInfoAdder;
         private Dictionary<int, int> _idMatchingMap;
 
+        /// <summary>
+        /// <see cref="BulletAdder"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">문서 정보 복사에 사용되는 <see cref="DocInfoAdder"/> 인스턴스입니다.</param>
         public BulletAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
             _idMatchingMap = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 소스 Bullet ID를 타겟 Bullet ID로 변환하여 반환합니다.
+        /// 동일한 파일이면 원본 ID를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 Bullet의 ID</param>
+        /// <returns>타겟 Bullet의 ID</returns>
         public int ProcessById(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -121,6 +131,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             target.CharShapeID = (uint)_docInfoAdder.ForCharShapeInfo().ProcessById((int)source.CharShapeID);
         }
 
+        /// <summary>
+        /// 소스 Bullet ID와 타겟 Bullet ID에 해당하는 Bullet이 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 Bullet의 ID</param>
+        /// <param name="targetId">타겟 Bullet의 ID</param>
+        /// <returns>두 Bullet이 동일하면 true, 그렇지 않으면 false를 반환합니다.</returns>
         public bool EqualById(int sourceId, int targetId)
         {
             Bullet? source = null;

@@ -24,6 +24,15 @@ namespace HwpLib.Tool
             return merger.Merge();
         }
 
+        /// <summary>
+        /// 표의 셀을 병합하되, 병합 가능 여부를 검사하지 않고 강제로 병합합니다.
+        /// </summary>
+        /// <param name="table">병합할 표</param>
+        /// <param name="startRow">행의 시작 인덱스</param>
+        /// <param name="startCol">열의 시작 인덱스</param>
+        /// <param name="rowSpan">행의 span</param>
+        /// <param name="colSpan">열의 span</param>
+        /// <returns>병합 성공 여부</returns>
         public static bool MergeCellWithoutCheck(ControlTable table, int startRow, int startCol, int rowSpan, int colSpan)
         {
             var merger = new TableCellMerger(table, startRow, startCol, rowSpan, colSpan, false);

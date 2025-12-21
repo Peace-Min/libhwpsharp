@@ -24,11 +24,29 @@ namespace HwpLib.Tool.ObjectFinder.ForField
         /// </summary>
         public class FindPosition
         {
+            /// <summary>
+            /// 필드의 시작 문단 인덱스입니다.
+            /// </summary>
             public int StartParaIndex { get; set; }
+
+            /// <summary>
+            /// 필드의 시작 문자 인덱스입니다.
+            /// </summary>
             public int StartCharIndex { get; set; }
+
+            /// <summary>
+            /// 필드의 끝 문단 인덱스입니다.
+            /// </summary>
             public int EndParaIndex { get; set; }
+
+            /// <summary>
+            /// 필드의 끝 문자 인덱스입니다.
+            /// </summary>
             public int EndCharIndex { get; set; }
 
+            /// <summary>
+            /// <see cref="FindPosition"/> 클래스의 새 인스턴스를 초기화합니다.
+            /// </summary>
             public FindPosition()
             {
                 StartParaIndex = -1;
@@ -37,7 +55,14 @@ namespace HwpLib.Tool.ObjectFinder.ForField
                 EndCharIndex = -1;
             }
 
+            /// <summary>
+            /// 필드의 시작 위치를 찾았는지 여부를 나타냅니다.
+            /// </summary>
             public bool FindStartPosition => StartParaIndex != -1 && StartCharIndex != -1;
+
+            /// <summary>
+            /// 필드의 끝 위치를 찾았는지 여부를 나타냅니다.
+            /// </summary>
             public bool FindEndPosition => EndParaIndex != -1 && EndCharIndex != -1;
         }
 
@@ -208,6 +233,10 @@ namespace HwpLib.Tool.ObjectFinder.ForField
         /// <summary>
         /// 문단 리스트에서 모든 필드 객체를 찾아 텍스트를 반환한다.
         /// </summary>
+        /// <param name="paraList">문단 리스트</param>
+        /// <param name="fieldType">필드 타입</param>
+        /// <param name="fieldName">필드 이름</param>
+        /// <param name="results">결과를 저장할 리스트</param>
         public static void GetAllFieldText(IParagraphList paraList, ControlType fieldType, string fieldName, List<string> results)
         {
             if (paraList == null)
@@ -249,6 +278,11 @@ namespace HwpLib.Tool.ObjectFinder.ForField
         /// <summary>
         /// 문단 리스트에서 필드 객체를 찾아 텍스트를 설정한다.
         /// </summary>
+        /// <param name="paraList">문단 리스트</param>
+        /// <param name="fieldType">필드 타입</param>
+        /// <param name="fieldName">필드 이름</param>
+        /// <param name="textBuffer">설정할 텍스트 버퍼</param>
+        /// <returns>설정 결과</returns>
         public static SetFieldResult SetFieldText(IParagraphList paraList, ControlType fieldType, string fieldName, TextBuffer textBuffer)
         {
             if (paraList == null)

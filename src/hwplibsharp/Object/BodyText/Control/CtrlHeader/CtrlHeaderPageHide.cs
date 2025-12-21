@@ -27,11 +27,19 @@
         /// </summary>
         public PageHideHeaderProperty Property => property;
 
+        /// <summary>
+        /// 다른 <see cref="CtrlHeaderPageHide"/> 인스턴스의 값을 이 인스턴스에 복사합니다.
+        /// </summary>
+        /// <param name="from">복사할 원본 <see cref="CtrlHeaderPageHide"/> 인스턴스입니다.</param>
         public void Copy(CtrlHeaderPageHide from)
         {
             property.Copy(from.property);
         }
 
+        /// <summary>
+        /// 다른 <see cref="CtrlHeader"/> 인스턴스의 값을 이 인스턴스에 복사합니다.
+        /// </summary>
+        /// <param name="from">복사할 원본 <see cref="CtrlHeader"/> 인스턴스입니다.</param>
         public override void Copy(CtrlHeader from)
         {
             CtrlHeaderPageHide from2 = (CtrlHeaderPageHide)from;

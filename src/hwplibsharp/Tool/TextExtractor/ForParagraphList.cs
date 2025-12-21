@@ -56,6 +56,16 @@ namespace HwpLib.Tool.TextExtractor
             }
         }
 
+        /// <summary>
+        /// 지정한 범위(문단 및 문자 인덱스)에서 텍스트를 추출한다.
+        /// </summary>
+        /// <param name="paragraphList">문단 리스트</param>
+        /// <param name="startParaIndex">시작 문단 인덱스</param>
+        /// <param name="startCharIndex">시작 문자 인덱스</param>
+        /// <param name="endParaIndex">끝 문단 인덱스</param>
+        /// <param name="endCharIndex">끝 문자 인덱스</param>
+        /// <param name="option">텍스트 추출 옵션</param>
+        /// <param name="sb">추출된 텍스트를 저장할 StringBuilder 객체</param>
         public static void Extract(IParagraphList? paragraphList,
                                    int startParaIndex,
                                    int startCharIndex,
@@ -114,6 +124,17 @@ namespace HwpLib.Tool.TextExtractor
             }
         }
 
+        /// <summary>
+        /// 지정한 범위(문단 및 문자 인덱스)에서 텍스트를 추출한다.
+        /// </summary>
+        /// <param name="paragraphList">문단 리스트</param>
+        /// <param name="startParaIndex">시작 문단 인덱스</param>
+        /// <param name="startCharIndex">시작 문자 인덱스</param>
+        /// <param name="endParaIndex">끝 문단 인덱스</param>
+        /// <param name="endCharIndex">끝 문자 인덱스</param>
+        /// <param name="appendLF">문단 끝에 줄바꿈 추가 여부</param>
+        /// <param name="tem">텍스트 추출 방법</param>
+        /// <param name="sb">추출된 텍스트를 저장할 StringBuilder 객체</param>
         public static void Extract(IParagraphList? paragraphList,
                                    int startParaIndex,
                                    int startCharIndex,

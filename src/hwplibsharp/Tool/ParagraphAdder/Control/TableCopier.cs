@@ -9,6 +9,16 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class TableCopier
     {
+        /// <summary>
+        /// 소스 <see cref="ControlTable"/>의 내용을 대상 <see cref="ControlTable"/>로 복사합니다.
+        /// <para>
+        /// 표의 헤더, 캡션, 테이블 속성, 행 및 셀의 내용을 모두 복사하며, <paramref name="docInfoAdder"/>가 제공될 경우
+        /// 문서 정보(테두리, 스타일 등)도 함께 처리합니다.
+        /// </para>
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="ControlTable"/> 인스턴스입니다.</param>
+        /// <param name="target">내용이 복사될 대상 <see cref="ControlTable"/> 인스턴스입니다.</param>
+        /// <param name="docInfoAdder">문서 정보 매핑을 위한 <see cref="DocInfoAdder"/> 인스턴스입니다. (null 허용)</param>
         public static void Copy(ControlTable source, ControlTable target, DocInfoAdder? docInfoAdder)
         {
             var sourceH = source.Header;

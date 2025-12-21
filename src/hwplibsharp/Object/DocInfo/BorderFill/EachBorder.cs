@@ -36,6 +36,10 @@
         /// </summary>
         public Color4Byte Color => color;
 
+        /// <summary>
+        /// 다른 EachBorder 객체로부터 복사한다.
+        /// </summary>
+        /// <param name="from">복사할 원본 객체</param>
         public void Copy(EachBorder from)
         {
             Type = from.Type;

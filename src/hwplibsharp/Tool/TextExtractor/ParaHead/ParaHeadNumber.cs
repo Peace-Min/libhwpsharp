@@ -46,6 +46,12 @@ namespace HwpLib.Tool.TextExtractor.ParaHead
             return result;
         }
 
+        /// <summary>
+        /// 지정된 값과 문단 번호 형식에 따라 해당하는 문자열을 반환합니다.
+        /// </summary>
+        /// <param name="value">문단 번호 값(1부터 시작)</param>
+        /// <param name="format">문단 번호 형식</param>
+        /// <returns>형식에 맞는 번호 문자열</returns>
         public static string ToString(int value, ParagraphNumberFormat format)
         {
             if (value <= 0)

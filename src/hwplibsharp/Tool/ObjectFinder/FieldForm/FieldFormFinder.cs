@@ -195,6 +195,9 @@ namespace HwpLib.Tool.ObjectFinder.FieldForm
             private readonly List<FieldData> _fieldDataList;
             private readonly List<FormData> _formDataList;
 
+            /// <summary>
+            /// <see cref="Result"/> 클래스의 새 인스턴스를 초기화합니다.
+            /// </summary>
             public Result()
             {
                 _fieldDataList = new List<FieldData>();
@@ -202,6 +205,10 @@ namespace HwpLib.Tool.ObjectFinder.FieldForm
                 Added = false;
             }
 
+            /// <summary>
+            /// <see cref="FieldData"/> 객체를 결과에 추가합니다.
+            /// </summary>
+            /// <param name="fieldData">추가할 <see cref="FieldData"/> 객체</param>
             public void AddFieldData(FieldData? fieldData)
             {
                 if (fieldData != null)
@@ -211,6 +218,10 @@ namespace HwpLib.Tool.ObjectFinder.FieldForm
                 }
             }
 
+            /// <summary>
+            /// <see cref="FieldData"/> 리스트를 결과에 모두 추가합니다.
+            /// </summary>
+            /// <param name="fieldDataList">추가할 <see cref="FieldData"/> 리스트</param>
             public void AddAllFieldData(List<FieldData> fieldDataList)
             {
                 _fieldDataList.AddRange(fieldDataList);
@@ -220,8 +231,15 @@ namespace HwpLib.Tool.ObjectFinder.FieldForm
                 }
             }
 
+            /// <summary>
+            /// 결과에 추가된 모든 <see cref="FieldData"/> 리스트를 가져옵니다.
+            /// </summary>
             public List<FieldData> FieldDataList => _fieldDataList;
 
+            /// <summary>
+            /// <see cref="FormData"/> 객체를 결과에 추가합니다.
+            /// </summary>
+            /// <param name="formData">추가할 <see cref="FormData"/> 객체</param>
             public void AddFormData(FormData? formData)
             {
                 if (formData != null)
@@ -231,8 +249,14 @@ namespace HwpLib.Tool.ObjectFinder.FieldForm
                 }
             }
 
+            /// <summary>
+            /// 결과에 추가된 모든 <see cref="FormData"/> 리스트를 가져옵니다.
+            /// </summary>
             public List<FormData> FormDataList => _formDataList;
 
+            /// <summary>
+            /// 결과에 데이터가 추가되었는지 여부를 나타냅니다.
+            /// </summary>
             public bool Added { get; private set; }
         }
 
@@ -241,13 +265,45 @@ namespace HwpLib.Tool.ObjectFinder.FieldForm
         /// </summary>
         public class Option
         {
+            /// <summary>
+            /// 찾을 필드 또는 폼의 이름입니다. null이면 모든 필드/폼을 찾습니다.
+            /// </summary>
             public string? NameToFind { get; set; }
+
+            /// <summary>
+            /// 첫 번째로 찾은 결과만 반환할지 여부를 나타냅니다.
+            /// </summary>
             public bool OnlyFirst { get; set; }
+
+            /// <summary>
+            /// 필드를 검색할지 여부를 나타냅니다.
+            /// </summary>
             public bool FindField { get; set; }
+
+            /// <summary>
+            /// GSO(그림, 도형 등)를 검색할지 여부를 나타냅니다.
+            /// </summary>
             public bool FindGso { get; set; }
+
+            /// <summary>
+            /// 셀(표의 셀)을 검색할지 여부를 나타냅니다.
+            /// </summary>
             public bool FindCell { get; set; }
+
+            /// <summary>
+            /// 폼(양식 컨트롤)을 검색할지 여부를 나타냅니다.
+            /// </summary>
             public bool FindForm { get; set; }
 
+            /// <summary>
+            /// <see cref="Option"/> 클래스의 새 인스턴스를 초기화합니다.
+            /// </summary>
+            /// <param name="nameToFind">찾을 필드 또는 폼의 이름</param>
+            /// <param name="onlyFirst">첫 번째 결과만 반환할지 여부</param>
+            /// <param name="findField">필드 검색 여부</param>
+            /// <param name="findGso">GSO 검색 여부</param>
+            /// <param name="findCell">셀 검색 여부</param>
+            /// <param name="findForm">폼 검색 여부</param>
             public Option(string? nameToFind, bool onlyFirst, bool findField, bool findGso, bool findCell, bool findForm)
             {
                 NameToFind = nameToFind;

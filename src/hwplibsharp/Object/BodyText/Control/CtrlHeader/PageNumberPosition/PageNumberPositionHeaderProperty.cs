@@ -39,6 +39,10 @@
             set => Value = (uint)BitFlag.Set(Value, 8, 11, value.GetValue());
         }
 
+        /// <summary>
+        /// 다른 <see cref="PageNumberPositionHeaderProperty"/> 인스턴스의 값을 이 인스턴스에 복사합니다.
+        /// </summary>
+        /// <param name="from">복사할 원본 <see cref="PageNumberPositionHeaderProperty"/> 인스턴스입니다.</param>
         public void Copy(PageNumberPositionHeaderProperty from)
         {
             Value = from.Value;

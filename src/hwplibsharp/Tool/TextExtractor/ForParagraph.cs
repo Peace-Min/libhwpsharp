@@ -12,7 +12,13 @@ namespace HwpLib.Tool.TextExtractor
     /// </summary>
     public static class ForParagraph
     {
+        /// <summary>
+        /// 문단 텍스트 추출의 시작 인덱스를 나타냅니다.
+        /// </summary>
         public const int ParaStart = -1;
+        /// <summary>
+        /// 문단 텍스트 추출의 종료 인덱스를 나타냅니다.
+        /// </summary>
         public const int ParaEnd = 0xffff;
 
         /// <summary>

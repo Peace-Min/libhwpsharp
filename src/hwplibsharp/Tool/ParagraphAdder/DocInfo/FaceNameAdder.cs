@@ -12,11 +12,20 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
     {
         private DocInfoAdder _docInfoAdder;
 
+        /// <summary>
+        /// FaceNameInfoAdder 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">DocInfoAdder 인스턴스</param>
         public FaceNameInfoAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
         }
 
+        /// <summary>
+        /// 한글 FaceNameInfo를 복사하고 대상에 추가합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 FaceNameInfo의 인덱스</param>
+        /// <returns>대상 FaceNameInfo의 인덱스</returns>
         public int ProcessByHangulId(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -144,6 +153,11 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             target.XHeight = source.XHeight;
         }
 
+        /// <summary>
+        /// 라틴 FaceNameInfo를 복사하고 대상에 추가합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 FaceNameInfo의 인덱스</param>
+        /// <returns>대상 FaceNameInfo의 인덱스</returns>
         public int ProcessByLatinId(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -156,6 +170,11 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Process(source, targetArray);
         }
 
+        /// <summary>
+        /// 한자 FaceNameInfo를 복사하고 대상에 추가합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 FaceNameInfo의 인덱스</param>
+        /// <returns>대상 FaceNameInfo의 인덱스</returns>
         public int ProcessByHanjaId(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -168,6 +187,11 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Process(source, targetArray);
         }
 
+        /// <summary>
+        /// 일본어 FaceNameInfo를 복사하고 대상에 추가합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 FaceNameInfo의 인덱스</param>
+        /// <returns>대상 FaceNameInfo의 인덱스</returns>
         public int ProcessByJapaneseId(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -180,6 +204,11 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Process(source, targetArray);
         }
 
+        /// <summary>
+        /// 기타 FaceNameInfo를 복사하고 대상에 추가합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 FaceNameInfo의 인덱스</param>
+        /// <returns>대상 FaceNameInfo의 인덱스</returns>
         public int ProcessByOtherId(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -192,6 +221,11 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Process(source, targetArray);
         }
 
+        /// <summary>
+        /// 심볼 FaceNameInfo를 복사하고 대상에 추가합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 FaceNameInfo의 인덱스</param>
+        /// <returns>대상 FaceNameInfo의 인덱스</returns>
         public int ProcessBySymbolId(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -204,6 +238,11 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Process(source, targetArray);
         }
 
+        /// <summary>
+        /// 사용자 정의 FaceNameInfo를 복사하고 대상에 추가합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 FaceNameInfo의 인덱스</param>
+        /// <returns>대상 FaceNameInfo의 인덱스</returns>
         public int ProcessByUserId(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -216,6 +255,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Process(source, targetArray);
         }
 
+        /// <summary>
+        /// 한글 FaceNameInfo의 두 인덱스가 같은지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 인덱스</param>
+        /// <param name="targetId">대상 인덱스</param>
+        /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByHangulId(int sourceId, int targetId)
         {
             var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HangulFaceNameList?.ToList(), sourceId);
@@ -223,6 +268,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Equal(source, target);
         }
 
+        /// <summary>
+        /// 라틴 FaceNameInfo의 두 인덱스가 같은지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 인덱스</param>
+        /// <param name="targetId">대상 인덱스</param>
+        /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByLatinId(int sourceId, int targetId)
         {
             var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EnglishFaceNameList?.ToList(), sourceId);
@@ -230,6 +281,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Equal(source, target);
         }
 
+        /// <summary>
+        /// 한자 FaceNameInfo의 두 인덱스가 같은지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 인덱스</param>
+        /// <param name="targetId">대상 인덱스</param>
+        /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByHanjaId(int sourceId, int targetId)
         {
             var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HanjaFaceNameList?.ToList(), sourceId);
@@ -237,6 +294,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Equal(source, target);
         }
 
+        /// <summary>
+        /// 일본어 FaceNameInfo의 두 인덱스가 같은지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 인덱스</param>
+        /// <param name="targetId">대상 인덱스</param>
+        /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByJapaneseId(int sourceId, int targetId)
         {
             var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.JapaneseFaceNameList?.ToList(), sourceId);
@@ -244,6 +307,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Equal(source, target);
         }
 
+        /// <summary>
+        /// 기타 FaceNameInfo의 두 인덱스가 같은지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 인덱스</param>
+        /// <param name="targetId">대상 인덱스</param>
+        /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByOtherId(int sourceId, int targetId)
         {
             var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EtcFaceNameList?.ToList(), sourceId);
@@ -251,6 +320,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Equal(source, target);
         }
 
+        /// <summary>
+        /// 심볼 FaceNameInfo의 두 인덱스가 같은지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 인덱스</param>
+        /// <param name="targetId">대상 인덱스</param>
+        /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualBySymbolId(int sourceId, int targetId)
         {
             var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.SymbolFaceNameList?.ToList(), sourceId);
@@ -258,6 +333,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return Equal(source, target);
         }
 
+        /// <summary>
+        /// 사용자 정의 FaceNameInfo의 두 인덱스가 같은지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">원본 인덱스</param>
+        /// <param name="targetId">대상 인덱스</param>
+        /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByUserId(int sourceId, int targetId)
         {
             var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.UserFaceNameList?.ToList(), sourceId);

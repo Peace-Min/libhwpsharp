@@ -14,6 +14,9 @@ namespace HwpLib.Object.DocInfo
         private readonly List<LevelNumbering> _levelNumberingList;
         private int _startNumber;
 
+        /// <summary>
+        /// <see cref="NumberingInfo"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
         public NumberingInfo()
         {
             _levelNumberingList = new List<LevelNumbering>();
@@ -46,14 +49,24 @@ namespace HwpLib.Object.DocInfo
             throw new ArgumentException($"invalid level : {level}");
         }
 
+        /// <summary>
+        /// 수준별 문단 번호 정보의 읽기 전용 리스트를 가져옵니다.
+        /// </summary>
         public IReadOnlyList<LevelNumbering> LevelNumberingList => _levelNumberingList;
 
+        /// <summary>
+        /// 문단 번호의 시작 번호를 가져오거나 설정합니다.
+        /// </summary>
         public int StartNumber
         {
             get => _startNumber;
             set => _startNumber = value;
         }
 
+        /// <summary>
+        /// 이 인스턴스의 복사본을 생성합니다.
+        /// </summary>
+        /// <returns>멤버 값이 동일한 <see cref="NumberingInfo"/>의 새 인스턴스입니다.</returns>
         public NumberingInfo Clone()
         {
             var cloned = new NumberingInfo();

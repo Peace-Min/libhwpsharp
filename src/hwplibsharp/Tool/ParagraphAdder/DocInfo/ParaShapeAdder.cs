@@ -12,12 +12,21 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private DocInfoAdder _docInfoAdder;
         private Dictionary<int, int> _idMatchingMap;
 
+        /// <summary>
+        /// <see cref="ParaShapeInfoAdder"/> 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">문서 정보 복사에 사용되는 <see cref="DocInfoAdder"/> 인스턴스입니다.</param>
         public ParaShapeInfoAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
             _idMatchingMap = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 소스 ParaShapeInfo의 ID를 기준으로 대상 문서에 복사하고, 매칭되는 대상 ID를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 ParaShapeInfo의 ID(인덱스)</param>
+        /// <returns>대상 문서의 ParaShapeInfo ID(인덱스)</returns>
         public int ProcessById(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -179,6 +188,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             }
         }
 
+        /// <summary>
+        /// 소스 ParaShapeInfo와 대상 ParaShapeInfo의 ID(인덱스)를 기준으로 두 객체가 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 ParaShapeInfo의 ID(인덱스)</param>
+        /// <param name="targetId">대상 ParaShapeInfo의 ID(인덱스)</param>
+        /// <returns>두 ParaShapeInfo가 동일하면 true, 그렇지 않으면 false를 반환합니다.</returns>
         public bool EqualById(int sourceId, int targetId)
         {
             try

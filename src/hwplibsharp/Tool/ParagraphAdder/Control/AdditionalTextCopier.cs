@@ -8,6 +8,12 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class AdditionalTextCopier
     {
+        /// <summary>
+        /// 소스 ControlAdditionalText를 대상에 복사합니다.
+        /// </summary>
+        /// <param name="source">소스 ControlAdditionalText</param>
+        /// <param name="target">대상 ControlAdditionalText</param>
+        /// <param name="docInfoAdder">DocInfoAdder 인스턴스</param>
         public static void Copy(ControlAdditionalText source, ControlAdditionalText target, DocInfoAdder? docInfoAdder)
         {
             CopyHeader(source.GetHeader(), target.GetHeader(), docInfoAdder);

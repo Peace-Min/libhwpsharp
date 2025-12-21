@@ -12,12 +12,21 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         private DocInfoAdder _docInfoAdder;
         private Dictionary<int, int> _idMatchingMap;
 
+        /// <summary>
+        /// CharShapeInfoAdder 클래스의 새 인스턴스를 초기화합니다.
+        /// </summary>
+        /// <param name="docInfoAdder">DocInfoAdder 인스턴스</param>
         public CharShapeInfoAdder(DocInfoAdder docInfoAdder)
         {
             _docInfoAdder = docInfoAdder;
             _idMatchingMap = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 소스 ID를 기반으로 CharShapeInfo를 처리하고 대상 ID를 반환합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 CharShapeInfo ID</param>
+        /// <returns>대상 CharShapeInfo ID</returns>
         public int ProcessById(int sourceId)
         {
             if (_docInfoAdder.GetSourceHWPFile() == _docInfoAdder.GetTargetHWPFile())
@@ -75,6 +84,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             return -1;
         }
 
+        /// <summary>
+        /// 두 CharShapeInfo 객체가 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="source">소스 CharShapeInfo</param>
+        /// <param name="target">대상 CharShapeInfo</param>
+        /// <returns>두 객체가 동일하면 true, 그렇지 않으면 false</returns>
         public bool Equal(CharShapeInfo? source, CharShapeInfo? target)
         {
             if (source == null || target == null) return source == target;
@@ -288,6 +303,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             target.User = source.User;
         }
 
+        /// <summary>
+        /// 소스 ID와 대상 ID를 기반으로 두 CharShapeInfo가 동일한지 비교합니다.
+        /// </summary>
+        /// <param name="sourceId">소스 CharShapeInfo ID</param>
+        /// <param name="targetId">대상 CharShapeInfo ID</param>
+        /// <returns>두 CharShapeInfo가 동일하면 true, 그렇지 않으면 false</returns>
         public bool EqualById(int sourceId, int targetId)
         {
             CharShapeInfo? source = null;

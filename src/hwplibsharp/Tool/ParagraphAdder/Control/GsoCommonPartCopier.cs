@@ -10,6 +10,13 @@ namespace HwpLib.Tool.ParagraphAdder.Control
     /// </summary>
     public class GsoCommonPartCopier
     {
+        /// <summary>
+        /// 소스 <see cref="GsoControl"/>의 공통 부분을 대상 <see cref="GsoControl"/>에 복사합니다.
+        /// <paramref name="docInfoAdder"/>가 제공되면 문서 정보 항목도 적절히 변환하여 복사합니다.
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="GsoControl"/> 인스턴스입니다.</param>
+        /// <param name="target">복사 대상 <see cref="GsoControl"/> 인스턴스입니다.</param>
+        /// <param name="docInfoAdder">문서 정보 변환을 위한 <see cref="DocInfoAdder"/> 인스턴스입니다. 필요 없으면 null을 전달할 수 있습니다.</param>
         public static void Copy(GsoControl source, GsoControl target, DocInfoAdder? docInfoAdder)
         {
             // in container == null
@@ -110,6 +117,13 @@ namespace HwpLib.Tool.ParagraphAdder.Control
             }
         }
 
+        /// <summary>
+        /// <para>소스 <see cref="PictureInfo"/>의 정보를 대상 <see cref="PictureInfo"/>에 복사합니다.</para>
+        /// <para><paramref name="docInfoAdder"/>가 제공되면 BinItemID를 변환하여 복사합니다.</para>
+        /// </summary>
+        /// <param name="source">복사할 원본 <see cref="PictureInfo"/> 인스턴스입니다.</param>
+        /// <param name="target">복사 대상 <see cref="PictureInfo"/> 인스턴스입니다.</param>
+        /// <param name="docInfoAdder">문서 정보 변환을 위한 <see cref="DocInfoAdder"/> 인스턴스입니다. 필요 없으면 null을 전달할 수 있습니다.</param>
         public static void CopyPictureInfo(PictureInfo? source, PictureInfo? target, DocInfoAdder? docInfoAdder)
         {
             if (source == null || target == null) return;
