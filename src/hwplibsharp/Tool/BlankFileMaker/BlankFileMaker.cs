@@ -1,4 +1,9 @@
-﻿using HwpLib.Object;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/blankfilemaker/BlankFileMaker.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object;
 using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.CompatibleDocument;
 using HwpLib.Object.FileHeader;

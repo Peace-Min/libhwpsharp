@@ -1,4 +1,8 @@
-﻿namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Curve
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/curve/CurveSegmentType.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Curve
 {
 
     /// <summary>

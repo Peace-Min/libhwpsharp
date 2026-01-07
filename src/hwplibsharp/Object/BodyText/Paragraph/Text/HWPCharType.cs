@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Paragraph.Text
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/text/HWPCharType.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Paragraph.Text
 {
 
     /// <summary>

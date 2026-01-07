@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Paragraph.Memo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/BodyText.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Paragraph.Memo;
 using System.Collections.Generic;
 
 

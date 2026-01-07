@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Paragraph.Text;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/ParaTextCopier.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Paragraph.Text;
 
 namespace HwpLib.Tool.ParagraphAdder
 {

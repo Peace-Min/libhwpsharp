@@ -1,4 +1,9 @@
-﻿using HwpLib.Object;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/objectfinder/FieldFinder.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Tool.TextExtractor;
 using System.Collections.Generic;

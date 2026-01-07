@@ -1,4 +1,10 @@
-﻿using OpenMcdf;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/util/compoundFile/
+// Repository: https://github.com/neolord0/hwplib
+// Note: OpenMcdf RootStorage wrapper (C# uses OpenMcdf instead of Apache POI)
+// =====================================================================
+
+using OpenMcdf;
 using System;
 using System.IO;
 

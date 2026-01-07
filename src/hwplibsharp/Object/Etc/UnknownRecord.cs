@@ -1,4 +1,9 @@
-﻿using CfRecordHeader = HwpLib.CompoundFile.RecordHeader;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/etc/UnknownRecord.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using CfRecordHeader = HwpLib.CompoundFile.RecordHeader;
 
 
 namespace HwpLib.Object.Etc

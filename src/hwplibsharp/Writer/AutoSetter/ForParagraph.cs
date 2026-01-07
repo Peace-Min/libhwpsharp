@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Paragraph;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/ForParagraph.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Object.BodyText.Paragraph.Header;
 using HwpLib.Object.BodyText.Paragraph.Text;
 using HwpLib.Writer.AutoSetter.Control;

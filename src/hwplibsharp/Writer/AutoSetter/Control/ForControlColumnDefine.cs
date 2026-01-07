@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/control/ForControlColumnDefine.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control;
 
 
 namespace HwpLib.Writer.AutoSetter.Control

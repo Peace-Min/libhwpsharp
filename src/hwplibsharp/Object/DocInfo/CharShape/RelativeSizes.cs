@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/charshape/RelativeSizes.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 
 namespace HwpLib.Object.DocInfo.CharShape
 {

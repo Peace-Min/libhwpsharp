@@ -1,4 +1,9 @@
-﻿using HwpLib.CompoundFile;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/bodytext/gso/part/shapecomponent/ForShapeComponentForNormal.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.LineInfo;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.ShadowInfo;

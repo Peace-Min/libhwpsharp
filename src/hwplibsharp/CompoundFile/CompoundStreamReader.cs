@@ -1,4 +1,10 @@
-﻿using HwpLib.Binary;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/util/compoundFile/reader/StreamReader.java
+// Repository: https://github.com/neolord0/hwplib
+// Note: Adapted for OpenMcdf (C# uses OpenMcdf instead of Apache POI)
+// =====================================================================
+
+using HwpLib.Binary;
 using HwpLib.Object.FileHeader;
 using HwpLib.Util.Binary;
 using System;

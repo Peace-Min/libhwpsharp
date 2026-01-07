@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/control/ForControlEquation.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control;
 using HwpLib.Writer.AutoSetter.Control.Gso.Part;
 
 

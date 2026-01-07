@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/control/ForControl.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Writer.AutoSetter.Control.Gso;
 

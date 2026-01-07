@@ -1,4 +1,9 @@
-﻿using HwpLib.CompoundFile;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/bodytext/ForSection.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText;
 using HwpLib.Writer.BodyText.Control.SectionDefine;
 using HwpLib.Writer.BodyText.Paragraph;

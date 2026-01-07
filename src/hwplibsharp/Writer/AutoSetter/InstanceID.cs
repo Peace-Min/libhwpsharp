@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Writer.AutoSetter
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/InstanceID.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Writer.AutoSetter
 {
 
     /// <summary>

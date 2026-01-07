@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Tool.ObjectFinder.FieldForm
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/objectfinder/fieldform/FieldType.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Tool.ObjectFinder.FieldForm
 {
 
     /// <summary>

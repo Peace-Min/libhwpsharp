@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.CtrlHeader;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ControlFootnote.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.FootnoteEndnote;
 using HwpLib.Object.BodyText.Paragraph;
 

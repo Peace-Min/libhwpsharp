@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo.Numbering
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/numbering/ParagraphHeadInfo.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo.Numbering
 {
 
     /// <summary>

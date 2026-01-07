@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.Gso;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/control/GsoCommonPartCopier.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 using HwpLib.Tool.ParagraphAdder.DocInfo;

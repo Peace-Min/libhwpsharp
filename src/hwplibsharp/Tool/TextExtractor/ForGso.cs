@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.Gso;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/textextractor/ForGso.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 using HwpLib.Tool.TextExtractor.ParaHead;
 using System.Text;

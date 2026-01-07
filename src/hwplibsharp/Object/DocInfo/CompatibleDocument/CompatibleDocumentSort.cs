@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo.CompatibleDocument
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/compatibledocument/CompatibleDocumentSort.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo.CompatibleDocument
 {
 
     /// <summary>

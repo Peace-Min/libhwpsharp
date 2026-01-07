@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo.CharShape
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/charshape/UnderLineSort.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo.CharShape
 {
 
     /// <summary>

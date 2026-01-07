@@ -1,4 +1,8 @@
-﻿namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.TextArt
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/textart/TextArtAlign.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.TextArt
 {
 
     /// <summary>

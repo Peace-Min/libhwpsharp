@@ -1,4 +1,8 @@
-﻿using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Curve;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/ShapeComponentCurve.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Curve;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Polygon;
 using System.Collections.Generic;
 

@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.SectionDefine
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/sectiondefine/FillArea.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.SectionDefine
 {
 
     /// <summary>

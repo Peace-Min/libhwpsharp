@@ -1,4 +1,9 @@
-﻿using HwpLib.Object;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/AutoSetter.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object;
 
 
 namespace HwpLib.Writer.AutoSetter

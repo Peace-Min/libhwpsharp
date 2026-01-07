@@ -1,4 +1,9 @@
-﻿using HwpLib.CompoundFile;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/bodytext/ForControlEquation.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control;
 using HwpLib.Writer.BodyText.Control.Eqed;
 using HwpLib.Writer.BodyText.Control.Gso.Part;

@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BinData;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/docinfo/ForEmbeddedBinaryData.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BinData;
 using System;
 using System.Collections.Generic;
 

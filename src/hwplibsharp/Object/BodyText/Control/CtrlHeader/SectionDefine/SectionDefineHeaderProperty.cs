@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.CtrlHeader.SectionDefine
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ctrlheader/sectiondefine/SectionDefineHeaderProperty.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.CtrlHeader.SectionDefine
 {
 
     using HwpLib.Util.Binary;

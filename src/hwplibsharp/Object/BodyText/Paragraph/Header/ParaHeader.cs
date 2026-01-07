@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Paragraph.Header
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/header/ParaHeader.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Paragraph.Header
 {
 
     /// <summary>

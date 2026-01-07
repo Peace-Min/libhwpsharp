@@ -1,4 +1,9 @@
-﻿using HwpLib.CompoundFile;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/bodytext/headerfooter/ForListHeaderForHeaderFooter.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.HeaderFooter;
 using HwpLib.Object.Etc;
 

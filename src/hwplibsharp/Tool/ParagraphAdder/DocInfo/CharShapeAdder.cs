@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/docinfo/CharShapeAdder.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.CharShape;
 using System.Collections.Generic;
 

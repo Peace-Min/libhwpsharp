@@ -1,4 +1,8 @@
-﻿namespace HwpLib.Object.BodyText.Control.Gso.Caption
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/caption/CaptionDirection.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+namespace HwpLib.Object.BodyText.Control.Gso.Caption
 {
 
     /// <summary>

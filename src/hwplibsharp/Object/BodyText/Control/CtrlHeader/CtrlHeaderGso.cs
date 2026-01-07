@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ctrlheader/CtrlHeaderGso.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 
 namespace HwpLib.Object.BodyText.Control.CtrlHeader
 {

@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.Etc;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/DocInfo.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.Etc;
 using System.Collections.Generic;
 using CfRecordHeader = HwpLib.CompoundFile.RecordHeader;
 

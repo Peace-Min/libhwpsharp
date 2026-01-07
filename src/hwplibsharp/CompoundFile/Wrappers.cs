@@ -1,4 +1,10 @@
-﻿using OpenMcdf;
+﻿// =====================================================================
+// C# Specific Implementation (no direct Java equivalent)
+// Provides OpenMcdf wrappers (Java uses Apache POI)
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using OpenMcdf;
 using System.Collections.Generic;
 using System.IO;
 

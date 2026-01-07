@@ -1,4 +1,9 @@
-﻿using HwpLib.Util.Binary;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/lineseg/LineSegItemTag.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Util.Binary;
 
 
 namespace HwpLib.Object.BodyText.Paragraph.LineSeg

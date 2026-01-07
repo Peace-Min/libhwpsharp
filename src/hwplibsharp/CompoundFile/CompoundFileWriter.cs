@@ -1,4 +1,10 @@
-﻿using HwpLib.Object.FileHeader;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/util/compoundFile/writer/CompoundFileWriter.java
+// Repository: https://github.com/neolord0/hwplib
+// Note: Adapted for OpenMcdf (C# uses OpenMcdf instead of Apache POI)
+// =====================================================================
+
+using HwpLib.Object.FileHeader;
 using OpenMcdf;
 using System;
 using System.Collections.Generic;

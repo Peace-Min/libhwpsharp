@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponent.LineInfo
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponent/lineinfo/LineEndShape.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponent.LineInfo
 {
 
     /// <summary>

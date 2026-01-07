@@ -1,4 +1,9 @@
-﻿using HwpLib.CompoundFile;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/bodytext/gso/part/shapecomponent/CommonPart.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.CompoundFile;
 
 
 namespace HwpLib.Writer.BodyText.Control.Gso.Part.ShapeComponent

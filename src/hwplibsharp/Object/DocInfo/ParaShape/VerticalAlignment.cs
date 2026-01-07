@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo.ParaShape
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/parashape/VerticalAlignment.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo.ParaShape
 {
 
     /// <summary>

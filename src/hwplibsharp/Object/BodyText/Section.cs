@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.SectionDefine;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/Section.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.SectionDefine;
 using System.Collections;
 using System.Collections.Generic;
 

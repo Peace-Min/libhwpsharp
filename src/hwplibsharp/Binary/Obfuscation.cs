@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/reader/bodytext/Obfuscation.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 using System.IO;
 
 namespace HwpLib.Binary

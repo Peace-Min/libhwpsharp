@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.Form.Properties;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/form/FormObject.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.Form.Properties;
 
 
 namespace HwpLib.Object.BodyText.Control.Form

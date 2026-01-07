@@ -1,4 +1,9 @@
-﻿using HwpLib.Tool.ParagraphAdder.DocInfo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/control/CtrlDataCopier.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Tool.ParagraphAdder.DocInfo;
 
 namespace HwpLib.Tool.ParagraphAdder.Control
 {

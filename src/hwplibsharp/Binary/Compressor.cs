@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/util/compressors/Compressor.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 using System.IO;
 using System.IO.Compression;
 

@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.CharShape;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/CharShape.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.CharShape;
 using HwpLib.Object.Etc;
 
 

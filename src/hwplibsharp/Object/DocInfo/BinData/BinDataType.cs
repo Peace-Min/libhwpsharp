@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo.BinData
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/bindata/BinDataType.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo.BinData
 {
 
     /// <summary>

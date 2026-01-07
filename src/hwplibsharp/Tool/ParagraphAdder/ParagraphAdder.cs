@@ -1,4 +1,9 @@
-﻿using HwpLib.Object;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/ParagraphAdder.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object;
 using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Tool.ParagraphAdder.DocInfo;

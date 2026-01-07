@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/LayoutCompatibility.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo
 {
 
     /// <summary>

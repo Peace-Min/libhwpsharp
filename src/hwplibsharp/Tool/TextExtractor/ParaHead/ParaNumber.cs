@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Tool.TextExtractor.ParaHead
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/textextractor/parahead/ParaNumber.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Tool.TextExtractor.ParaHead
 {
     /// <summary>
     /// 문단 번호 관리 클래스

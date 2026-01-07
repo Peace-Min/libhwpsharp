@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/objectfinder/forfield/settext/ForGso.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 

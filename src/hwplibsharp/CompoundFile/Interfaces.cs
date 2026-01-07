@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿// =====================================================================
+// C# Specific Implementation (no direct Java equivalent)
+// Provides OpenMcdf abstractions (Java uses Apache POI)
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System.Collections.Generic;
 
 namespace HwpLib.CompoundFile
 {

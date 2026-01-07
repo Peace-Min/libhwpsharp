@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.CtrlHeader.Gso
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ctrlheader/gso/HeightCriterion.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.CtrlHeader.Gso
 {
 
     /// <summary>

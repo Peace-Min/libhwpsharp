@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.BorderFill.FillInfo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/Bullet.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 using HwpLib.Object.DocInfo.Numbering;
 using HwpLib.Object.Etc;
 

@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Paragraph.Memo
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/memo/MemoList.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Paragraph.Memo
 {
 
     /// <summary>

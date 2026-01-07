@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Paragraph;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/ParaTextSetter.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Paragraph;
 using HwpLib.Object.BodyText.Paragraph.CharShape;
 using HwpLib.Object.BodyText.Paragraph.Text;
 using System.Collections.Generic;

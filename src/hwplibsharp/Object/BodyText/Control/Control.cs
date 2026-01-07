@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.Bookmark;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/Control.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.Bookmark;
 
 
 namespace HwpLib.Object.BodyText.Control

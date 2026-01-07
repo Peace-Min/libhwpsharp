@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/text/ParaText.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System.Collections.Generic;
 using System.Text;
 
 

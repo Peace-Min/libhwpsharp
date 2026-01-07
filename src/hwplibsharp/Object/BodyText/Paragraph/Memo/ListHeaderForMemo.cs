@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.Gso.TextBox;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/memo/ListHeaderForMemo.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.Gso.TextBox;
 
 
 namespace HwpLib.Object.BodyText.Paragraph.Memo

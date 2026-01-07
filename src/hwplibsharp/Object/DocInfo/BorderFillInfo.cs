@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.BorderFill;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/BorderFill.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.BorderFill;
 using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 
 

@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/Paragraph.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 using System.Collections.Generic;
 
 namespace HwpLib.Object.BodyText.Paragraph

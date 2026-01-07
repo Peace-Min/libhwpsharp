@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.FileHeader
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/fileheader/FileVersion.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.FileHeader
 {
 
     /// <summary>

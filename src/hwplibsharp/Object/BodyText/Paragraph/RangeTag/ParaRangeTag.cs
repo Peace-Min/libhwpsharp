@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/rangetag/ParaRangeTag.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System.Collections.Generic;
 
 namespace HwpLib.Object.BodyText.Paragraph.RangeTag
 {

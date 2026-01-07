@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.Etc;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/equation/EQEdit.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.Etc;
 
 
 namespace HwpLib.Object.BodyText.Control.Equation

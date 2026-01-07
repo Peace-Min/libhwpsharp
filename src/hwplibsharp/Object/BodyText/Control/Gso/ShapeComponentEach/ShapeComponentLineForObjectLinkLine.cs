@@ -1,4 +1,8 @@
-﻿using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.ObjectLinkLine;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/ShapeComponentLineForObjectLinkLine.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.ObjectLinkLine;
 using System.Collections.Generic;
 
 

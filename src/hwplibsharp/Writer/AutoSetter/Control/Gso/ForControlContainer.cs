@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.Gso;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/control/gso/ForControlContainer.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 
 

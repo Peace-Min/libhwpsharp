@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.Style;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/Style.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.Style;
 
 
 namespace HwpLib.Object.DocInfo

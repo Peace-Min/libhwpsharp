@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Tool.TextExtractor
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/textextractor/TextExtractorListener.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Tool.TextExtractor
 {
     /// <summary>
     /// 텍스트 추출 리스너 인터페이스

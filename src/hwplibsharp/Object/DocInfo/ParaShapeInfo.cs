@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.ParaShape;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/ParaShape.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.ParaShape;
 
 
 namespace HwpLib.Object.DocInfo

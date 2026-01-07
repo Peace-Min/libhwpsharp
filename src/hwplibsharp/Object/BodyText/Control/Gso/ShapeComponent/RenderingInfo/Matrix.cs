@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponent.RenderingInfo
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponent/renderinginfo/Matrix.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponent.RenderingInfo
 {
 
     /// <summary>

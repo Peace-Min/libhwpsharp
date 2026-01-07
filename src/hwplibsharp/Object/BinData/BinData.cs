@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.BinData;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bindata/BinData.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.BinData;
 using System.Collections.Generic;
 
 

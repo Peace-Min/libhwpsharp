@@ -1,4 +1,8 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/picture/ColorWithEffect.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using System;
 using System.Collections.Generic;
 
 namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Picture

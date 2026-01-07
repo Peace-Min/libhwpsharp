@@ -1,4 +1,8 @@
-﻿using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.LineInfo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/ShapeComponentPicture.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using HwpLib.Object.BodyText.Control.Gso.ShapeComponent.LineInfo;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Picture;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Polygon;
 using HwpLib.Object.DocInfo.BorderFill.FillInfo;

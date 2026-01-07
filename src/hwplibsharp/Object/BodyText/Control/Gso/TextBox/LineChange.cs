@@ -1,4 +1,8 @@
-﻿namespace HwpLib.Object.BodyText.Control.Gso.TextBox
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/textbox/LineChange.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+namespace HwpLib.Object.BodyText.Control.Gso.TextBox
 {
 
     /// <summary>

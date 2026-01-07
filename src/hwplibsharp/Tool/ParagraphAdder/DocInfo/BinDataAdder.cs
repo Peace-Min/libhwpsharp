@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/docinfo/BinDataAdder.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo
 {

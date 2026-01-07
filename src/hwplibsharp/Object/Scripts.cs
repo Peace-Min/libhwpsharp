@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/Scripts.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object
 {
 
     /// <summary>

@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.BorderFill.FillInfo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/docinfo/ForFillInfo.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.BorderFill.FillInfo;
 using HwpLib.Object.Etc;
 using System.Collections.Generic;
 using System.Linq;

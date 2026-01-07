@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.TabDef;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/TabDef.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.TabDef;
 using System.Collections.Generic;
 
 

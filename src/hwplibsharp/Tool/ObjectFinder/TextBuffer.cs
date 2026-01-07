@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/objectfinder/TextBuffer.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System.Collections.Generic;
 
 namespace HwpLib.Tool.ObjectFinder
 {

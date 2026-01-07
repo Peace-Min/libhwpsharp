@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Util.Binary
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/util/binary/BitFlag.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Util.Binary
 {
 
     /// <summary>

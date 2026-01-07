@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.FaceName;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/FaceName.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.FaceName;
 
 
 namespace HwpLib.Object.DocInfo

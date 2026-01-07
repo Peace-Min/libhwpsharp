@@ -1,4 +1,9 @@
-﻿using HwpLib.Object;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/textextractor/TextExtractor.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object;
 using HwpLib.Tool.TextExtractor.ParaHead;
 using System.Text;
 

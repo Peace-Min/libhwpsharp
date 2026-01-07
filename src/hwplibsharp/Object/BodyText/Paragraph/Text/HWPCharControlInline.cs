@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/text/HWPCharControlInline.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 
 namespace HwpLib.Object.BodyText.Paragraph.Text
 {

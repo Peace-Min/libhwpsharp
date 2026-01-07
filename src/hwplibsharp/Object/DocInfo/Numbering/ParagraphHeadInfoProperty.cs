@@ -1,4 +1,9 @@
-﻿using HwpLib.Util.Binary;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/numbering/ParagraphHeadInfoProperty.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Util.Binary;
 
 
 namespace HwpLib.Object.DocInfo.Numbering

@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/util/StringUtil.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 

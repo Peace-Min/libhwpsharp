@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/etc/HWPString.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 using System.Linq;
 
 namespace HwpLib.Object.Etc

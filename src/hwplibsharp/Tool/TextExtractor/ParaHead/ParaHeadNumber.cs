@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.Numbering;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/textextractor/parahead/ParaHeadNumber.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.Numbering;
 
 namespace HwpLib.Tool.TextExtractor.ParaHead
 {

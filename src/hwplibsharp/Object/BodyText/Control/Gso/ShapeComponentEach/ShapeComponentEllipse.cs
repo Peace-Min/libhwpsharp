@@ -1,4 +1,8 @@
-﻿using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Ellipse;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/ShapeComponentEllipse.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Ellipse;
 
 
 namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach

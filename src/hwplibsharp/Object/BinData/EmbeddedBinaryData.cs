@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.BinData;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bindata/EmbeddedBinaryData.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.BinData;
 
 
 namespace HwpLib.Object.BinData

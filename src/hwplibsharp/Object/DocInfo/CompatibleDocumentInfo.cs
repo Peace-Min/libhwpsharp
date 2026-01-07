@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.CompatibleDocument;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/CompatibleDocument.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.CompatibleDocument;
 
 
 namespace HwpLib.Object.DocInfo

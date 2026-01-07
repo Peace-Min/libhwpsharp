@@ -1,4 +1,9 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/util/ArrayUtil.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System;
 
 namespace HwpLib.Util
 {

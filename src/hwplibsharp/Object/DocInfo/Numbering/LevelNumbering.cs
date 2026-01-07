@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.Etc;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/numbering/LevelNumbering.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.Etc;
 
 
 namespace HwpLib.Object.DocInfo.Numbering

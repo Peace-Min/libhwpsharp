@@ -1,4 +1,8 @@
-﻿using HwpLib.Object.BodyText.Control.CtrlHeader;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/ControlOLE.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach;
 
 

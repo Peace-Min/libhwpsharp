@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo.BorderFill
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/borderfill/CenterLineSort.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo.BorderFill
 {
 
     /// <summary>

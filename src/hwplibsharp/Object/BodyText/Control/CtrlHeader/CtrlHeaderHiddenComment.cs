@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.CtrlHeader
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ctrlheader/CtrlHeaderHiddenComment.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.CtrlHeader
 {
     /// <summary>
     /// 숨은 설명 컨트롤을 위한 컨트롤 헤더 레코드

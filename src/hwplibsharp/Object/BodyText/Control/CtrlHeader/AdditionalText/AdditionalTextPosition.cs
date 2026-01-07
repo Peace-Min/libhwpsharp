@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.CtrlHeader.AdditionalText
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ctrlheader/additionaltext/AdditionalTextPosition.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.CtrlHeader.AdditionalText
 {
 
     /// <summary>

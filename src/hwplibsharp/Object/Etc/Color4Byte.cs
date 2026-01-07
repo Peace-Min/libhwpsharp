@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.Etc
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/etc/Color4Byte.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.Etc
 {
 
     using HwpLib.Util.Binary;

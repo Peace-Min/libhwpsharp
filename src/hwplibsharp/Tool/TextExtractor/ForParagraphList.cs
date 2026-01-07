@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/textextractor/ForParagraphList.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText;
 using HwpLib.Tool.TextExtractor.ParaHead;
 using System.Text;
 

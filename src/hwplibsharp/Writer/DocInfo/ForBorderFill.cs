@@ -1,4 +1,9 @@
-﻿using HwpLib.CompoundFile;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/docinfo/ForBorderFill.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.CompoundFile;
 using HwpLib.Object.DocInfo.BorderFill;
 using HwpLib.Object.Etc;
 using HwpLib.Writer.DocInfo.BorderFill;

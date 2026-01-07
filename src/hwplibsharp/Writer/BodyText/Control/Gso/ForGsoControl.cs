@@ -1,4 +1,9 @@
-﻿using HwpLib.CompoundFile;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/bodytext/gso/ForGsoControl.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.CompoundFile;
 using HwpLib.Object.BodyText.Control.Gso;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponent;
 using HwpLib.Writer.BodyText.Control.Gso.Part;

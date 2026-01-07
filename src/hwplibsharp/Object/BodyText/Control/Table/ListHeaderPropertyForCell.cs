@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.CtrlHeader.SectionDefine;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/table/ListHeaderPropertyForCell.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.CtrlHeader.SectionDefine;
 using HwpLib.Object.BodyText.Control.Gso.TextBox;
 using HwpLib.Util.Binary;
 

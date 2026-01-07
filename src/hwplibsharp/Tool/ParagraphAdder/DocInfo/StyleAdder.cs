@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/docinfo/StyleAdder.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo;
 using System.Collections.Generic;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo

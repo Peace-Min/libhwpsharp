@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Tool.ObjectFinder
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/objectfinder/SetFieldResult.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Tool.ObjectFinder
 {
 
     /// <summary>

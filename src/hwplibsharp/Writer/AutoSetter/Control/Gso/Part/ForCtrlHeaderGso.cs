@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.CtrlHeader;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/writer/autosetter/control/gso/part/ForCtrlHeaderGso.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.Gso.Caption;
 
 

@@ -1,4 +1,8 @@
-﻿namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.ObjectLinkLine
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/objectlinkline/ControlPoint.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.ObjectLinkLine
 {
 
     /// <summary>

@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/blankfilemaker/SectionDefineAdder.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control;
 using HwpLib.Object.BodyText.Control.CtrlHeader;
 using HwpLib.Object.BodyText.Control.SectionDefine;
 using HwpLib.Object.BodyText.Paragraph;

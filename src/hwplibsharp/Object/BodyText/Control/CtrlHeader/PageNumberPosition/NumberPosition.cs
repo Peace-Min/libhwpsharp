@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control.CtrlHeader.PageNumberPosition
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ctrlheader/pagenumberposition/NumberPosition.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control.CtrlHeader.PageNumberPosition
 {
 
     /// <summary>

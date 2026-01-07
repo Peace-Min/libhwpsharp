@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.BodyText.Control
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/ControlType.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.BodyText.Control
 {
     /// <summary>
     /// 컨트롤 타입

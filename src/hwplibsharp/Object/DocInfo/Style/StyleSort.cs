@@ -1,4 +1,9 @@
-﻿namespace HwpLib.Object.DocInfo.Style
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/style/StyleSort.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+namespace HwpLib.Object.DocInfo.Style
 {
 
     /// <summary>

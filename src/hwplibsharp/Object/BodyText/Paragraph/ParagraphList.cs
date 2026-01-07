@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/ParagraphList.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 

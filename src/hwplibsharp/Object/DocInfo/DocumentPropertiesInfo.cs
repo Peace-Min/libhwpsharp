@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.DocInfo.DocumentProperties;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/docinfo/DocumentProperties.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.DocInfo.DocumentProperties;
 
 
 namespace HwpLib.Object.DocInfo

@@ -1,4 +1,8 @@
-﻿using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Polygon;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/ShapeComponentTextArt.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.Polygon;
 using HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.TextArt;
 using HwpLib.Object.DocInfo.FaceName;
 using HwpLib.Object.Etc;

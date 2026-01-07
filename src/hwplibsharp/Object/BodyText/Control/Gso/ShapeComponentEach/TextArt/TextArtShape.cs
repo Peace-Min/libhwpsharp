@@ -1,4 +1,8 @@
-﻿using System;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/object/bodytext/control/gso/shapecomponenteach/textart/TextArtShape.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+using System;
 
 namespace HwpLib.Object.BodyText.Control.Gso.ShapeComponentEach.TextArt
 {

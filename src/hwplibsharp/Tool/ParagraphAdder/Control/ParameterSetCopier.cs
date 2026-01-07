@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText.Control.Bookmark;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/paragraphadder/control/ParameterSetCopier.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText.Control.Bookmark;
 using HwpLib.Tool.ParagraphAdder.DocInfo;
 
 namespace HwpLib.Tool.ParagraphAdder.Control

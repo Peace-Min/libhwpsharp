@@ -1,4 +1,9 @@
-﻿using HwpLib.Object.BodyText;
+﻿// =====================================================================
+// Java Original: kr/dogfoot/hwplib/tool/objectfinder/fieldform/FieldData.java
+// Repository: https://github.com/neolord0/hwplib
+// =====================================================================
+
+using HwpLib.Object.BodyText;
 using HwpLib.Object.BodyText.Paragraph;
 
 
