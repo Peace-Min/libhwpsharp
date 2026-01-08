@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 
 
@@ -14,7 +14,9 @@ namespace HwpLib
         /// 라이브러리 버전을 반환한다.
         /// </summary>
         public static string Version =>
-            Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.1.7";
+            Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            ?? Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)
+            ?? "Unknown";
 
         /// <summary>
         /// 원본 라이브러리 저작자
