@@ -71,10 +71,7 @@ public class ChangingParagraphTextTest
                     listForText.Clear();
                     var newText = ChangeText(text);
 
-                    if (newText != null)
-                    {
-                        newList.AddRange(ToHwpCharList(newText));
-                    }
+                    newList.AddRange(ToHwpCharList(newText));
                 }
                 newList.Add(ch);
             }
@@ -86,10 +83,7 @@ public class ChangingParagraphTextTest
             listForText.Clear();
             var newText = ChangeText(text);
 
-            if (newText != null)
-            {
-                newList.AddRange(ToHwpCharList(newText));
-            }
+            newList.AddRange(ToHwpCharList(newText));
         }
 
         return newList;
@@ -119,44 +113,35 @@ public class ChangingParagraphTextTest
         return null;
     }
 
-    private static List<HWPChar> ToHwpCharList(string text)
+    private static List<HWPChar> ToHwpCharList(string? text)
     {
         var list = new List<HWPChar>();
+        if (text == null) return list;
+
         int count = text.Length;
         for (int index = 0; index < count; index++)
         {
             var chn = new HWPCharNormal();
             chn.Code = (short)char.ConvertToUtf32(text, index);
             list.Add(chn);
+            // 서로게이트 페어 처리
+            if (char.IsHighSurrogate(text[index]) && index + 1 < count && char.IsLowSurrogate(text[index + 1]))
+            {
+                index++;
+            }
         }
         return list;
     }
 
     private static void ChangeNewCharList(Paragraph paragraph, List<HWPChar> newCharList)
     {
-        // TODO: ParaText에 Clear() 및 SetCharList() 메서드 추가 필요
-        // CharList는 IReadOnlyList이므로 직접 수정 불가
-        // 임시 우회: 텍스트 삭제 후 AddString으로 다시 추가
-        paragraph.DeleteText();
-        paragraph.CreateText();
-
-        if (paragraph.Text == null) return;
-
-        // 새 문자 리스트의 내용을 문자열로 변환하여 추가
-        var sb = new System.Text.StringBuilder();
+        // Java 버전과 동일하게: CharList를 clear하고 새로운 문자들을 추가
+        paragraph.Text!.Clear();
         foreach (var ch in newCharList)
         {
-            if (ch.Type == HWPCharType.Normal)
-            {
-                sb.Append(((HWPCharNormal)ch).Ch);
-            }
+            paragraph.Text!.AddChar(ch);
         }
-        if (sb.Length > 0)
-        {
-            paragraph.Text.AddString(sb.ToString());
-        }
-
-        paragraph.Header.CharacterCount = paragraph.Text.CharList.Count;
+        paragraph.Header.CharacterCount = newCharList.Count;
     }
 
     private static void RemoveLineSeg(Paragraph paragraph)
@@ -171,16 +156,10 @@ public class ChangingParagraphTextTest
         int size = paragraph.CharShape.PositionShapeIdPairList.Count;
         if (size > 1)
         {
-            // PositionShapeIdPairList는 IReadOnlyList이므로 RemoveAt 직접 호출 불가
-            // RemoveParaCharShape(pair)를 사용하여 객체로 제거해야 함
-            var pairsToRemove = new List<CharPositionShapeIdPair>();
-            for (int index = 1; index < size; index++)
+            // Java 버전과 동일하게: 인덱스 1부터 반복하여 삭제
+            for (int index = 0; index < size - 1; index++)
             {
-                pairsToRemove.Add(paragraph.CharShape.PositionShapeIdPairList[index]);
-            }
-            foreach (var pair in pairsToRemove)
-            {
-                paragraph.CharShape.RemoveParaCharShape(pair);
+                paragraph.CharShape.RemoveParaCharShapeAt(1);
             }
             paragraph.Header.CharShapeCount = 1;
         }

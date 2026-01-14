@@ -1,4 +1,4 @@
-﻿// =====================================================================
+// =====================================================================
 // Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/charshape/ParaCharShape.java
 // Repository: https://github.com/neolord0/hwplib
 // =====================================================================
@@ -61,6 +61,15 @@ namespace HwpLib.Object.BodyText.Paragraph.CharShape
         public bool RemoveParaCharShape(CharPositionShapeIdPair pair)
         {
             return _positionShapeIdPairList.Remove(pair);
+        }
+
+        /// <summary>
+        /// 지정된 인덱스의 위치와 글자 모양의 쌍을 리스트에서 제거한다.
+        /// </summary>
+        /// <param name="index">제거할 인덱스</param>
+        public void RemoveParaCharShapeAt(int index)
+        {
+            _positionShapeIdPairList.RemoveAt(index);
         }
 
         /// <summary>

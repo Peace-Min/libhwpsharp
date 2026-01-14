@@ -1,4 +1,4 @@
-﻿// =====================================================================
+// =====================================================================
 // Java Original: kr/dogfoot/hwplib/writer/autosetter/ForParagraph.java
 // Repository: https://github.com/neolord0/hwplib
 // =====================================================================
@@ -122,7 +122,8 @@ namespace HwpLib.Writer.AutoSetter
                         break;
                     case 8:
                         cm.HasTitleMark = true;
-                        break;
+                        // Java 원본과 동일하게 case 9로 폴스루 (break 없음)
+                        goto case 9;
                     case 9:
                         cm.HasTab = true;
                         break;

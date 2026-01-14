@@ -1,4 +1,4 @@
-﻿// =====================================================================
+// =====================================================================
 // Java Original: kr/dogfoot/hwplib/tool/paragraphadder/docinfo/FaceNameAdder.java
 // Repository: https://github.com/neolord0/hwplib
 // =====================================================================
@@ -6,7 +6,6 @@
 using HwpLib.Object.DocInfo;
 using HwpLib.Object.DocInfo.FaceName;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace HwpLib.Tool.ParagraphAdder.DocInfo
 {
@@ -38,12 +37,15 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 return sourceId;
             }
 
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HangulFaceNameList?.ToList(), sourceId);
-            var targetArray = _docInfoAdder.GetTargetHWPFile()?.DocInfo?.HangulFaceNameList?.ToList();
-            return Process(source, targetArray);
+            var sourceList = _docInfoAdder.GetSourceHWPFile()?.DocInfo?.HangulFaceNameList;
+            var targetDocInfo = _docInfoAdder.GetTargetHWPFile()?.DocInfo;
+            if (sourceList == null || targetDocInfo == null) return sourceId;
+
+            var source = GetFaceNameInfo(sourceList, sourceId);
+            return Process(source, targetDocInfo.HangulFaceNameList, targetDocInfo.AddNewHangulFaceName);
         }
 
-        private FaceNameInfo? GetFaceNameInfo(List<FaceNameInfo>? faceNameList, int index)
+        private FaceNameInfo? GetFaceNameInfo(IReadOnlyList<FaceNameInfo>? faceNameList, int index)
         {
             if (faceNameList == null) return null;
 
@@ -63,24 +65,24 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             }
         }
 
-        private int Process(FaceNameInfo? source, List<FaceNameInfo>? targetArray)
+        private int Process(FaceNameInfo? source, IReadOnlyList<FaceNameInfo>? targetList, System.Func<FaceNameInfo>? addNewFunc)
         {
-            if (source == null || targetArray == null) return 0;
+            if (source == null || targetList == null || addNewFunc == null) return 0;
 
-            int index = Find(source, targetArray);
+            int index = Find(source, targetList);
             if (index == -1)
             {
-                index = AddAndCopy(source, targetArray);
+                index = AddAndCopy(source, addNewFunc, targetList);
             }
             return index;
         }
 
-        private int Find(FaceNameInfo source, List<FaceNameInfo> targetArray)
+        private int Find(FaceNameInfo source, IReadOnlyList<FaceNameInfo> targetList)
         {
-            int count = targetArray.Count;
+            int count = targetList.Count;
             for (int index = 0; index < count; index++)
             {
-                var target = targetArray[index];
+                var target = targetList[index];
                 if (Equal(source, target))
                 {
                     return index;
@@ -126,10 +128,9 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 && source.XHeight == target.XHeight;
         }
 
-        private int AddAndCopy(FaceNameInfo source, List<FaceNameInfo> targetArray)
+        private int AddAndCopy(FaceNameInfo source, System.Func<FaceNameInfo> addNewFunc, IReadOnlyList<FaceNameInfo> targetList)
         {
-            var target = new HwpLib.Object.DocInfo.FaceNameInfo();
-            targetArray.Add(target);
+            var target = addNewFunc();
 
             if (source.Property != null && target.Property != null)
                 target.Property.Value = source.Property.Value;
@@ -139,7 +140,7 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
             CopyFontTypeInfo(source.FontTypeInfo, target.FontTypeInfo);
             target.BaseFontName = source.BaseFontName;
 
-            return targetArray.Count - 1;
+            return targetList.Count - 1;
         }
 
         private void CopyFontTypeInfo(FontTypeInfo? source, FontTypeInfo? target)
@@ -170,9 +171,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 return sourceId;
             }
 
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EnglishFaceNameList?.ToList(), sourceId);
-            var targetArray = _docInfoAdder.GetTargetHWPFile()?.DocInfo?.EnglishFaceNameList?.ToList();
-            return Process(source, targetArray);
+            var sourceList = _docInfoAdder.GetSourceHWPFile()?.DocInfo?.EnglishFaceNameList;
+            var targetDocInfo = _docInfoAdder.GetTargetHWPFile()?.DocInfo;
+            if (sourceList == null || targetDocInfo == null) return sourceId;
+
+            var source = GetFaceNameInfo(sourceList, sourceId);
+            return Process(source, targetDocInfo.EnglishFaceNameList, targetDocInfo.AddNewEnglishFaceName);
         }
 
         /// <summary>
@@ -187,9 +191,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 return sourceId;
             }
 
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HanjaFaceNameList?.ToList(), sourceId);
-            var targetArray = _docInfoAdder.GetTargetHWPFile()?.DocInfo?.HanjaFaceNameList?.ToList();
-            return Process(source, targetArray);
+            var sourceList = _docInfoAdder.GetSourceHWPFile()?.DocInfo?.HanjaFaceNameList;
+            var targetDocInfo = _docInfoAdder.GetTargetHWPFile()?.DocInfo;
+            if (sourceList == null || targetDocInfo == null) return sourceId;
+
+            var source = GetFaceNameInfo(sourceList, sourceId);
+            return Process(source, targetDocInfo.HanjaFaceNameList, targetDocInfo.AddNewHanjaFaceName);
         }
 
         /// <summary>
@@ -204,9 +211,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 return sourceId;
             }
 
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.JapaneseFaceNameList?.ToList(), sourceId);
-            var targetArray = _docInfoAdder.GetTargetHWPFile()?.DocInfo?.JapaneseFaceNameList?.ToList();
-            return Process(source, targetArray);
+            var sourceList = _docInfoAdder.GetSourceHWPFile()?.DocInfo?.JapaneseFaceNameList;
+            var targetDocInfo = _docInfoAdder.GetTargetHWPFile()?.DocInfo;
+            if (sourceList == null || targetDocInfo == null) return sourceId;
+
+            var source = GetFaceNameInfo(sourceList, sourceId);
+            return Process(source, targetDocInfo.JapaneseFaceNameList, targetDocInfo.AddNewJapaneseFaceName);
         }
 
         /// <summary>
@@ -221,9 +231,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 return sourceId;
             }
 
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EtcFaceNameList?.ToList(), sourceId);
-            var targetArray = _docInfoAdder.GetTargetHWPFile()?.DocInfo?.EtcFaceNameList?.ToList();
-            return Process(source, targetArray);
+            var sourceList = _docInfoAdder.GetSourceHWPFile()?.DocInfo?.EtcFaceNameList;
+            var targetDocInfo = _docInfoAdder.GetTargetHWPFile()?.DocInfo;
+            if (sourceList == null || targetDocInfo == null) return sourceId;
+
+            var source = GetFaceNameInfo(sourceList, sourceId);
+            return Process(source, targetDocInfo.EtcFaceNameList, targetDocInfo.AddNewEtcFaceName);
         }
 
         /// <summary>
@@ -238,9 +251,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 return sourceId;
             }
 
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.SymbolFaceNameList?.ToList(), sourceId);
-            var targetArray = _docInfoAdder.GetTargetHWPFile()?.DocInfo?.SymbolFaceNameList?.ToList();
-            return Process(source, targetArray);
+            var sourceList = _docInfoAdder.GetSourceHWPFile()?.DocInfo?.SymbolFaceNameList;
+            var targetDocInfo = _docInfoAdder.GetTargetHWPFile()?.DocInfo;
+            if (sourceList == null || targetDocInfo == null) return sourceId;
+
+            var source = GetFaceNameInfo(sourceList, sourceId);
+            return Process(source, targetDocInfo.SymbolFaceNameList, targetDocInfo.AddNewSymbolFaceName);
         }
 
         /// <summary>
@@ -255,9 +271,12 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
                 return sourceId;
             }
 
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.UserFaceNameList?.ToList(), sourceId);
-            var targetArray = _docInfoAdder.GetTargetHWPFile()?.DocInfo?.UserFaceNameList?.ToList();
-            return Process(source, targetArray);
+            var sourceList = _docInfoAdder.GetSourceHWPFile()?.DocInfo?.UserFaceNameList;
+            var targetDocInfo = _docInfoAdder.GetTargetHWPFile()?.DocInfo;
+            if (sourceList == null || targetDocInfo == null) return sourceId;
+
+            var source = GetFaceNameInfo(sourceList, sourceId);
+            return Process(source, targetDocInfo.UserFaceNameList, targetDocInfo.AddNewUserFaceName);
         }
 
         /// <summary>
@@ -268,8 +287,8 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByHangulId(int sourceId, int targetId)
         {
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HangulFaceNameList?.ToList(), sourceId);
-            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.HangulFaceNameList?.ToList(), targetId);
+            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HangulFaceNameList, sourceId);
+            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.HangulFaceNameList, targetId);
             return Equal(source, target);
         }
 
@@ -281,8 +300,8 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByLatinId(int sourceId, int targetId)
         {
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EnglishFaceNameList?.ToList(), sourceId);
-            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.EnglishFaceNameList?.ToList(), targetId);
+            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EnglishFaceNameList, sourceId);
+            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.EnglishFaceNameList, targetId);
             return Equal(source, target);
         }
 
@@ -294,8 +313,8 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByHanjaId(int sourceId, int targetId)
         {
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HanjaFaceNameList?.ToList(), sourceId);
-            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.HanjaFaceNameList?.ToList(), targetId);
+            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.HanjaFaceNameList, sourceId);
+            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.HanjaFaceNameList, targetId);
             return Equal(source, target);
         }
 
@@ -307,8 +326,8 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByJapaneseId(int sourceId, int targetId)
         {
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.JapaneseFaceNameList?.ToList(), sourceId);
-            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.JapaneseFaceNameList?.ToList(), targetId);
+            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.JapaneseFaceNameList, sourceId);
+            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.JapaneseFaceNameList, targetId);
             return Equal(source, target);
         }
 
@@ -320,8 +339,8 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByOtherId(int sourceId, int targetId)
         {
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EtcFaceNameList?.ToList(), sourceId);
-            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.EtcFaceNameList?.ToList(), targetId);
+            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.EtcFaceNameList, sourceId);
+            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.EtcFaceNameList, targetId);
             return Equal(source, target);
         }
 
@@ -333,8 +352,8 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualBySymbolId(int sourceId, int targetId)
         {
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.SymbolFaceNameList?.ToList(), sourceId);
-            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.SymbolFaceNameList?.ToList(), targetId);
+            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.SymbolFaceNameList, sourceId);
+            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.SymbolFaceNameList, targetId);
             return Equal(source, target);
         }
 
@@ -346,8 +365,8 @@ namespace HwpLib.Tool.ParagraphAdder.DocInfo
         /// <returns>동일하면 true, 아니면 false</returns>
         public bool EqualByUserId(int sourceId, int targetId)
         {
-            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.UserFaceNameList?.ToList(), sourceId);
-            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.UserFaceNameList?.ToList(), targetId);
+            var source = GetFaceNameInfo(_docInfoAdder.GetSourceHWPFile()?.DocInfo?.UserFaceNameList, sourceId);
+            var target = GetFaceNameInfo(_docInfoAdder.GetTargetHWPFile()?.DocInfo?.UserFaceNameList, targetId);
             return Equal(source, target);
         }
     }

@@ -1,4 +1,4 @@
-﻿// =====================================================================
+// =====================================================================
 // Java Original: kr/dogfoot/hwplib/object/bodytext/paragraph/text/ParaText.java
 // Repository: https://github.com/neolord0/hwplib
 // =====================================================================
@@ -413,6 +413,14 @@ namespace HwpLib.Object.BodyText.Paragraph.Text
         public void InsertChar(int index, HWPChar hwpChar)
         {
             _charList.Insert(index, hwpChar);
+        }
+
+        /// <summary>
+        /// 글자 리스트를 모두 삭제한다.
+        /// </summary>
+        public void Clear()
+        {
+            _charList.Clear();
         }
 
         /// <summary>

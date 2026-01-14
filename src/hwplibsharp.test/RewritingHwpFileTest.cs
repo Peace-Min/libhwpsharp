@@ -45,6 +45,7 @@ public class RewritingHwpFileTest
 
         // Act
         Assert.IsNotNull(hwpFile);
+
         var writePath = TestHelper.GetResultPath($"result-rewrite-{filename}");
         HWPWriter.ToFile(hwpFile, writePath);
 
